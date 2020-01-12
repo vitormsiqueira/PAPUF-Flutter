@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/color_hex.dart';
 
-class AppButton extends StatelessWidget {
+class AppButtonOutline extends StatelessWidget {
   String name;
   Function onPressed;
   bool showProgress;
   String backGroundColor;
 
-  AppButton(this.name,
+  AppButtonOutline(this.name,
       {this.onPressed,
       this.showProgress = false,
       this.backGroundColor = "#4DE4B2"});
@@ -16,10 +16,9 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 45,
-      child: RaisedButton(
+      child: OutlineButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         color: hexToColor(backGroundColor),
-        elevation: 0,
         child: showProgress //if que mostra a o progresso circular
             ? Center(
                 child: CircularProgressIndicator(
@@ -34,6 +33,7 @@ class AppButton extends StatelessWidget {
                 ),
               ),
         onPressed: onPressed,
+        borderSide: BorderSide(color: Colors.white),
       ),
     );
   }

@@ -43,7 +43,7 @@ class AppText extends StatelessWidget {
 
       //estilo do texto qdo começa a digitação
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 18,
         color: Colors.white,
       ),
 
@@ -51,14 +51,19 @@ class AppText extends StatelessWidget {
         //estilo do texto principal
         labelText: label,
         labelStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 18,
           color: hexToColor("#8D9CCB"),
         ),
-
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: hexToColor("#8D9CCB")),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
+        ),
         hintText: hint,
         hintStyle: TextStyle(
           color: Colors.white,
-          fontSize: 20,
+          fontSize: 18,
         ),
       ),
     );
