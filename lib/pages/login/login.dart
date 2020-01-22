@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/pages/forget_pass/forget_page.dart';
+import 'package:papuf/pages/home/home_page.dart';
 import 'package:papuf/utils/nav.dart';
 import 'package:papuf/widgets/app_button.dart';
 import 'package:papuf/widgets/app_button_outline.dart';
@@ -168,6 +169,12 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _showProgress = true;
     });
+
+    setState(() {
+      _showProgress = false;
+    });
+
+    push(context, HomePage(), replace: true);
 
     setState(() {
       _showProgress = false;
