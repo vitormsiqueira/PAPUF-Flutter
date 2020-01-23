@@ -13,27 +13,122 @@ class HomePage extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: Text(
-            "Salas de Aula",
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-        ),
+        title: _textAppBar(),
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: _body(),
+      body: _body(context),
     );
   }
 
-  _body() {
-    return Container(
-      child: _listViewSalas(),
+  _body(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          _listViewSalas(),
+          _textControle(),
+          _controle(),
+          _dashboard(),
+          _cardDashboard(context),
+        ],
+      ),
     );
   }
+}
+
+_textAppBar() {
+  return Padding(
+    padding: const EdgeInsets.only(left: 15.0),
+    child: Text(
+      "Salas de Aula",
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
+}
+
+_cardDashboard(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 15.0, left: 30, right: 30),
+    child: Container(
+      width: MediaQuery.of(context).size.width,
+      height: 80,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: hexToColor("#4163CD"),
+      ),
+    ),
+  );
+}
+
+_dashboard() {
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Container(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30.0, top: 30, bottom: 20),
+          child: Text(
+            "Dashboard",
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: 22,
+            ),
+          ),
+        ),
+      )
+    ],
+  );
+}
+
+_textControle() {
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Container(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30.0, top: 30, bottom: 20),
+          child: Text(
+            "Controle",
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: 22,
+            ),
+          ),
+        ),
+      )
+    ],
+  );
+}
+
+_controle() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Container(
+        width: 160,
+        height: 350,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: hexToColor("#4163CD"),
+        ),
+      ),
+      SizedBox(
+        width: 30,
+      ),
+      Container(
+        width: 160,
+        height: 350,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: hexToColor("#4163CD"),
+        ),
+      ),
+    ],
+  );
 }
 
 _listViewSalas() {
@@ -54,7 +149,7 @@ _listViewSalas() {
             highlightColor: hexToColor("#4DE4B2"),
             child: Container(
               height: 36,
-              width: 100,
+              width: 80,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: hexToColor("#4DE4B2")),
