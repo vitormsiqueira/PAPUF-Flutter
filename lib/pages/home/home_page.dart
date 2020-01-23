@@ -6,14 +6,9 @@ import 'package:papuf/pages/home/bottom_nav_bar.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.light, // status bar brightness
         title: _textAppBar(),
         elevation: 0,
         backgroundColor: Colors.white,
@@ -111,7 +106,7 @@ _controle() {
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
       Container(
-        width: 160,
+        width: 150,
         height: 350,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -119,10 +114,10 @@ _controle() {
         ),
       ),
       SizedBox(
-        width: 30,
+        width: 40,
       ),
       Container(
-        width: 160,
+        width: 150,
         height: 350,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
