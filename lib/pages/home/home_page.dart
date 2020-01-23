@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:papuf/color_hex.dart';
+import 'package:papuf/pages/home/bottom_nav_bar.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: _body(context),
+      bottomNavigationBar: BottomNavyBar(),
     );
   }
 
