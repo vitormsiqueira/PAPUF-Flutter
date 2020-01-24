@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:papuf/pages/forget_pass/forget_page.dart';
+import 'package:papuf/pages/home/home_page.dart';
+import 'package:papuf/pages/notifications/notifications_page.dart';
+import 'package:papuf/utils/nav.dart';
 
 import '../../color_hex.dart';
 
@@ -34,12 +38,18 @@ class _BottomNavyBarState extends State<BottomNavyBar> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                IconTheme(
-                  data: IconThemeData(
-                      size: 28,
-                      color:
-                          isSelected ? hexToColor("#4163CD") : Colors.black87),
-                  child: item.icon,
+                GestureDetector(
+                  onTap: () {
+                    push(context, HomePage(), replace: true);
+                  },
+                  child: IconTheme(
+                    data: IconThemeData(
+                        size: 28,
+                        color: isSelected
+                            ? hexToColor("#4163CD")
+                            : Colors.black45),
+                    child: item.icon,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8),

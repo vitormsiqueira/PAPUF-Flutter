@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/pages/home/bottom_nav_bar.dart';
+import 'package:papuf/widgets/text_appbar.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light, // status bar brightness
-        title: _textAppBar(),
+        title: textAppBar("Salas de Aula"),
         elevation: 0,
         backgroundColor: Colors.white,
       ),
@@ -20,31 +26,20 @@ class HomePage extends StatelessWidget {
 
   _body(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          _listViewSalas(),
-          _textControle(),
-          _controle(),
-          _dashboard(),
-          _cardDashboard(context),
-        ],
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            _listViewSalas(),
+            _textControle(),
+            _controle(),
+            _dashboard(),
+            _cardDashboard(context),
+          ],
+        ),
       ),
     );
   }
-}
-
-_textAppBar() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 15.0),
-    child: Text(
-      "Salas de Aula",
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  );
 }
 
 _cardDashboard(BuildContext context) {
@@ -71,8 +66,9 @@ _dashboard() {
           child: Text(
             "Dashboard",
             style: TextStyle(
-              color: Colors.black87,
+              color: Colors.black54,
               fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -91,8 +87,9 @@ _textControle() {
           child: Text(
             "Controle",
             style: TextStyle(
-              color: Colors.black87,
+              color: Colors.black54,
               fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -131,7 +128,7 @@ _controle() {
 _listViewSalas() {
   bool pressed = false;
   return Container(
-    padding: EdgeInsets.only(left: 15),
+    padding: EdgeInsets.only(left: 25),
     height: 30,
     child: ListView(
       scrollDirection: Axis.horizontal,

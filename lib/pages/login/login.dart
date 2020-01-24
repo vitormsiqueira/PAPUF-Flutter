@@ -34,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     return Stack(
       children: <Widget>[
         Container(
+          color: Colors.white,
           child: Padding(
             padding: EdgeInsets.only(top: 45),
             child: Center(
