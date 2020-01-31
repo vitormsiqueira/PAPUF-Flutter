@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/pages/home/bottom_nav_bar.dart';
+import 'package:papuf/widgets/controle.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool pressed = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,31 +35,150 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             _listViewSalas(),
             _textControle(),
-            _controle(),
-            _dashboard(),
-            _cardDashboard(context),
+            Controle(),
+            _textDashboard(),
+            _dashboard(context),
           ],
         ),
       ),
     );
   }
+
+  _listViewSalas() {
+    return Container(
+      padding: EdgeInsets.only(left: 25),
+      height: 30,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: List.generate(15, (int index) {
+          // gera a lista
+          return Card(
+            elevation: 0,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () {
+                setState(() {
+                  if (pressed == true) {
+                    pressed = false;
+                  } else
+                    pressed = true;
+                });
+              },
+              splashColor: hexToColor("#4DE4B2"),
+              highlightColor: hexToColor("#4DE4B2"),
+              child: Container(
+                height: 36,
+                width: 80,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: hexToColor("#4DE4B2")),
+                  color: pressed ? hexToColor("#4DE4B2") : Colors.transparent,
+                ),
+                child: Center(
+                  child: Text(
+                    "Sala $index",
+                    style: pressed
+                        ? TextStyle(
+                            fontSize: 16,
+                            letterSpacing: .6,
+                            color: Colors.white,
+                          )
+                        : TextStyle(
+                            color: hexToColor("#4DE4B2"),
+                            fontSize: 16,
+                            letterSpacing: .6,
+                          ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
 }
 
-_cardDashboard(BuildContext context) {
+_dashboard(BuildContext context) {
   return Padding(
-    padding: const EdgeInsets.only(bottom: 15.0, left: 30, right: 30),
+    padding: const EdgeInsets.only(bottom: 30.0, left: 30, right: 30),
     child: Container(
+      padding: EdgeInsets.only(left: 15),
+      child: Row(
+        children: <Widget>[
+          Container(
+            width: 60,
+            height: 60,
+            child: Icon(
+              Icons.trending_up,
+              color: hexToColor("#4163CD"),
+              size: 35,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: 15, top: 16, right: 56), //consertar isso daqui
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Consumo hoje",
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "450 kW",
+                  style: TextStyle(
+                      color: Colors.black45,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: 55,
+            height: 55,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                FlatButton(
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: Colors.black45,
+                    size: 30,
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
       width: MediaQuery.of(context).size.width,
       height: 80,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: hexToColor("#4163CD"),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 25.0, // has the effect of softening the shadow
+            spreadRadius: .5, // has the effect of extending the shadow
+          )
+        ],
       ),
     ),
   );
 }
 
-_dashboard() {
+_textDashboard() {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -67,7 +189,7 @@ _dashboard() {
             "Dashboard",
             style: TextStyle(
               color: Colors.black54,
-              fontSize: 22,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -88,83 +210,12 @@ _textControle() {
             "Controle",
             style: TextStyle(
               color: Colors.black54,
-              fontSize: 22,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
       )
     ],
-  );
-}
-
-_controle() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-      Container(
-        width: 150,
-        height: 350,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: hexToColor("#4163CD"),
-        ),
-      ),
-      SizedBox(
-        width: 40,
-      ),
-      Container(
-        width: 150,
-        height: 350,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: hexToColor("#4163CD"),
-        ),
-      ),
-    ],
-  );
-}
-
-_listViewSalas() {
-  bool pressed = false;
-  return Container(
-    padding: EdgeInsets.only(left: 25),
-    height: 30,
-    child: ListView(
-      scrollDirection: Axis.horizontal,
-      children: List.generate(15, (int index) {
-        // gera a lista
-        return Card(
-          elevation: 0,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: () {},
-            splashColor: hexToColor("#4DE4B2"),
-            highlightColor: hexToColor("#4DE4B2"),
-            child: Container(
-              height: 36,
-              width: 80,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: hexToColor("#4DE4B2")),
-              ),
-              child: Center(
-                child: Text(
-                  "Sala $index",
-                  style: pressed
-                      ? TextStyle(
-                          fontSize: 16,
-                          letterSpacing: .6,
-                          color: hexToColor("#4DE4B2"),
-                          fontWeight: FontWeight.w500,
-                        )
-                      : TextStyle(color: hexToColor("#4DE4B2")),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    ),
   );
 }

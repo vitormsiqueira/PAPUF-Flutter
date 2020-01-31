@@ -28,9 +28,7 @@ class _BottomNavyBarState extends State<BottomNavyBar> {
         width: isSelected ? 150 : 50,
         padding: isSelected ? EdgeInsets.only(left: 16, right: 16) : null,
         decoration: isSelected
-            ? BoxDecoration(
-                color: Colors.cyan[50],
-                borderRadius: BorderRadius.all(Radius.circular(25)))
+            ? BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(25)))
             : null,
         child: ListView(
           scrollDirection: Axis.horizontal,
