@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:papuf/color_hex.dart';
 
 class AppButtonOutline extends StatelessWidget {
-  String name;
-  Function onPressed;
-  bool showProgress;
-  String backGroundColor;
+  final String name;
+  final Function onPressed;
+  final bool showProgress;
+  final String backGroundColor;
 
   AppButtonOutline(this.name,
       {this.onPressed,
