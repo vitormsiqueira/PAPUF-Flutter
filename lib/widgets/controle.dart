@@ -5,6 +5,9 @@ import '../color_hex.dart';
 bool pressed = false;
 
 class Controle extends StatefulWidget {
+  final int currentSala;
+
+  const Controle({this.currentSala});
   @override
   _ControleState createState() => _ControleState();
 }
@@ -104,9 +107,9 @@ class _ControleState extends State<Controle> {
       color: selected == "On" ? hexToColor("#4163CD") : Colors.white,
       boxShadow: [
         BoxShadow(
-          color: selected == "On" ? hexToColor("#4163CD") : Colors.black38,
-          blurRadius: 25.0, // has the effect of softening the shadow
-          spreadRadius: .5, // has the effect of extending the shadow
+          color: selected == "On" ? hexToColor("#838BDA") : Colors.black26,
+          blurRadius: 15.0, // has the effect of softening the shadow
+          spreadRadius: 0.5, // has the effect of extending the shadow
         )
       ],
     );
@@ -127,14 +130,14 @@ class _ControleState extends State<Controle> {
   }
 
   _textOthers(
-      String selected, String texto, int size, FontWeight MyFontWeight) {
+      String selected, String texto, int size, FontWeight myFontWeight) {
     return Center(
       child: Text(
         texto,
         style: TextStyle(
           fontSize: size.toDouble(),
           color: selected == "On" ? Colors.white : hexToColor("#4163CD"),
-          fontWeight: MyFontWeight,
+          fontWeight: myFontWeight,
         ),
       ),
     );

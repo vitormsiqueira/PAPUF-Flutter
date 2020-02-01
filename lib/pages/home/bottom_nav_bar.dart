@@ -38,7 +38,7 @@ class _BottomNavyBarState extends State<BottomNavyBar> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    push(context, HomePage(), replace: true);
+                    push(context, HomePage('admin'), replace: true);
                   },
                   child: IconTheme(
                     data: IconThemeData(

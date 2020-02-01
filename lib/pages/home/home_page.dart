@@ -6,6 +6,8 @@ import 'package:papuf/widgets/controle.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 class HomePage extends StatefulWidget {
+  final String login;
+  const HomePage(this.login);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -18,7 +20,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light, // status bar brightness
-        title: textAppBar("Salas de Aula"),
+        title: widget.login == 'admin'
+            ? textAppBar("Salas de Aula")
+            : textAppBar("Minhas Aulas"),
         elevation: 0,
         backgroundColor: Colors.white,
       ),
@@ -35,7 +39,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             _listViewSalas(),
             _textControle(),
-            Controle(),
+            Controle(
+              currentSala: 1,
+            ),
             _textDashboard(),
             _dashboard(context),
           ],
@@ -169,7 +175,7 @@ _dashboard(BuildContext context) {
         boxShadow: [
           BoxShadow(
             color: Colors.black26,
-            blurRadius: 25.0, // has the effect of softening the shadow
+            blurRadius: 15.0, // has the effect of softening the shadow
             spreadRadius: .5, // has the effect of extending the shadow
           )
         ],
@@ -188,7 +194,7 @@ _textDashboard() {
           child: Text(
             "Dashboard",
             style: TextStyle(
-              color: Colors.black54,
+              color: Colors.black,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),

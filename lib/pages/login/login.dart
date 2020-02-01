@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
       _showProgress = false;
     });
 
-    push(context, HomePage(), replace: true);
+    push(context, HomePage(login), replace: true);
 
     setState(() {
       _showProgress = false;
