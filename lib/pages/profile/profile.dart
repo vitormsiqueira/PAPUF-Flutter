@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
-class NotificationsPage extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light, // status bar brightness
-        title: textAppBar("Notificações"),
+        title: textAppBar("Profile"),
         elevation: 0,
         backgroundColor: Colors.white,
       ),

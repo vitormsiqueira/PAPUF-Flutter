@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:papuf/color_hex.dart';
-import 'package:papuf/pages/home/bottom_nav_bar.dart';
+import 'package:papuf/pages/dashboard/dashboard_page.dart';
+import 'package:papuf/pages/notifications/notifications_page.dart';
+import 'package:papuf/pages/profile/profile.dart';
 import 'package:papuf/widgets/controle.dart';
+import 'package:papuf/widgets/text_appbar.dart';
+
+import 'package:flutter/material.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,8 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool pressed = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,82 +30,73 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
       ),
       body: _body(context),
-      bottomNavigationBar: BottomNavyBar(),
     );
   }
+}
 
-  _body(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: <Widget>[
-            _listViewSalas(),
-            _textControle(),
-            Controle(
-              currentSala: 1,
-            ),
-            _textDashboard(),
-            _dashboard(context),
-          ],
-        ),
+_body(BuildContext context) {
+  return SingleChildScrollView(
+    child: Container(
+      color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          _listViewSalas(),
+          _textControle(),
+          Controle(
+            currentSala: 1,
+          ),
+          _textDashboard(),
+          _dashboard(context),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 
-  _listViewSalas() {
-    return Container(
-      padding: EdgeInsets.only(left: 25),
-      height: 30,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: List.generate(15, (int index) {
-          // gera a lista
-          return Card(
-            elevation: 0,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(20),
-              onTap: () {
-                setState(() {
-                  if (pressed == true) {
-                    pressed = false;
-                  } else
-                    pressed = true;
-                });
-              },
-              splashColor: hexToColor("#4DE4B2"),
-              highlightColor: hexToColor("#4DE4B2"),
-              child: Container(
-                height: 36,
-                width: 80,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: hexToColor("#4DE4B2")),
-                  color: pressed ? hexToColor("#4DE4B2") : Colors.transparent,
-                ),
-                child: Center(
-                  child: Text(
-                    "Sala $index",
-                    style: pressed
-                        ? TextStyle(
-                            fontSize: 16,
-                            letterSpacing: .6,
-                            color: Colors.white,
-                          )
-                        : TextStyle(
-                            color: hexToColor("#4DE4B2"),
-                            fontSize: 16,
-                            letterSpacing: .6,
-                          ),
-                  ),
+_listViewSalas() {
+  return Container(
+    padding: EdgeInsets.only(left: 25),
+    height: 30,
+    child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: List.generate(15, (int index) {
+        // gera a lista
+        return Card(
+          elevation: 0,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20),
+            splashColor: hexToColor("#4DE4B2"),
+            highlightColor: hexToColor("#4DE4B2"),
+            child: Container(
+              height: 36,
+              width: 80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: hexToColor("#4DE4B2")),
+                color: pressed ? hexToColor("#4DE4B2") : Colors.transparent,
+              ),
+              child: Center(
+                child: Text(
+                  "Sala $index",
+                  style: pressed
+                      ? TextStyle(
+                          fontSize: 16,
+                          letterSpacing: .6,
+                          color: Colors.white,
+                        )
+                      : TextStyle(
+                          color: hexToColor("#4DE4B2"),
+                          fontSize: 16,
+                          letterSpacing: .6,
+                        ),
                 ),
               ),
             ),
-          );
-        }),
-      ),
-    );
-  }
+          ),
+        );
+      }),
+    ),
+  );
 }
 
 _dashboard(BuildContext context) {
