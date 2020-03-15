@@ -5,6 +5,7 @@ import 'package:papuf/pages/dashboard/dashboard_page.dart';
 import 'package:papuf/pages/notifications/notifications_page.dart';
 import 'package:papuf/pages/profile/profile.dart';
 import 'package:papuf/widgets/controle.dart';
+import 'package:papuf/widgets/list_view_classes.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
+  // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
+  bool pressed = false;
+  int _selectedClass = 0;
+  final _classOptions = [
+    print("Sala 1")
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +37,7 @@ class _HomePageState extends State<HomePage> {
             : textAppBar("Minhas Aulas"),
         elevation: 0,
         backgroundColor: Colors.white,
+        
       ),
       body: _body(context),
     );
@@ -40,7 +50,7 @@ _body(BuildContext context) {
       color: Colors.white,
       child: Column(
         children: <Widget>[
-          _listViewSalas(),
+          ListClasses(),
           _textControle(),
           Controle(
             currentSala: 1,
@@ -49,52 +59,6 @@ _body(BuildContext context) {
           _dashboard(context),
         ],
       ),
-    ),
-  );
-}
-
-_listViewSalas() {
-  return Container(
-    padding: EdgeInsets.only(left: 25),
-    height: 30,
-    child: ListView(
-      scrollDirection: Axis.horizontal,
-      children: List.generate(15, (int index) {
-        // gera a lista
-        return Card(
-          elevation: 0,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(20),
-            splashColor: hexToColor("#4DE4B2"),
-            highlightColor: hexToColor("#4DE4B2"),
-            child: Container(
-              height: 36,
-              width: 80,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: hexToColor("#4DE4B2")),
-                color: pressed ? hexToColor("#4DE4B2") : Colors.transparent,
-              ),
-              child: Center(
-                child: Text(
-                  "Sala $index",
-                  style: pressed
-                      ? TextStyle(
-                          fontSize: 16,
-                          letterSpacing: .6,
-                          color: Colors.white,
-                        )
-                      : TextStyle(
-                          color: hexToColor("#4DE4B2"),
-                          fontSize: 16,
-                          letterSpacing: .6,
-                        ),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
     ),
   );
 }

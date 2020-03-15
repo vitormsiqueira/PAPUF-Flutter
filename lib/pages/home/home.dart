@@ -5,6 +5,8 @@ import 'package:papuf/pages/notifications/notifications_page.dart';
 import 'package:papuf/pages/profile/profile.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
+import '../../color_hex.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -14,7 +16,7 @@ class _HomeState extends State<Home> {
   bool pressed = false;
   int _selectedPage = 0;
   final _pageOptions = [
-    HomePage('Admin'),
+    HomePage('admin'),
     NotificationsPage(),
     DashboardPage(),
     ProfilePage(),
@@ -24,9 +26,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
-        elevation: 0.5,
         currentIndex: _selectedPage,
-        backgroundColor: Colors.black,
         onTap: (int index) {
           setState(() {
             _selectedPage = index;
@@ -36,41 +36,41 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: Colors.blueAccent,
+              color: hexToColor("#4163CD"),
             ),
             title: Text(
               'Home',
-              style: TextStyle(color: Colors.blueGrey),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notifications,
-              color: Colors.blueAccent,
-            ),
-            title: Text(
-              'Notifications',
-              style: TextStyle(color: Colors.blueGrey),
+              style: TextStyle(color: hexToColor("#4163CD")),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.dashboard,
-              color: Colors.blueAccent,
+              color: hexToColor("#4163CD"),
             ),
             title: Text(
               'Dashboard',
-              style: TextStyle(color: Colors.blueGrey),
+              style: TextStyle(color: hexToColor("#4163CD")),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications,
+              color: hexToColor("#4163CD"),
+            ),
+            title: Text(
+              'Notificações',
+              style: TextStyle(color: hexToColor("#4163CD")),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.account_circle,
-              color: Colors.blueAccent,
+              color: hexToColor("#4163CD"),
             ),
             title: Text(
-              'Search',
-              style: TextStyle(color: Colors.blueGrey),
+              'Perfil',
+              style: TextStyle(color: hexToColor("#4163CD")),
             ),
           ),
         ],
