@@ -21,7 +21,7 @@ class _ListClassesState extends State<ListClasses> {
     // Container responsavel pelo tamnaho da listview
     return new Container(
     // padding: EdgeInsets.only(left: 27, top: 7),
-    height: 50,
+    height: 45,
     child: ListView(
       padding: EdgeInsets.all(3),
       scrollDirection: Axis.horizontal,

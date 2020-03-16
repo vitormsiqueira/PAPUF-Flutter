@@ -18,8 +18,8 @@ String topic = "temp";
 mqtt.MqttClient client;
 mqtt.MqttConnectionState connectionState;
 
-int ar1 = 0;
-int ar2 = 0;
+int ar1 = 10;
+int ar2 = 10;
 
 bool pressed = false;
 
@@ -54,16 +54,16 @@ class _ControleState extends State<Controle> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        _modulo(selected1, um, "19º"),
+        _modulo(selected1, um),
         SizedBox(
           width: 40,
         ),
-        _modulo(selected2, dois, "21º")
+        _modulo(selected2, dois)
       ],
     );
   }
 
-  _modulo(String selected, int i, String temp) {
+  _modulo(String selected, int i) {
     return Container(
       padding: EdgeInsets.all(15),
       width: 150,
@@ -105,6 +105,7 @@ class _ControleState extends State<Controle> {
           // ),
 
           ControlTemperature(ar1, "temp-1"),
+          //ControlTemperature(ar2, "temp-2"),
 
           Container(
             width: 80,
