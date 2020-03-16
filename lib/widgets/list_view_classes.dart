@@ -17,53 +17,38 @@ class _ListClassesState extends State<ListClasses> {
   ];
   @override
   Widget build(BuildContext context) {
+
+    // Container responsavel pelo tamnaho da listview
     return new Container(
-    
-    padding: EdgeInsets.only(left: 27, top: 7),
-    height: 35,
+    // padding: EdgeInsets.only(left: 27, top: 7),
+    height: 50,
     child: ListView(
+      padding: EdgeInsets.all(3),
       scrollDirection: Axis.horizontal,
       children: List.generate(15, (int index) {
         // gera a lista
-        return Card(
-          elevation: 0,
-          child: InkWell(
-            onTap: (){
-              setState(() {
-                
-              });
-            },
-            borderRadius: BorderRadius.circular(20),
-            splashColor: hexToColor("#4DE4B2"),
-            highlightColor: hexToColor("#4DE4B2"),
-            focusColor: Colors.black,
+        return Container(
+          height: 50,
+          child: RawMaterialButton(
+            onPressed: (){}, 
             child: Container(
-              height: 36,
-              width: 80,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: hexToColor("#4DE4B2")),
-                color: pressed ? hexToColor("#4DE4B2") : Colors.transparent,
-              ),
-              child: Center(
-                child: Text(
-                  "Sala $index",
-                  style: pressed
-                      ? TextStyle(
-                          fontSize: 16,
-                          letterSpacing: .6,
-                          color: Colors.white,
-                        )
-                      : TextStyle(
-                          color: hexToColor("#4DE4B2"),
-                          fontSize: 16,
-                          letterSpacing: .6,
-                        ),
+              child: Text(
+                "$index", 
+                style: TextStyle(
+                  fontSize: 20,
+                  letterSpacing: .6,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+            shape: new CircleBorder(),
+            elevation: 3,
+            fillColor: hexToColor("#4DE4B2"),
+            
           ),
         );
+        
       }),
     ),
   );

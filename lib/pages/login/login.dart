@@ -35,7 +35,12 @@ class _LoginPageState extends State<LoginPage> {
     return Stack(
       children: <Widget>[
         Container(
+          height: 1000,
+          color: hexToColor("#4163CD"),
+        ),
+        Container(
           color: Colors.white,
+          height: 450,
           child: Padding(
             padding: EdgeInsets.only(top: 45),
             child: Center(
@@ -53,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Container(
                     child: _img("assets/images/logo_bloco.jpg"),
-                    constraints: BoxConstraints(maxHeight: 200),
+                    constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10),
@@ -71,9 +76,10 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
+        
         SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 350.0),
+            padding: const EdgeInsets.only(top: 400.0),
             child: Form(
               key: _formKey, //chave do formulário que controla o estado
               child: Container(
