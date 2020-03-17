@@ -19,13 +19,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
   bool pressed = false;
   int _selectedClass = 0;
-  final _classOptions = [
-    print("Sala 1")
-  ];
+  final _classOptions = [print("Sala 1")];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,6 @@ class _HomePageState extends State<HomePage> {
             : textAppBar("Minhas Aulas"),
         elevation: 0,
         backgroundColor: Colors.white,
-        
       ),
       body: _body(context),
     );
