@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:papuf/utils/control_temperature.dart';
-
+import 'package:papuf/widgets/jsonToSend.dart';
 import '../color_hex.dart';
 
 import 'package:mqtt_client/mqtt_client.dart' as mqtt;
@@ -78,31 +78,6 @@ class _ControleState extends State<Controle> {
                 ? _img("assets/images/icon_ar_branco.png")
                 : _img("assets/images/icon_ar_azul.png"),
           ),
-          // Container(
-          //   width: 80,
-          //   height: 60,
-          //   child: InkWell(
-          //     onTap: () {
-          //       print(selected);
-          //     },
-          //     child: _textOthers(selected, '+', 45, FontWeight.w400),
-          //   ),
-          // ),
-          // Container(
-          //   width: 80,
-          //   height: 60,
-          //   child: _textOthers(selected, temp, 45, FontWeight.w300),
-          // ),
-          // Container(
-          //   width: 80,
-          //   height: 60,
-          //   child: InkWell(
-          //     onTap: () {
-          //       print(selected);
-          //     },
-          //     child: _textOthers(selected, '-', 55, FontWeight.w400),
-          //   ),
-          // ),
 
           ControlTemperature(ar1, "temp-1"),
 
@@ -111,6 +86,8 @@ class _ControleState extends State<Controle> {
             height: 60,
             child: InkWell(
               onTap: () {
+                PublishM(CreateJsonTempState("0" ,selected), topic);
+                //RequestState(topic);
                 print(selected);
                 // aqui o selected não estava alterando o estado global, apenas qdo especificando se seelcted1 ou selected2
                 // mas ta aí uma solução porca

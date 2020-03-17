@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/widgets/controle.dart';
-
+import 'package:papuf/widgets/jsonToSend.dart';
 import '../color_hex.dart';
 
 class ControlTemperature extends StatefulWidget {
@@ -38,7 +38,8 @@ class _ControlTemperatureState extends State<ControlTemperature> {
                 setState(() {
                   temp++;
                 });
-                PublishM(temp.toString(), topic);
+                //envia um json {"temp": "3", "state": "on"} com temperatura e estado
+                PublishM(CreateJsonTempState(temp.toString(), "on"), topic);
               },
               child: _textOthers(selected, '+', 45, FontWeight.w400),
             ),
@@ -51,7 +52,7 @@ class _ControlTemperatureState extends State<ControlTemperature> {
                 setState(() {
                   temp--;
                 });
-                PublishM(temp.toString(), topic);
+                PublishM(CreateJsonTempState(temp.toString(), "on"), topic);
               },
               child: _textOthers(selected, '-', 45, FontWeight.w400),
            ),
