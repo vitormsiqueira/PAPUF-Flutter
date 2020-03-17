@@ -33,7 +33,7 @@ class _ControlTemperatureState extends State<ControlTemperature> {
     return Container(
       child: Column(
         children: <Widget>[
-          FlatButton(
+          RawMaterialButton(
               onPressed: () {
                 setState(() {
                   temp++;
@@ -42,19 +42,21 @@ class _ControlTemperatureState extends State<ControlTemperature> {
                 PublishM(CreateJsonTempState(temp.toString(), "on"), topic);
               },
               child: _textOthers(selected, '+', 45, FontWeight.w400),
+              shape: CircleBorder(),
             ),
           
           Container(
             child: _textOthers(selected, temp.toString()+'º', 45, FontWeight.w300),
           ),
-           FlatButton(
+           RawMaterialButton(
               onPressed: () {
                 setState(() {
                   temp--;
                 });
                 PublishM(CreateJsonTempState(temp.toString(), "on"), topic);
               },
-              child: _textOthers(selected, '-', 45, FontWeight.w400),
+              child: _textOthers(selected, '-', 50, FontWeight.w400),
+              shape: CircleBorder(),
            ),
         SizedBox(
           height: 15,
