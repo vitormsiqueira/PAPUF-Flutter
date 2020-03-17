@@ -10,7 +10,7 @@ class ListClasses extends StatefulWidget {
 
 class _ListClassesState extends State<ListClasses> {
   bool pressed = false;
-  int _selectedPage = 0;
+  int _selectedClass = 0;
   final _pageOptions = [print("Sala x")];
   @override
   Widget build(BuildContext context) {
@@ -28,19 +28,22 @@ class _ListClassesState extends State<ListClasses> {
             // Width controla os espaçamento das bolinhas
             width: 60,
             child: RawMaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                // Seta a sala na qual é clicada
+                _selectedClass = index;
+                print(_selectedClass);
+              },
               child: Container(
                 child: Text(
                   "$index",
                   style: TextStyle(
                     fontSize: 20,
-                    letterSpacing: .6,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              shape: new CircleBorder(),
+              shape: CircleBorder(),
               elevation: 3,
               fillColor: hexToColor("#4DE4B2"),
             ),

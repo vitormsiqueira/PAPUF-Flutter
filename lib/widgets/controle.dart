@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:papuf/utils/control_temperature.dart';
-
+import 'package:papuf/widgets/jsonToSend.dart';
 import '../color_hex.dart';
 
 import 'package:mqtt_client/mqtt_client.dart' as mqtt;
@@ -48,7 +48,6 @@ class _ControleState extends State<Controle> {
   double _temp = 30;
   StreamSubscription subscription;
 
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -78,31 +77,6 @@ class _ControleState extends State<Controle> {
                 ? _img("assets/images/icon_ar_branco.png")
                 : _img("assets/images/icon_ar_azul.png"),
           ),
-          // Container(
-          //   width: 80,
-          //   height: 60,
-          //   child: InkWell(
-          //     onTap: () {
-          //       print(selected);
-          //     },
-          //     child: _textOthers(selected, '+', 45, FontWeight.w400),
-          //   ),
-          // ),
-          // Container(
-          //   width: 80,
-          //   height: 60,
-          //   child: _textOthers(selected, temp, 45, FontWeight.w300),
-          // ),
-          // Container(
-          //   width: 80,
-          //   height: 60,
-          //   child: InkWell(
-          //     onTap: () {
-          //       print(selected);
-          //     },
-          //     child: _textOthers(selected, '-', 55, FontWeight.w400),
-          //   ),
-          // ),
 
           ControlTemperature(ar1, "temp-1"),
           //ControlTemperature(ar2, "temp-2"),
@@ -112,6 +86,8 @@ class _ControleState extends State<Controle> {
             height: 60,
             child: InkWell(
               onTap: () {
+                PublishM(CreateJsonTempState("0", selected), topic);
+                //RequestState(topic);
                 print(selected);
                 // aqui o selected não estava alterando o estado global, apenas qdo especificando se seelcted1 ou selected2
                 // mas ta aí uma solução porca
@@ -131,7 +107,6 @@ class _ControleState extends State<Controle> {
               child: _textOnOff(selected),
             ),
           ),
-
         ],
       ),
     );
@@ -289,13 +264,15 @@ class _ControleState extends State<Controle> {
     }
   }
 
-    //################################################################
+  //################################################################
 }
 
 void PublishM(String mes, String topic) {
   final mqtt.MqttClientPayloadBuilder builder = mqtt.MqttClientPayloadBuilder();
   builder.addString(mes);
-  client.publishMessage(topic, mqtt.MqttQos.values[1],
+  client.publishMessage(
+    topic,
+    mqtt.MqttQos.values[1],
     builder.payload,
     retain: true,
   );

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/widgets/controle.dart';
-
+import 'package:papuf/widgets/jsonToSend.dart';
 import '../color_hex.dart';
 
 class ControlTemperature extends StatefulWidget {
-  
   final int temp;
   final String topic;
   const ControlTemperature(this.temp, this.topic);
@@ -34,48 +33,48 @@ class _ControlTemperatureState extends State<ControlTemperature> {
       child: Column(
         children: <Widget>[
           RawMaterialButton(
-              onPressed: () {
-                setState(() {
-                  temp++;
-                });
-                PublishM(temp.toString(), topic);
-              },
-              child: _textOthers(selected, '+', 45, FontWeight.w400),
-              shape: CircleBorder(),
-            ),
-          
-          Container(
-            child: _textOthers(selected, temp.toString()+'º', 45, FontWeight.w300),
+            onPressed: () {
+              setState(() {
+                temp++;
+              });
+              //envia um json {"temp": "3", "state": "on"} com temperatura e estado
+              PublishM(CreateJsonTempState(temp.toString(), "on"), topic);
+            },
+            child: _textOthers(selected, '+', 45, FontWeight.w400),
+            shape: CircleBorder(),
           ),
-           RawMaterialButton(
-              onPressed: () {
-                setState(() {
-                  temp--;
-                });
-                PublishM(temp.toString(), topic);
-              },
-              child: _textOthers(selected, '-', 50, FontWeight.w400),
-              shape: CircleBorder(),
-           ),
-        SizedBox(
-          height: 15,
-        )
+          Container(
+            child: _textOthers(
+                selected, temp.toString() + 'º', 45, FontWeight.w300),
+          ),
+          RawMaterialButton(
+            onPressed: () {
+              setState(() {
+                temp--;
+              });
+              PublishM(CreateJsonTempState(temp.toString(), "on"), topic);
+            },
+            child: _textOthers(selected, '-', 50, FontWeight.w400),
+            shape: CircleBorder(),
+          ),
+          SizedBox(
+            height: 15,
+          )
         ],
       ),
     );
   }
 }
 
-_textOthers(
-      String selected, String texto, int size, FontWeight myFontWeight) {
-    return Center(
-      child: Text(
-        texto,
-        style: TextStyle(
-          fontSize: size.toDouble(),
-          color: selected == "On" ? Colors.white : hexToColor("#4163CD"),
-          fontWeight: myFontWeight,
-        ),
+_textOthers(String selected, String texto, int size, FontWeight myFontWeight) {
+  return Center(
+    child: Text(
+      texto,
+      style: TextStyle(
+        fontSize: size.toDouble(),
+        color: selected == "On" ? Colors.white : hexToColor("#4163CD"),
+        fontWeight: myFontWeight,
       ),
-    );
-  }
+    ),
+  );
+}

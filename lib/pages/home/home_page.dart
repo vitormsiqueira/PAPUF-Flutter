@@ -167,7 +167,7 @@ _textControle() {
         child: Padding(
           padding: const EdgeInsets.only(left: 30.0, top: 30, bottom: 20),
           child: Text(
-            "Controle",
+            "Controle | Sala ",
             style: TextStyle(
               color: Colors.black54,
               fontSize: 24,
