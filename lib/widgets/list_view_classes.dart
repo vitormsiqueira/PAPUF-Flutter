@@ -21,9 +21,9 @@ class _ListClassesState extends State<ListClasses> {
     // Container responsavel pelo tamanho da listview
     return new Container(
     // padding: EdgeInsets.only(left: 27, top: 7),
-    height: 45,
+    height: 48,
     child: ListView(
-      padding: EdgeInsets.only(left:18, top: 3, bottom: 3),
+      padding: EdgeInsets.only(left:18, top: 3, bottom: 10),
       scrollDirection: Axis.horizontal,
       children: List.generate(15, (int index) {
         // gera a lista

@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:papuf/color_hex.dart';
-import 'package:papuf/pages/dashboard/dashboard_page.dart';
-import 'package:papuf/pages/notifications/notifications_page.dart';
-import 'package:papuf/pages/profile/profile.dart';
 import 'package:papuf/utils/connect_MQTT.dart';
 import 'package:papuf/widgets/controle.dart';
 import 'package:papuf/widgets/list_view_classes.dart';
-import 'package:papuf/widgets/text_appbar.dart';
-
-import 'package:flutter/material.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,13 +22,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: CustomAppBar(),
       appBar: AppBar(
         brightness: Brightness.light, // status bar brightness
         title: widget.login == 'admin'
             ? textAppBar("Salas de Aula")
             : textAppBar("Minhas Aulas"),
-        elevation: 0,
+        elevation: .5,
         backgroundColor: Colors.white,
+        // A instância abaixo permite adicionar a LisClasses, aumentando a altura e inserindo um container
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48.0),
+          child: Theme(
+            data: Theme.of(context).copyWith(accentColor: Colors.white),
+            child: Container(
+              height: 48.0,
+              alignment: Alignment.center,
+              child: ListClasses(),
+            ),
+          ),
+        ),
       ),
       body: _body(context),
     );
@@ -47,7 +54,6 @@ _body(BuildContext context) {
       color: Colors.white,
       child: Column(
         children: <Widget>[
-          ListClasses(),
           _textControle(),
           Controle(ar1, "temp-1", currentSala: 1),
           _textDashboard(),

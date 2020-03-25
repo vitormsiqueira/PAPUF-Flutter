@@ -8,7 +8,7 @@ class NotificationsPage extends StatelessWidget {
       appBar: AppBar(
         brightness: Brightness.light, // status bar brightness
         title: textAppBar("Notificações"),
-        elevation: 0,
+        elevation: 1,
         backgroundColor: Colors.white,
       ),
       body: _body(),
