@@ -4,6 +4,7 @@ import 'package:papuf/color_hex.dart';
 import 'package:papuf/pages/dashboard/dashboard_page.dart';
 import 'package:papuf/pages/notifications/notifications_page.dart';
 import 'package:papuf/pages/profile/profile.dart';
+import 'package:papuf/utils/connect_MQTT.dart';
 import 'package:papuf/widgets/controle.dart';
 import 'package:papuf/widgets/list_view_classes.dart';
 import 'package:papuf/widgets/text_appbar.dart';
@@ -48,9 +49,7 @@ _body(BuildContext context) {
         children: <Widget>[
           ListClasses(),
           _textControle(),
-          Controle(
-            currentSala: 1,
-          ),
+          Controle(ar1, "temp-1", currentSala: 1),
           _textDashboard(),
           _dashboard(context),
         ],
@@ -63,62 +62,66 @@ _dashboard(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 30.0, left: 30, right: 30),
     child: Container(
-      padding: EdgeInsets.only(left: 15),
-      child: Row(
+      padding: EdgeInsets.only(top: 10, bottom: 10.0, left: 10, right: 10),
+      child: Column(
         children: <Widget>[
-          Container(
-            width: 60,
-            height: 60,
-            child: Icon(
-              Icons.trending_up,
-              color: hexToColor("#4163CD"),
-              size: 35,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(
-                left: 15, top: 16, right: 56), //consertar isso daqui
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Consumo hoje",
-                  style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800),
+          Row(
+            children: <Widget>[
+              Container(
+                width: 60,
+                height: 60,
+                child: Icon(
+                  Icons.trending_up,
+                  color: hexToColor("#4163CD"),
+                  size: 35,
                 ),
-                SizedBox(
-                  height: 5,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 15), //consertar isso daqui
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Consumo hoje",
+                          style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "450 kW",
+                          style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                      ),
+                    )
+                  ],
                 ),
-                Text(
-                  "450 kW",
-                  style: TextStyle(
-                      color: Colors.black45,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 55,
-            height: 55,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FlatButton(
+              ),
+              Container(
+                height: 55,
+                child: RawMaterialButton(
                   onPressed: () {},
                   child: Icon(
                     Icons.arrow_forward,
                     color: Colors.black45,
                     size: 30,
                   ),
-                )
-              ],
-            ),
-          )
+                  shape: CircleBorder(),
+                ),
+              )
+            ],
+          ),
+          
         ],
       ),
       width: MediaQuery.of(context).size.width,
