@@ -47,6 +47,7 @@ class _ListClassesState extends State<ListClasses> {
 
                 ),
               ),
+            ),
               shape: CircleBorder(),
               elevation: 3,
               fillColor: hexToColor("#4DE4B2"),
