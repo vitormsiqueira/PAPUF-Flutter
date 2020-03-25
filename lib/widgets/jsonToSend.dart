@@ -10,3 +10,4 @@ String createJsonTempState(String temp, String state){
 void requestState(String topicAr){ //envia um pedido e estado on off para o ar, que deverá responde
   publishM('{\"State?\"}', topicAr);
 }
+

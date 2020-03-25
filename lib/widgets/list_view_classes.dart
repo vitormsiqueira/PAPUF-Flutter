@@ -15,10 +15,10 @@ class _ListClassesState extends State<ListClasses> {
   final _pageOptions = [
     print("Sala 0")
   ];
+
   @override
   Widget build(BuildContext context) {
-
-    // Container responsavel pelo tamnaho da listview
+    // Container responsavel pelo tamanho da listview
     return new Container(
     // padding: EdgeInsets.only(left: 27, top: 7),
     height: 45,
@@ -44,19 +44,19 @@ class _ListClassesState extends State<ListClasses> {
                   letterSpacing: .6,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+
                 ),
               ),
+              shape: CircleBorder(),
+              elevation: 3,
+              fillColor: hexToColor("#4DE4B2"),
+              
             ),
-            shape: new CircleBorder(),
-            elevation: 3,
-            fillColor: hexToColor("#4DE4B2"),
-            
-          ),
-        );
+          );
+          
+        }),
+      ),
+    );
         
-      }),
-    ),
-  );
-
   }
 }

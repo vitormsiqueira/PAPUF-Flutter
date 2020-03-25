@@ -43,9 +43,9 @@ class _ControlTemperatureState extends State<ControlTemperature> {
               child: _textOthers(selected, '+', 45, FontWeight.w400),
               shape: CircleBorder(),
             ),
-          
           Container(
-            child: _textOthers(selected, temp.toString()+'º', 45, FontWeight.w300),
+            child: _textOthers(
+                selected, temp.toString() + 'º', 45, FontWeight.w300),
           ),
            RawMaterialButton(
               onPressed: () {
@@ -66,16 +66,15 @@ class _ControlTemperatureState extends State<ControlTemperature> {
   }
 }
 
-_textOthers(
-      String selected, String texto, int size, FontWeight myFontWeight) {
-    return Center(
-      child: Text(
-        texto,
-        style: TextStyle(
-          fontSize: size.toDouble(),
-          color: selected == "On" ? Colors.white : hexToColor("#4163CD"),
-          fontWeight: myFontWeight,
-        ),
+_textOthers(String selected, String texto, int size, FontWeight myFontWeight) {
+  return Center(
+    child: Text(
+      texto,
+      style: TextStyle(
+        fontSize: size.toDouble(),
+        color: selected == "On" ? Colors.white : hexToColor("#4163CD"),
+        fontWeight: myFontWeight,
       ),
-    );
-  }
+    ),
+  );
+}
