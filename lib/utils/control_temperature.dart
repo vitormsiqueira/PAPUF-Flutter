@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:papuf/widgets/controle.dart';
 import 'package:papuf/widgets/jsonToSend.dart';
 import '../color_hex.dart';
+import 'connect_MQTT.dart';
 
 class ControlTemperature extends StatefulWidget {
-  
+  final String selected;
   final int temp;
   final String topic;
-  const ControlTemperature(this.temp, this.topic);
+  const ControlTemperature(this.selected, this.temp, this.topic);
 
   @override
   _ControlTemperatureState createState() => _ControlTemperatureState();
@@ -22,7 +22,6 @@ class _ControlTemperatureState extends State<ControlTemperature> {
     // TODO: implement initState
     super.initState();
     setState(() {
-      selected = this.selected;
       temp = widget.temp;
       topic = widget.topic;
     });
@@ -39,7 +38,7 @@ class _ControlTemperatureState extends State<ControlTemperature> {
                   temp++;
                 });
                 //envia um json {"temp": "3", "state": "on"} com temperatura e estado
-                PublishM(CreateJsonTempState(temp.toString(), "on"), topic);
+                publishM(createJsonTempState(temp.toString(), "on"), topic);
               },
               child: _textOthers(selected, '+', 45, FontWeight.w400),
               shape: CircleBorder(),
@@ -53,7 +52,7 @@ class _ControlTemperatureState extends State<ControlTemperature> {
                 setState(() {
                   temp--;
                 });
-                PublishM(CreateJsonTempState(temp.toString(), "on"), topic);
+                publishM(createJsonTempState(temp.toString(), "on"), topic);
               },
               child: _textOthers(selected, '-', 50, FontWeight.w400),
               shape: CircleBorder(),

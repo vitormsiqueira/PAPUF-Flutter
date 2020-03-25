@@ -11,7 +11,7 @@ class ListClasses extends StatefulWidget {
 
 class _ListClassesState extends State<ListClasses> {
   bool pressed = false;
-  int _selectedPage = 0;
+  int _selectedClass = 0;
   final _pageOptions = [
     print("Sala 0")
   ];
@@ -23,14 +23,19 @@ class _ListClassesState extends State<ListClasses> {
     // padding: EdgeInsets.only(left: 27, top: 7),
     height: 45,
     child: ListView(
-      padding: EdgeInsets.all(3),
+      padding: EdgeInsets.only(left:18, top: 3, bottom: 3),
       scrollDirection: Axis.horizontal,
       children: List.generate(15, (int index) {
         // gera a lista
         return Container(
           height: 50,
+          width: 60,
           child: RawMaterialButton(
-            onPressed: (){}, 
+            onPressed: (){
+              print(index);
+              _selectedClass = index;
+              
+            }, 
             child: Container(
               child: Text(
                 "$index", 

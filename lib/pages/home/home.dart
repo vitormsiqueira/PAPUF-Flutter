@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPage,
@@ -36,41 +37,41 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: hexToColor("#4163CD"),
+              color: _selectedPage == 0 ? hexToColor("#4163CD") : Colors.grey,
             ),
             title: Text(
               'Home',
-              style: TextStyle(color: hexToColor("#4163CD")),
+              style: TextStyle(color: _selectedPage == 0 ? hexToColor("#4163CD") : Colors.grey),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.dashboard,
-              color: hexToColor("#4163CD"),
+              color: _selectedPage == 1 ? hexToColor("#4163CD") : Colors.grey,
             ),
             title: Text(
               'Dashboard',
-              style: TextStyle(color: hexToColor("#4163CD")),
+              style: TextStyle(color: _selectedPage == 1 ? hexToColor("#4163CD") : Colors.grey),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.notifications,
-              color: hexToColor("#4163CD"),
+              color: _selectedPage == 2 ? hexToColor("#4163CD") : Colors.grey,
             ),
             title: Text(
               'Notificações',
-              style: TextStyle(color: hexToColor("#4163CD")),
+              style: TextStyle(color: _selectedPage == 2 ? hexToColor("#4163CD") : Colors.grey),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.account_circle,
-              color: hexToColor("#4163CD"),
+              color: _selectedPage == 3 ? hexToColor("#4163CD") : Colors.grey,
             ),
             title: Text(
               'Perfil',
-              style: TextStyle(color: hexToColor("#4163CD")),
+              style: TextStyle(color: _selectedPage == 3 ? hexToColor("#4163CD") : Colors.grey),
             ),
           ),
         ],
