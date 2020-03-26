@@ -3,8 +3,7 @@ import 'package:papuf/pages/dashboard/dashboard_page.dart';
 import 'package:papuf/pages/home/home_page.dart';
 import 'package:papuf/pages/notifications/notifications_page.dart';
 import 'package:papuf/pages/profile/profile.dart';
-import 'package:papuf/widgets/text_appbar.dart';
-
+import 'package:papuf/utils/custom_icons/p_a_p_u_f_icons.dart';
 import '../../color_hex.dart';
 
 class Home extends StatefulWidget {
@@ -17,14 +16,13 @@ class _HomeState extends State<Home> {
   int _selectedPage = 0;
   final _pageOptions = [
     HomePage('admin'),
-    NotificationsPage(),
     DashboardPage(),
+    NotificationsPage(),
     ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPage,
@@ -36,42 +34,46 @@ class _HomeState extends State<Home> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home,
-              color: _selectedPage == 0 ? hexToColor("#4163CD") : Colors.grey,
+              PAPUF.home_outline,
+              size: 21,
+              color: _selectedPage == 0 ? hexToColor("#4163CD") : Colors.black54,
             ),
             title: Text(
               'Home',
-              style: TextStyle(color: _selectedPage == 0 ? hexToColor("#4163CD") : Colors.grey),
+              style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 0 ? hexToColor("#4163CD") : Colors.black54),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.dashboard,
-              color: _selectedPage == 1 ? hexToColor("#4163CD") : Colors.grey,
+              PAPUF.chart_bar_outline,
+              size: 21,
+              color: _selectedPage == 1 ? hexToColor("#4163CD") : Colors.black54,
             ),
             title: Text(
               'Dashboard',
-              style: TextStyle(color: _selectedPage == 1 ? hexToColor("#4163CD") : Colors.grey),
+              style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 1 ? hexToColor("#4163CD") : Colors.black54),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.notifications,
-              color: _selectedPage == 2 ? hexToColor("#4163CD") : Colors.grey,
+              PAPUF.bell,
+              size: 21,
+              color: _selectedPage == 2 ? hexToColor("#4163CD") : Colors.black54,
             ),
             title: Text(
               'Notificações',
-              style: TextStyle(color: _selectedPage == 2 ? hexToColor("#4163CD") : Colors.grey),
+              style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 2 ? hexToColor("#4163CD") : Colors.black54),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.account_circle,
-              color: _selectedPage == 3 ? hexToColor("#4163CD") : Colors.grey,
+              PAPUF.user_outline,
+              size: 21,
+              color: _selectedPage == 3 ? hexToColor("#4163CD") : Colors.black54,
             ),
             title: Text(
               'Perfil',
-              style: TextStyle(color: _selectedPage == 3 ? hexToColor("#4163CD") : Colors.grey),
+              style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 3 ? hexToColor("#4163CD") : Colors.black54),
             ),
           ),
         ],

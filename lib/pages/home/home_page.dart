@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         title: widget.login == 'admin'
             ? textAppBar("Salas de Aula")
             : textAppBar("Minhas Aulas"),
-        elevation: .5,
+        elevation: 1,
         backgroundColor: Colors.white,
         // A instância abaixo permite adicionar a LisClasses, aumentando a altura e inserindo um container
         bottom: PreferredSize(
@@ -51,13 +51,15 @@ class _HomePageState extends State<HomePage> {
 _body(BuildContext context) {
   return SingleChildScrollView(
     child: Container(
-      color: Colors.white,
+      padding: EdgeInsets.only(bottom: 30),
+      //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
+      color: Colors.white, 
       child: Column(
         children: <Widget>[
           _textControle(),
           Controle(ar1, "temp-1", currentSala: 1),
-          _textDashboard(),
-          _dashboard(context),
+          // _textDashboard(),
+          // _dashboard(context),
         ],
       ),
     ),

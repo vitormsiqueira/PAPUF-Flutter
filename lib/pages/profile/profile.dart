@@ -8,7 +8,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         brightness: Brightness.light, // status bar brightness
         title: textAppBar("Profile"),
-        elevation: 0,
+        elevation: 1,
         backgroundColor: Colors.white,
       ),
       body: _body(),

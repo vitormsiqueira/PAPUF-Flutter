@@ -1,0 +1,40 @@
+{
+  "name": "PAPUF",
+  "css_prefix_text": "",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "c053ebe321823b081483d332b06eee54",
+      "css": "gauge",
+      "code": 59393,
+      "src": "elusive"
+    },
+    {
+      "uid": "890649841b2c37d56ff90065872fecf3",
+      "css": "chart-bar-outline",
+      "code": 59394,
+      "src": "typicons"
+    },
+    {
+      "uid": "a42f298da5c64e646a5d532724cd6e15",
+      "css": "home-outline",
+      "code": 59392,
+      "src": "typicons"
+    },
+    {
+      "uid": "c155bb86da2f8da808394d58220b5146",
+      "css": "bell",
+      "code": 59395,
+      "src": "typicons"
+    },
+    {
+      "uid": "8ed4884bf9b840729eef8f0bbd2b1dbb",
+      "css": "user-outline",
+      "code": 59396,
+      "src": "typicons"
+    }
+  ]
+}
