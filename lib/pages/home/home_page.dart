@@ -19,50 +19,77 @@ class _HomePageState extends State<HomePage> {
   int _selectedClass = 0;
   final _classOptions = [print("Sala 1")];
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: CustomAppBar(),
-      appBar: AppBar(
-        brightness: Brightness.light, // status bar brightness
-        title: widget.login == 'admin'
-            ? textAppBar("Salas de Aula")
-            : textAppBar("Minhas Aulas"),
-        elevation: 1,
-        backgroundColor: Colors.white,
-        // A instância abaixo permite adicionar a LisClasses, aumentando a altura e inserindo um container
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48.0),
-          child: Theme(
-            data: Theme.of(context).copyWith(accentColor: Colors.white),
-            child: Container(
-              height: 48.0,
-              alignment: Alignment.center,
-              child: ListClasses(),
+  final List<Tab> myTabs = List.generate(
+    15,
+    (index) => Tab(
+      child: Container(
+        child: Center(
+          child: Text(
+            '$index',
+            style: TextStyle(
+              fontSize: 21,
             ),
           ),
         ),
       ),
-      body: _body(context),
+    ),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: myTabs.length,
+      child: Scaffold(
+        backgroundColor: Colors.yellow,
+        // appBar: CustomAppBar(),
+        appBar: AppBar(
+          brightness: Brightness.light, // status bar brightness
+          title: widget.login == 'admin'
+              ? textAppBar("Salas de Aula")
+              : textAppBar("Minhas Aulas"),
+          elevation: 1,
+          backgroundColor: Colors.white,
+          /////
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(48.0),
+            child: Theme(
+              data: Theme.of(context).copyWith(accentColor: Colors.white),
+              child: TabBar(
+                
+                isScrollable: true,
+                labelColor: Colors.white, // cor da label da tab selecionada
+                unselectedLabelColor: hexToColor("#4DE4B2"), // cor da label da tab não selecionada
+                indicator: BoxDecoration(
+                  color: hexToColor("#4DE4B2"),
+                  shape: BoxShape.circle,
+                ),
+                tabs: myTabs,
+              ),
+            ),
+          ),
+        ),
+        body: _body(context),
+      ),
     );
   }
 }
 
 _body(BuildContext context) {
-  return SingleChildScrollView(
-    child: Container(
-      padding: EdgeInsets.only(bottom: 30),
-      //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
-      color: Colors.white, 
-      child: Column(
-        children: <Widget>[
-          _textControle(),
-          Controle(ar1, "temp-1", currentSala: 1),
-          // _textDashboard(),
-          // _dashboard(context),
-        ],
+  return Container(
+    color: Colors.white,
+    height: MediaQuery.of(context).size.height, //Add a full heigh white container 
+    child: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: 30),
+        //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
+        child: Column(
+          children: <Widget>[
+            _textControle(),
+            Controle(ar1, "temp-1", currentSala: 1),
+            // _textDashboard(),
+            // _dashboard(context),
+          ],
+        ),
       ),
-    ),
   );
 }
 
