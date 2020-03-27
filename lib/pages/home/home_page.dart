@@ -23,11 +23,20 @@ class _HomePageState extends State<HomePage> {
     15,
     (index) => Tab(
       child: Container(
-        child: Center(
-          child: Text(
-            '$index',
-            style: TextStyle(
-              fontSize: 21,
+        width: 35,
+        height: 35,
+        decoration: BoxDecoration(
+          border: Border.all(color: hexToColor("#4DE4B2"), width: 1),
+          shape: BoxShape.circle,
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: Center(
+            child: Text(
+              '$index',
+              style: TextStyle(
+                fontSize: 21,
+              ),
             ),
           ),
         ),
@@ -51,19 +60,22 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white,
           /////
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(48.0),
-            child: Theme(
-              data: Theme.of(context).copyWith(accentColor: Colors.white),
-              child: TabBar(
-                
-                isScrollable: true,
-                labelColor: Colors.white, // cor da label da tab selecionada
-                unselectedLabelColor: hexToColor("#4DE4B2"), // cor da label da tab não selecionada
-                indicator: BoxDecoration(
-                  color: hexToColor("#4DE4B2"),
-                  shape: BoxShape.circle,
+            preferredSize: const Size.fromHeight(53.0), // altura é de 48+5 do padding bottom na linha abaixo
+            
+            child: Container(
+              padding: EdgeInsets.only(bottom: 5),
+              child: Theme(
+                data: Theme.of(context).copyWith(accentColor: Colors.white),
+                child: TabBar(
+                  isScrollable: true,
+                  labelColor: Colors.white, // cor da label da tab selecionada
+                  unselectedLabelColor: hexToColor("#4DE4B2"), // cor da label da tab não selecionada
+                  indicator: BoxDecoration(
+                    color: hexToColor("#4DE4B2"),
+                    shape: BoxShape.circle,
+                  ),
+                  tabs: myTabs,
                 ),
-                tabs: myTabs,
               ),
             ),
           ),
@@ -84,7 +96,15 @@ _body(BuildContext context) {
         child: Column(
           children: <Widget>[
             _textControle(),
-            Controle(ar1, "temp-1", currentSala: 1),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // centraliza os controles
+              children: <Widget>[
+                Controle(ar1, "temp-1", currentSala: 1),
+                SizedBox(width: 40,),
+                Controle(ar2, "temp-2", currentSala: 1),
+              ],
+            ),
+            
             // _textDashboard(),
             // _dashboard(context),
           ],

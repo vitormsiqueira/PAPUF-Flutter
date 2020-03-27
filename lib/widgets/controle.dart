@@ -19,25 +19,10 @@ class Controle extends StatefulWidget {
 
 class _ControleState extends State<Controle> {
   int temp;
-  String topic;
   String selected1 = "Off";
-  String selected2 = "Off";
+  String selected2 = "On";
   int um = 1;
   int dois = 2;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        _modulo(selected1, ar1, topic, um),
-        SizedBox(
-          width: 40,
-        ),
-        _modulo(selected2, ar2, topic, dois)
-      ],
-    );
-  }
 
   @override
   void initState() {
@@ -49,7 +34,17 @@ class _ControleState extends State<Controle> {
     });
   }
 
-  _modulo(String selected, int temp, String topic, int i) {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        _modulo(selected1, topic, um), // variavel ar1 e ar2 definida em connect_MQTT.dart
+      ],
+    );
+  }
+
+  _modulo(String selected, String topic, int i) {
     return 
     Container(
       padding: EdgeInsets.all(15),
@@ -70,9 +65,11 @@ class _ControleState extends State<Controle> {
             onPressed: () {
               setState(() {
                 temp++;
+                print(temp);
+                //print('++++++++'+temp.toString());
               });
-              //envia um json {"temp": "3", "state": "on"} com temperatura e estado
-              publishM(createJsonTempState(temp.toString(), "on"), topic);
+              //envia um json {"temp": temp, "state": "on"} com temperatura e estado
+              publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
             },
             child: _textOthers(selected, '+', 45, FontWeight.w400),
             shape: CircleBorder(),
@@ -87,7 +84,8 @@ class _ControleState extends State<Controle> {
               setState(() {
                 temp--;
               });
-              publishM(createJsonTempState(temp.toString(), "on"), topic);
+              publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
+              
             },
             child: _textOthers(selected, '-', 50, FontWeight.w400),
             shape: CircleBorder(),
@@ -95,38 +93,53 @@ class _ControleState extends State<Controle> {
 
           SizedBox(
             height: 15,
-          ),          //ControlTemperature(ar2, "temp-2"),
-
+          ),
+          //ControlTemperature(ar2, "temp-2"),
           Container(
-            width: 80,
+            width: 60,
             height: 60,
-            child: InkWell(
-              onTap: () {
-                publishM(createJsonTempState("0" ,selected), topic);
+            child: RawMaterialButton(
+              onPressed: () {
                 //RequestState(topic);
-                print(selected);
+                //print('selected'+selected);
                 // aqui o selected não estava alterando o estado global, apenas qdo especificando se seelcted1 ou selected2
                 // mas ta aí uma solução porca
                 setState(() {
-                  if (selected1 == 'Off' && i == 1) {
-                    selected1 = 'On';
-                  } else if (selected1 == 'On' && i == 1) {
-                    selected1 = 'Off';
-                  } else if (selected2 == 'Off' && i == 2) {
-                    selected2 = 'On';
-                  } else if (selected2 == 'On' && i == 2) {
-                    selected2 = 'Off';
-                  }
+                  _currentState(i);
                 });
+                // publishM(createJsonTempState("0" ,selected), topic);
               },
-              splashColor: Colors.black,
               child: _textOnOff(selected),
+              shape: CircleBorder(),
             ),
           ),
           
         ],
       ),
     );
+
+  }
+
+  // essa função força a setar o estado de "On" sempre que trocar a temperatura com o estado atual "Off"
+  _setStateOn(int i){
+    if (selected1 == 'Off' && i == 1) {
+      selected1 = 'On';
+    } else if (selected2 == 'Off' && i == 2) {
+      selected2 = 'On';
+    }
+  }
+
+  // essa função faz o "switch" do estado do controle
+  _currentState(int i){
+    if (selected1 == 'Off' && i == 1) {
+      selected1 = 'On';
+    } else if (selected1 == 'On' && i == 1) {
+      selected1 = 'Off';
+    } else if (selected2 == 'Off' && i == 2) {
+      selected2 = 'On';
+    } else if (selected2 == 'On' && i == 2) {
+      selected2 = 'Off';
+    }
   }
 
   _controleBoxDecoration(String selected) {
@@ -159,6 +172,7 @@ class _ControleState extends State<Controle> {
 
   _textOthers(
       String selected, String texto, int size, FontWeight myFontWeight) {
+                print(texto);
     return Center(
       child: Text(
         texto,

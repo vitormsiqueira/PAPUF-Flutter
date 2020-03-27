@@ -11,8 +11,8 @@ String passwd = 'FWF3kqx3Yupz';
 String clientIdentifier = '27843';
 String topic = "temp";
 
-int ar1 = 10;
-int ar2 = 10;
+int ar1 = 19;
+int ar2 = 19;
 
 mqtt.MqttClient client;
 mqtt.MqttConnectionState connectionState;
@@ -140,6 +140,7 @@ class _ConnectMQTTState extends State<ConnectMQTT> {
     if (topic == "temp-1") {
       setState(() {
         ar1 = int.parse(msg);
+        print("jgjfkdlslkdlsjfksdjfk");
       });
     }
     if (topic == "temp-2") {
@@ -154,7 +155,9 @@ class _ConnectMQTTState extends State<ConnectMQTT> {
 void publishM(String mes, String topic) {
   final mqtt.MqttClientPayloadBuilder builder = mqtt.MqttClientPayloadBuilder();
   builder.addString(mes);
-  client.publishMessage(topic, mqtt.MqttQos.values[1],
+  client.publishMessage(
+    topic, 
+    mqtt.MqttQos.values[1],
     builder.payload,
     retain: true,
   );
