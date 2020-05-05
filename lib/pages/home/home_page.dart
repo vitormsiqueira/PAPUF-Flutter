@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedClass = 0;
   final _classOptions = [print("Sala 1")];
 
+  // lista que gera a lista de salas presentes na tabBar, assim como algumas configurações
   final List<Tab> myTabs = List.generate(
     15,
     (index) => Tab(
@@ -67,6 +68,7 @@ class _HomePageState extends State<HomePage> {
               child: Theme(
                 data: Theme.of(context).copyWith(accentColor: Colors.white),
                 child: TabBar(
+                  indicatorSize: TabBarIndicatorSize.label, // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
                   isScrollable: true,
                   labelColor: Colors.white, // cor da label da tab selecionada
                   unselectedLabelColor: hexToColor("#4DE4B2"), // cor da label da tab não selecionada
