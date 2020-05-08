@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   bool pressed = false;
   int _selectedPage = 0;
   final _pageOptions = [
-    HomePage('admin'),
+    HomePage(),
     DashboardPage(),
     NotificationsPage(),
     ProfilePage(),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:papuf/pages/home/home.dart';
+import 'package:papuf/utils/auth.dart';
+import 'package:papuf/utils/auth_provider.dart';
 
 import 'pages/login/login.dart';
 void main() {
@@ -16,14 +18,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      color: Colors.white,
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
+    return AuthProvider(
+      auth: Auth(),
+      child: MaterialApp(
+        color: Colors.white,
+        title: 'PAPUF!',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.cyan,
+        ),
+        home: LoginPage(),
       ),
-      home: LoginPage(),
     );
   }
 }

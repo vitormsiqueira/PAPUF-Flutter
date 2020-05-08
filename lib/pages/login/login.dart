@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/pages/forget_pass/forget_page.dart';
 import 'package:papuf/pages/home/home.dart';
-import 'package:papuf/pages/home/home_page.dart';
+import 'package:papuf/pages/register/register_page.dart';
+import 'package:papuf/utils/auth.dart';
+import 'package:papuf/utils/auth_provider.dart';
 import 'package:papuf/utils/nav.dart';
 import 'package:papuf/widgets/app_button.dart';
 import 'package:papuf/widgets/app_button_outline.dart';
 import 'package:papuf/widgets/app_text.dart';
 
 class LoginPage extends StatefulWidget {
+  
+  const LoginPage({this.onSignedIn});
+  final VoidCallback onSignedIn;
+  
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -21,8 +27,6 @@ class _LoginPageState extends State<LoginPage> {
   final _focusPassword = FocusNode();
 
   final _controllerPass = TextEditingController();
-
-  bool _showProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                     AppText(
                       "Senha",
                       "Digite sua senha",
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.text,
                       password: true,
                       controller: _controllerPass,
                       validator: _validatePass,
@@ -124,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () {
-                          push(context, ForgetPage(), replace: true);
+                          push(context, ForgetPage(), replace: false);
                         },
                         child: Text(
                           "Esqueceu a senha?",
@@ -138,14 +142,12 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 25),
                     AppButton(
                       "ENTRAR",
-                      onPressed: _onClickLogin,
-                      showProgress: _showProgress,
+                      onPressed: onClickLogin,
                     ),
                     SizedBox(height: 25),
                     AppButtonOutline(
                       "Cadastrar",
-                      onPressed: _onClickLogin,
-                      showProgress: _showProgress,
+                      onPressed: _onClickRegister,
                       backGroundColor: "#4163CD",
                     )
                   ],
@@ -158,13 +160,9 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _onClickLogin() async {
+  Future<void> onClickLogin() async {
     //valida o estado atual do form
     bool formOk = _formKey.currentState.validate();
-
-    if (!formOk) {
-      return;
-    }
 
     //faz a leitura da label e armazena na variavel
     String login = _controllerLogin.text;
@@ -174,20 +172,32 @@ class _LoginPageState extends State<LoginPage> {
 
     print("Login: $login, Senha: $password"); //printa o valor digitado na label
 
-    setState(() {
-      _showProgress = true;
-    });
+    try {
+      final BaseAuth auth = AuthProvider.of(context).auth;
+      final String userId = await auth.signInWithEmailAndPassword(login, password);
+      print('Signed in: $userId');
 
-    push(context, Home(), replace: true);
+      // widget.onSignedIn(); // does't work
+      
+      // redireciona para a página Home, com substituição da tela atual
+      push(context, Home(), replace: true);
+  
+    } catch (e) {
+      print('Error: $e');
+    }
 
-    setState(() {
-      _showProgress = false;
-    });
+  }
+
+  _onClickRegister() async{
+    push(context, RegisterPage(), replace: false);
   }
 
   String _validateLogin(String text) {
     if (text.isEmpty) {
       return "Digite o login";
+    }
+    if (text.length < 3) {
+      return "O login deve ser maior que 3 caracteres";
     }
     return null;
   }

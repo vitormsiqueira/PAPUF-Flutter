@@ -7,8 +7,9 @@ import 'package:papuf/widgets/list_view_classes.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 class HomePage extends StatefulWidget {
-  final String login;
-  const HomePage(this.login);
+  final VoidCallback onSignedOut;
+  HomePage({this.onSignedOut});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -54,9 +55,7 @@ class _HomePageState extends State<HomePage> {
         // appBar: CustomAppBar(),
         appBar: AppBar(
           brightness: Brightness.light, // status bar brightness
-          title: widget.login == 'admin'
-              ? textAppBar("Salas de Aula")
-              : textAppBar("Minhas Aulas"),
+          title: textAppBar("Salas de Aula"),
           elevation: 1,
           backgroundColor: Colors.white,
           /////
