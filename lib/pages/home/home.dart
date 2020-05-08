@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
                 Icon(
                   MdiIcons.homeOutline,
                   color: Colors.black54,
-                  ),
+                ),
               title: Text(
                 'Home',
                 style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 0 ? hexToColor("#4163CD") : Colors.black54),
