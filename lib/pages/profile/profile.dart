@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:papuf/utils/auth.dart';
+import 'package:papuf/utils/auth_provider.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 import '../../color_hex.dart';
 
 
 class ProfilePage extends StatelessWidget {
+
+  final VoidCallback onSignedOut;
+
+  ProfilePage({this.onSignedOut});
+  
+  Future<void> _signedOut(BuildContext context) async{
+    try {
+      final BaseAuth auth = AuthProvider.of(context).auth;
+      await auth.signedOut(); // chamamos a função deslogar
+      onSignedOut();
+      // print("função deslogar");
+    } catch (e) {
+      print('errooooo $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     
@@ -17,13 +35,27 @@ class ProfilePage extends StatelessWidget {
         title: textAppBar("Perfil", color: false),
         elevation: 0,
         backgroundColor: hexToColor("#4163CD"),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () => _signedOut(context), 
+            child: Text(
+              "Sair",
+              style: TextStyle(
+                fontSize: 17,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
       body: _body(context, size_card),
     );
   }
 }
 
-_body(BuildContext context, double size_card) {
+
+
+_body(BuildContext context, double size_card, {void signedOut}) {
   return SingleChildScrollView(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // separa o container do perfil com o container do logout
@@ -51,17 +83,17 @@ _body(BuildContext context, double size_card) {
           ),
         ),
 
-        _buttonSettingsLogout("Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
-        _buttonSettingsLogout("Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,)),
+        //buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
+        //buttonSettingsLogout(context, "Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,)),
            
       ],
     ),
   );
 }
 
-_buttonSettingsLogout(String buttonName, {Icon iconButton}){
+_buttonSettingsLogout(BuildContext context ,String buttonName, {Icon iconButton, void signedOut}){
   return FlatButton(
-    onPressed: (){}, 
+    onPressed: () => signedOut, 
     child: Row(
       children: <Widget>[
         iconButton,
@@ -84,6 +116,8 @@ _buttonSettingsLogout(String buttonName, {Icon iconButton}){
     )
   );
 }
+
+
 
 _pictureProfileCenter(String url){
   return Container(

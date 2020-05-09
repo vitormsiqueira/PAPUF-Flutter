@@ -36,6 +36,7 @@ class Auth implements BaseAuth{
   }
 
   Future<void> signedOut() async{
-    return _firebaseAuth.signOut();
+    await FirebaseAuth.instance.signOut(); 
+    return await _firebaseAuth.signOut();
   }
 }

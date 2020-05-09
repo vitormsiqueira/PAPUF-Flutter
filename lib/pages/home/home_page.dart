@@ -3,12 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/utils/connect_MQTT.dart';
 import 'package:papuf/widgets/controle.dart';
-import 'package:papuf/widgets/list_view_classes.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 class HomePage extends StatefulWidget {
-  final VoidCallback onSignedOut;
-  HomePage({this.onSignedOut});
 
   @override
   _HomePageState createState() => _HomePageState();
