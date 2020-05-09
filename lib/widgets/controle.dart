@@ -55,12 +55,13 @@ class _ControleState extends State<Controle> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(bottom: 10),
             child: selected == "On"
                 ? _img("assets/images/icon_ar_branco.png")
                 : _img("assets/images/icon_ar_azul.png"),
           ),
-
+          SizedBox(
+            height: 15,
+          ),
           RawMaterialButton(
             onPressed: () {
               setState(() {
@@ -78,7 +79,7 @@ class _ControleState extends State<Controle> {
           Container(
             child: _textOthers(selected, temp.toString()+'º', 45, FontWeight.w300),
           ),
-
+          
           RawMaterialButton(
             onPressed: () {
               setState(() {
@@ -92,7 +93,7 @@ class _ControleState extends State<Controle> {
           ),
 
           SizedBox(
-            height: 15,
+            height: 10,
           ),
           //ControlTemperature(ar2, "temp-2"),
           Container(
@@ -172,7 +173,7 @@ class _ControleState extends State<Controle> {
 
   _textOthers(
       String selected, String texto, int size, FontWeight myFontWeight) {
-                print(texto);
+    print(texto);
     return Center(
       child: Text(
         texto,

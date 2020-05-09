@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/pages/home/home.dart';
 import 'package:papuf/pages/login/login.dart';
-import 'package:papuf/pages/profile/profile.dart';
 import 'package:papuf/utils/auth.dart';
 import 'package:papuf/utils/auth_provider.dart';
 

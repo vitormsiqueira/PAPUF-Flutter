@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/pages/forget_pass/forget_page.dart';
-import 'package:papuf/pages/home/home.dart';
 import 'package:papuf/pages/register/register_page.dart';
 import 'package:papuf/utils/auth.dart';
 import 'package:papuf/utils/auth_provider.dart';

@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:papuf/pages/home/home.dart';
+import 'package:papuf/pages/settings/settings_page.dart';
 import 'package:papuf/utils/auth.dart';
 import 'package:papuf/utils/auth_provider.dart';
 import 'package:papuf/utils/nav.dart';
@@ -17,7 +15,7 @@ class ProfilePage extends StatelessWidget {
 
   ProfilePage({this.onSignedOut});
 
-  final BaseAuth _auth = Auth();
+  final BaseAuth auth = Auth();
 
   
   Future<void> _signedOut(BuildContext context) async{
@@ -42,22 +40,6 @@ class ProfilePage extends StatelessWidget {
         title: textAppBar("Perfil", color: false),
         elevation: 0,
         backgroundColor: hexToColor("#4163CD"),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () async {
-              await _auth.signedOut();
-              // onSignedOut();
-              push(context, RootPage(), replace: true);
-            }, 
-            child: Text(
-              "Sair",
-              style: TextStyle(
-                fontSize: 17,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
       ),
       body: _body(context, size_card),
     );
@@ -93,18 +75,33 @@ _body(BuildContext context, double size_card, {void signedOut}) {
             ],
           ),
         ),
-
-        //buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
-        //buttonSettingsLogout(context, "Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,)),
+        SizedBox(
+          height: 16.0,
+        ),
+        _buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
+        _buttonSettingsLogout(context, "Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,), logout: true),
            
       ],
     ),
   );
 }
 
-_buttonSettingsLogout(BuildContext context ,String buttonName, {Icon iconButton, void signedOut}){
+_buttonSettingsLogout(BuildContext context ,String buttonName, {Icon iconButton, bool logout = false}){
+
+  final BaseAuth auth = Auth();
+
   return FlatButton(
-    onPressed: () => signedOut, 
+    // Verifica se o botão construido é o de "Logout". 
+    onPressed: logout ? 
+    // Se sim, aplica a função de deslogar. 
+    () async {
+      await auth.signedOut();
+      push(context, RootPage(), replace: true);
+    } : 
+    // Se não, navega até a tela de configurações.
+    () {
+      push(context, SettingsPage(), replace: false);
+    },
     child: Row(
       children: <Widget>[
         iconButton,
@@ -112,23 +109,19 @@ _buttonSettingsLogout(BuildContext context ,String buttonName, {Icon iconButton,
           width: 16.0,
         ),
         Align(
-          alignment: Alignment.centerLeft, // permite o texto ser 'fixado' no inicio
+          alignment: Alignment.centerLeft, // permite o texto ser 'fixado' no inicio.
           child: Text(
             buttonName,
             style: TextStyle(
-              fontSize: 21.0,
+              fontSize: 20.0,
               color: Colors.black54,
             ),
           ),
         ),
-
       ],
-      
-    )
+    ),
   );
 }
-
-
 
 _pictureProfileCenter(String url){
   return Container(
