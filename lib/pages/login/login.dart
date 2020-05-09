@@ -6,6 +6,7 @@ import 'package:papuf/pages/register/register_page.dart';
 import 'package:papuf/utils/auth.dart';
 import 'package:papuf/utils/auth_provider.dart';
 import 'package:papuf/utils/nav.dart';
+import 'package:papuf/utils/root_pages.dart';
 import 'package:papuf/widgets/app_button.dart';
 import 'package:papuf/widgets/app_button_outline.dart';
 import 'package:papuf/widgets/app_text.dart';
@@ -179,8 +180,8 @@ class _LoginPageState extends State<LoginPage> {
 
       // widget.onSignedIn(); // does't work
       
-      // redireciona para a página Home, com substituição da tela atual
-      push(context, Home(), replace: true);
+      // redireciona para a RootPage que verifica se foi logado. Se sim, redireciona para Home, com substituição da tela atual
+      push(context, RootPage(), replace: true);
   
     } catch (e) {
       print('Error: $e');

@@ -1,5 +1,6 @@
  
 import 'package:flutter/material.dart';
+import 'package:papuf/pages/home/home.dart';
 import 'package:papuf/pages/login/login.dart';
 import 'package:papuf/pages/profile/profile.dart';
 import 'package:papuf/utils/auth.dart';
@@ -31,33 +32,16 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  void _signedIn() {
-    setState(() {
-      authStatus = AuthStatus.signedIn;
-    });
-  }
-
-  void _signedOut() {
-    setState(() {
-      authStatus = AuthStatus.notSignedIn;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     switch (authStatus) {
       case AuthStatus.notDetermined:
         return _buildWaitingScreen();
       case AuthStatus.notSignedIn:
-        return LoginPage(
-          onSignedIn: _signedIn,
-        );
+        return LoginPage();
       case AuthStatus.signedIn:
-        return ProfilePage(
-          onSignedOut: _signedOut,
-        );
+        return Home();
     }
-    return null;
   }
 
   Widget _buildWaitingScreen() {

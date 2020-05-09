@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:papuf/pages/home/home.dart';
 import 'package:papuf/utils/auth.dart';
 import 'package:papuf/utils/auth_provider.dart';
+import 'package:papuf/utils/nav.dart';
+import 'package:papuf/utils/root_pages.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 import '../../color_hex.dart';
@@ -12,6 +16,9 @@ class ProfilePage extends StatelessWidget {
   final VoidCallback onSignedOut;
 
   ProfilePage({this.onSignedOut});
+
+  final BaseAuth _auth = Auth();
+
   
   Future<void> _signedOut(BuildContext context) async{
     try {
@@ -37,7 +44,11 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: hexToColor("#4163CD"),
         actions: <Widget>[
           FlatButton(
-            onPressed: () => _signedOut(context), 
+            onPressed: () async {
+              await _auth.signedOut();
+              // onSignedOut();
+              push(context, RootPage(), replace: true);
+            }, 
             child: Text(
               "Sair",
               style: TextStyle(
