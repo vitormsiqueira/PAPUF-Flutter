@@ -7,10 +7,14 @@ class AppButton extends StatelessWidget {
   bool showProgress;
   String backGroundColor;
 
-  AppButton(this.name,
-      {this.onPressed,
+  AppButton(
+    this.name,
+    {
+      this.onPressed,
       this.showProgress = false,
-      this.backGroundColor = "#4DE4B2"});
+      this.backGroundColor = "#4DE4B2",
+    }
+  );
 
   @override
   Widget build(BuildContext context) {

@@ -11,18 +11,24 @@ class AppText extends StatelessWidget {
   TextInputAction textInputAction;
   FocusNode focusNode;
   FocusNode nextFocus;
+  String mainColor;
+  String secondColor;
 
   AppText(
     this.label,
-    this.hint, {
-    this.password = false,
-    this.controller,
-    this.validator,
-    this.keyboardType,
-    this.textInputAction,
-    this.focusNode,
-    this.nextFocus,
-  });
+    this.hint, 
+    {
+      this.password = false,
+      this.controller,
+      this.validator,
+      this.keyboardType,
+      this.textInputAction,
+      this.focusNode,
+      this.nextFocus,
+      this.mainColor = "#8D9CCB",
+      this.secondColor = "#ffffff",
+    }
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +50,7 @@ class AppText extends StatelessWidget {
       //estilo do texto qdo começa a digitação
       style: TextStyle(
         fontSize: 18,
-        color: Colors.white,
+        color: hexToColor(secondColor),
       ),
 
       decoration: InputDecoration(
@@ -52,17 +58,17 @@ class AppText extends StatelessWidget {
         labelText: label,
         labelStyle: TextStyle(
           fontSize: 18,
-          color: hexToColor("#8D9CCB"),
+          color: hexToColor(mainColor),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: hexToColor("#8D9CCB")),
+          borderSide: BorderSide(color: hexToColor(mainColor)),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: hexToColor(secondColor)),
         ),
         hintText: hint,
         hintStyle: TextStyle(
-          color: Colors.white,
+          color: hexToColor(secondColor),
           fontSize: 18,
         ),
       ),
