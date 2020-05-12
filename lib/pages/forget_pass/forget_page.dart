@@ -68,7 +68,7 @@ _body(BuildContext context) {
                   "Digite um email válido",
                   keyboardType: TextInputType.emailAddress,
                   mainColor: "#1c1c1c",
-                  secondColor: "#4163CD",
+                  secondColor: "#000000",
                 ),
               ),
               SizedBox(height: 16),
