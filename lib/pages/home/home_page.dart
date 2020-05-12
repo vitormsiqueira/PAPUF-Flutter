@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.center,
           child: Center(
             child: Text(
-              '$index',
+              (index+1).toString(),
               style: TextStyle(
                 fontSize: 21,
               ),
@@ -58,7 +58,6 @@ class _HomePageState extends State<HomePage> {
           /////
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(53.0), // altura é de 48+5 do padding bottom na linha abaixo
-            
             child: Container(
               padding: EdgeInsets.only(bottom: 5),
               child: Theme(
@@ -73,6 +72,7 @@ class _HomePageState extends State<HomePage> {
                     shape: BoxShape.circle,
                   ),
                   tabs: myTabs,
+                  
                 ),
               ),
             ),
