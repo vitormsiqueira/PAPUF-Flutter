@@ -19,5 +19,14 @@ class NotificationsPage extends StatelessWidget {
 _body() {
   return Container(
     color: Colors.white,
+    child: Center(
+      child: Text(
+        "Nenhuma notificação",
+        style: TextStyle(
+          fontSize: 20,
+          color: Colors.black54
+        ),
+      ),
+    ),
   );
 }

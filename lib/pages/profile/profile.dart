@@ -142,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
               // Cria um button
               ListTile(
-                leading: Icon(MdiIcons.helpCircleOutline),
+                leading: Icon(MdiIcons.helpCircle),
                 title: Text(
                   "Precisa de ajuda?",
                 ),
@@ -155,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
               // Mostra ainformação do aplicativo
               ListTile(
-                leading: Icon(MdiIcons.informationOutline),
+                leading: Icon(MdiIcons.information),
                 title: Text(
                   "Versão do aplicativo",
                 ),
