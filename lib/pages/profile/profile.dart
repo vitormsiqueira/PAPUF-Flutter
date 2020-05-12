@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:papuf/pages/settings/settings_page.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:papuf/utils/auth.dart';
-import 'package:papuf/utils/auth_provider.dart';
 import 'package:papuf/utils/nav.dart';
 import 'package:papuf/utils/root_pages.dart';
 import 'package:papuf/widgets/text_appbar.dart';
@@ -124,6 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
               // Cria uma switch list
               SwitchListTile(
+                secondary: Icon(isSwitched ? MdiIcons.brightness7 : MdiIcons.brightness4),
                 title: Text("Dark mode"),
                 value: isSwitched, 
                 onChanged: (value){
@@ -142,6 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
               // Cria um button
               ListTile(
+                leading: Icon(MdiIcons.helpCircleOutline),
                 title: Text(
                   "Precisa de ajuda?",
                 ),
@@ -154,6 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
               // Mostra ainformação do aplicativo
               ListTile(
+                leading: Icon(MdiIcons.informationOutline),
                 title: Text(
                   "Versão do aplicativo",
                 ),
