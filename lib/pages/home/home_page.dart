@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/utils/connect_MQTT.dart';
 import 'package:papuf/widgets/controle.dart';
@@ -99,7 +100,7 @@ class _HomePageState extends State<HomePage> {
           //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
           child: Column(
             children: <Widget>[
-              _textControle(),
+              _textControle("Controle | Sala $currentClassRoom"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center, // centraliza os controles
                 children: <Widget>[
@@ -108,7 +109,22 @@ class _HomePageState extends State<HomePage> {
                   Controle(ar2, "temp-2", currentSala: currentClassRoom),
                 ],
               ),
-              
+              SizedBox(
+                height: 20,
+              ),
+              // ListTile(
+              //   leading: Icon(Icons.details),
+              //   title: Text(
+              //     "Detalhes",
+              //     style: TextStyle(
+              //       fontSize: 20,
+              //       color: Colors.black54,
+              //     ),
+              //   ),
+              //   onTap: () => _onButtonPressedDetails(context),
+              // ),
+              _textControle("Detalhes"),
+              _cardDetails(currentClassRoom, "Piso 1", "BD-1", "45:07", "45:18"),
               // _textDashboard(),
               // _dashboard(context),
             ],
@@ -117,7 +133,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _textControle() {
+  _textControle(String text) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -125,7 +141,7 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.only(left: 30.0, top: 30, bottom: 20),
             child: Text(
-              "Controle | Sala $currentClassRoom",
+              text,
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 24,
@@ -135,6 +151,76 @@ class _HomePageState extends State<HomePage> {
           ),
         )
       ],
+    );
+  }
+
+  _cardDetails(int textSala, String textAndar, String textBloco, String tempAtividadeArLeft, String tempAtividadeArRight) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20),
+      child: Container(
+        // padding: EdgeInsets.all(15),
+        height: 260,
+        width: MediaQuery.of(context).size.width,
+        // color: Colors.black45,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 15.0,
+            )
+          ],
+        ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 25,
+            ),
+            _textDetails(Icon(MdiIcons.schoolOutline, color: Colors.black54,), "Sala ", "$textSala"),
+            _textDetails(Icon(Icons.business, color: Colors.black54,),"Bloco ", textBloco),
+            _textDetails(Icon(Icons.layers, color: Colors.black54,),"Andar ", textAndar),
+            _textDetails(Icon(MdiIcons.clockOutline, color: Colors.black54,),"Tempo Atividade\nAr esquerda ", tempAtividadeArLeft),
+            _textDetails(Icon(MdiIcons.clockOutline, color: Colors.black54,),"Tempo Atividade\nAr direita ", tempAtividadeArRight),
+          ],
+        ),
+
+      ),
+    );
+  }
+
+  _textDetails(Icon iconButton, String label, String myText){
+    return Padding(
+      padding: const EdgeInsets.only(left: 30.0, right: 30, top: 7, bottom: 7),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              iconButton,
+              SizedBox(
+                width: 16,
+              ),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54
+                ),
+              ),
+            ],
+           ),
+          Text(
+            myText,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black54,
+            ),
+          ),
+         
+        ],
+      ),
     );
   }
 }

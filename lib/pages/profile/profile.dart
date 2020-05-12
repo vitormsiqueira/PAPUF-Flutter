@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 16.0,
           ),
          
-         // Constroi os botões de Configurações e Logout.
+          // Constroi os botões de Configurações e Logout.
           _buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
           _buttonSettingsLogout(context, "Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,), logout: true),
               
