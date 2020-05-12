@@ -10,11 +10,12 @@ import 'package:papuf/widgets/text_appbar.dart';
 import '../../color_hex.dart';
 
 
-//this goes in our State class as a global variable
-bool isSwitched = true;
+// Variável global responsável por guardar o valor do switch do Dark Mode.
+bool isSwitched = false;
 
 class ProfilePage extends StatefulWidget {
 
+  // Variável responsável por realizar o logout.
   final VoidCallback onSignedOut;
 
   ProfilePage({this.onSignedOut});
@@ -26,16 +27,17 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final BaseAuth auth = Auth();
 
-  Future<void> _signedOut(BuildContext context) async{
-    try {
-      final BaseAuth auth = AuthProvider.of(context).auth;
-      await auth.signedOut(); // chamamos a função deslogar
-      widget.onSignedOut();
-      // print("função deslogar");
-    } catch (e) {
-      print('errooooo $e');
-    }
-  }
+  // //
+  // Future<void> _signedOut(BuildContext context) async{
+  //   try {
+  //     final BaseAuth auth = AuthProvider.of(context).auth;
+  //     await auth.signedOut(); // chamamos a função deslogar
+  //     widget.onSignedOut();
+  //     // print("função deslogar");
+  //   } catch (e) {
+  //     print('errooooo $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark, // ativa barra de status claro
+        // ativa barra de status claro
+        brightness: Brightness.dark, 
         title: textAppBar("Perfil", color: false),
         elevation: 0,
         backgroundColor: hexToColor("#4163CD"),
@@ -52,156 +55,154 @@ class _ProfilePageState extends State<ProfilePage> {
       body: _body(context, size_card),
     );
   }
-}
 
+  // Body Construction
+  _body(BuildContext context, double size_card, {void signedOut}) {
+    return SingleChildScrollView(
+      child: Column(
+        // separa o container do perfil com o container do logout
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(top: 16),
+            width: MediaQuery.of(context).size.width,
+            // verifica se metade da tela é maior que a altura de 350px.
+            // Se sim, permanece o valor da metade da tela.
+            // Se não, define o valor de 350px.
+            height: (size_card > 350.0) ? size_card : 350.0,
+            decoration: _boxDecorationCardBlue(),
+            child: Column(
+              children: <Widget>[
+                // Mostra a foto de perfil.
+                _pictureProfileCenter("https://www.leadsdeconsorcio.com.br/blog/wp-content/uploads/2019/11/04-1.jpg"),
+                // Mostra o nome do usuário.
+                _nameProfile('Test Lastname'),
+                // Mostra o email.
+                _infoProfile("Email:", "test@test.com"),
+                // Mostra a senha.
+                _infoProfile("Senha:", "******"),
+                // Mostra o neivel de acesso.
+                _infoProfile("Nível de Acesso:", "Administrador"),
+              ],
+            ),
+          ),
 
+          // Adiciona um espaço vertical
+          SizedBox(
+            height: 16.0,
+          ),
+         
+         // Constroi os botões de Configurações e Logout.
+          _buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
+          _buttonSettingsLogout(context, "Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,), logout: true),
+              
+        ],
+      ),
+    );
+  }
 
-_body(BuildContext context, double size_card, {void signedOut}) {
-  return SingleChildScrollView(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween, // separa o container do perfil com o container do logout
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(top: 16),
-          width: MediaQuery.of(context).size.width,
-          height: (size_card > 350.0) ? size_card : 350.0, // verifica se metade da tela é maior que a altura de 350px
-          decoration: _boxDecorationCardBlue(),
+  // Show modal bottom sheet construction
+  void _onButtonPressedSettings(BuildContext context) {
+    showModalBottomSheet(
+      // Adiciona bordas arredondadas nos cantos superiores.
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25.0),
+          topRight: Radius.circular(25.0),
+        ),
+      ),
+      context: context, 
+      builder: (context) {
+        return Container(
           child: Column(
             children: <Widget>[
-
-              _pictureProfileCenter("https://www.leadsdeconsorcio.com.br/blog/wp-content/uploads/2019/11/04-1.jpg"),
-              
-              _nameProfile('Test Lastname'),
-              
-              _infoProfile("Email:", "test@test.com"),
-
-              _infoProfile("Senha:", "******"),
-              
-              _infoProfile("Nível de Acesso:", "Administrador"),
-
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 16.0,
-        ),
-        
-        FlatButton(
-          child: Row(
-            children: <Widget>[
-              Icon(Icons.settings_applications, color: Colors.black54,),
+              // Adiciona espaço vertical.
               SizedBox(
-                width: 16.0,
+                height: 16,
               ),
-              Align(
-                alignment: Alignment.centerLeft, // permite o texto ser 'fixado' no inicio.
-                child: Text(
-                  'Configurações',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          onPressed: () => _onButtonPressedSettings(context),
-        ),
-          
-        //_buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
-        _buttonSettingsLogout(context, "Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,), logout: true),
-            
-      ],
-    ),
-  );
-}
-          
-void _onButtonPressedSettings(BuildContext context) {
-  showModalBottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(25.0),
-        topRight: Radius.circular(25.0),
-      ),
-    ),
-    context: context, 
-    builder: (context) {
-      return Container(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 16,
-            ),
-            ListTile(
-              title: Text("Dark mode"),
-              onLongPress: (){},
-              trailing: Switch(
+
+              // Cria uma switch list
+              SwitchListTile(
+                title: Text("Dark mode"),
                 value: isSwitched, 
                 onChanged: (value){
+                  setState((){
                     isSwitched = value;
+                    print(isSwitched);
+                  });
                 },
-                activeTrackColor: Colors.blueGrey,
-                activeColor: Colors.blue,
+                activeTrackColor: Colors.blue,
+                activeColor: Colors.white,
               ),
-            ),
-            ListTile(
-              title: Text(
-                "Versão do aplicativo",
+
+              SizedBox(
+                height: 16,
               ),
-              subtitle: Text(
-                "v1.0201"
+
+              // Cria um button
+              ListTile(
+                title: Text(
+                  "Precisa de ajuda?",
+                ),
+                onTap: (){},
               ),
-            )
 
-          ],
-        ),
-      );
-    }
-  );
-}
+              SizedBox(
+                height: 16,
+              ),
 
-_buttonSettingsLogout(BuildContext context ,String buttonName, {Icon iconButton, bool logout = false}){
-
-  final BaseAuth auth = Auth();
-
-  return FlatButton(
-    // Verifica se o botão construido é o de "Logout". 
-    onPressed: logout ? 
-    // Se sim, aplica a função de deslogar. 
-    () async {
-      await auth.signedOut();
-      push(context, RootPage(), replace: true);
-    } : 
-    // Se não, navega até a tela de configurações.
-    () {
-      push(context, SettingsPage(), replace: false);
-    },
-    child: Row(
-      children: <Widget>[
-        iconButton,
-        SizedBox(
-          width: 16.0,
-        ),
-        Align(
-          alignment: Alignment.centerLeft, // permite o texto ser 'fixado' no inicio.
-          child: Text(
-            buttonName,
-            style: TextStyle(
-              fontSize: 20.0,
-              color: Colors.black54,
-            ),
+              // Mostra ainformação do aplicativo
+              ListTile(
+                title: Text(
+                  "Versão do aplicativo",
+                ),
+                subtitle: Text(
+                  "v1.0201"
+                ),
+              ),
+              
+            ],
           ),
+        );
+      }
+    );
+  }
+
+  /// Button settings and logout creation.
+  _buttonSettingsLogout(BuildContext context ,String buttonName, {Icon iconButton, bool logout = false}){
+
+    // Inicia a variavel responsável pela autenticação.
+    final BaseAuth auth = Auth();
+
+    return ListTile(
+      leading: iconButton, // Ícone à esquerda do titulo.
+      title: Text(
+        buttonName,
+        style: TextStyle(
+          fontSize: 20,
+          color: Colors.black54,
         ),
-      ],
-    ),
-  );
+      ),
+      // Verifica se o botão construido é o de "Logout". 
+      onTap: logout ? 
+        // Se sim, aplica a função de deslogar. 
+        () async {
+          await auth.signedOut();
+          push(context, RootPage(), replace: true);
+        } : 
+        // Se não, navega até a tela de configurações.
+        () => _onButtonPressedSettings(context),
+    );
+  }
 }
 
 _pictureProfileCenter(String url){
   return Container(
+    // Define o tamanho da imagem.
     width: 120,
     height: 120,
+    // Deixa a imagem redonda.
     decoration: BoxDecoration(
       shape: BoxShape.circle,
       image: DecorationImage(
@@ -212,10 +213,12 @@ _pictureProfileCenter(String url){
   );
 }
 
+// Função responsável para mostra o nome do usuário
 _nameProfile(String name){
   return Padding(
     padding: const EdgeInsets.only(top: 16, bottom: 32),
-    child: Text(name,
+    child: Text(
+      name,
       style: TextStyle(
         color: Colors.white,
         fontSize: 24,
@@ -225,6 +228,7 @@ _nameProfile(String name){
   );
 }
 
+// Função responsável por apresentar as informações do perfil do usuário.
 _infoProfile(String left ,String right){
   return Padding(
     padding: const EdgeInsets.only(left: 25.0, bottom: 12.0, right: 25.0, top: 12.0),
@@ -233,6 +237,7 @@ _infoProfile(String left ,String right){
       children: <Widget>[
         Container(
           child: Text(
+            // Informação presente à esquerda no card.
             left,
             style: TextStyle(
               fontSize: 18.0,
@@ -242,6 +247,7 @@ _infoProfile(String left ,String right){
         ),
         Container(
           child: Text(
+            // Informação presente à direita no card.
             right,
             style: TextStyle(
               fontSize: 18.0,
@@ -254,6 +260,8 @@ _infoProfile(String left ,String right){
   );
 }
 
+// Função responsável por definir o card azul superior que irá mostrar a foto 
+// e as informações do usuário.
 _boxDecorationCardBlue(){
   return BoxDecoration(
     color: hexToColor("#4163CD"),
