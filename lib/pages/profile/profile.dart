@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:papuf/pages/settings/settings_page.dart';
 import 'package:papuf/utils/auth.dart';
@@ -9,20 +10,27 @@ import 'package:papuf/widgets/text_appbar.dart';
 import '../../color_hex.dart';
 
 
-class ProfilePage extends StatelessWidget {
+//this goes in our State class as a global variable
+bool isSwitched = true;
+
+class ProfilePage extends StatefulWidget {
 
   final VoidCallback onSignedOut;
 
   ProfilePage({this.onSignedOut});
 
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   final BaseAuth auth = Auth();
 
-  
   Future<void> _signedOut(BuildContext context) async{
     try {
       final BaseAuth auth = AuthProvider.of(context).auth;
       await auth.signedOut(); // chamamos a função deslogar
-      onSignedOut();
+      widget.onSignedOut();
       // print("função deslogar");
     } catch (e) {
       print('errooooo $e');
@@ -78,11 +86,78 @@ _body(BuildContext context, double size_card, {void signedOut}) {
         SizedBox(
           height: 16.0,
         ),
-        _buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
+        
+        FlatButton(
+          child: Row(
+            children: <Widget>[
+              Icon(Icons.settings_applications, color: Colors.black54,),
+              SizedBox(
+                width: 16.0,
+              ),
+              Align(
+                alignment: Alignment.centerLeft, // permite o texto ser 'fixado' no inicio.
+                child: Text(
+                  'Configurações',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          onPressed: () => _onButtonPressedSettings(context),
+        ),
+          
+        //_buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
         _buttonSettingsLogout(context, "Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,), logout: true),
-           
+            
       ],
     ),
+  );
+}
+          
+void _onButtonPressedSettings(BuildContext context) {
+  showModalBottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(25.0),
+        topRight: Radius.circular(25.0),
+      ),
+    ),
+    context: context, 
+    builder: (context) {
+      return Container(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 16,
+            ),
+            ListTile(
+              title: Text("Dark mode"),
+              onLongPress: (){},
+              trailing: Switch(
+                value: isSwitched, 
+                onChanged: (value){
+                    isSwitched = value;
+                },
+                activeTrackColor: Colors.blueGrey,
+                activeColor: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text(
+                "Versão do aplicativo",
+              ),
+              subtitle: Text(
+                "v1.0201"
+              ),
+            )
+
+          ],
+        ),
+      );
+    }
   );
 }
 
