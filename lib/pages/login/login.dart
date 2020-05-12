@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 5),
                     AppText(
                       "Login",
-                      "Digite seu login",
+                      hint: "Digite seu login",
                       controller: _controllerLogin,
                       validator: _validateLogin,
                       keyboardType: TextInputType.emailAddress,
@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 25),
                     AppText(
                       "Senha",
-                      "Digite sua senha",
+                      hint: "Digite sua senha",
                       keyboardType: TextInputType.text,
                       password: true,
                       controller: _controllerPass,

@@ -65,7 +65,7 @@ _body(BuildContext context) {
                 padding: EdgeInsets.all(16),
                 child: AppText(
                   "Email", 
-                  "Digite um email válido",
+                  hint: "Digite um email válido",
                   keyboardType: TextInputType.emailAddress,
                   mainColor: "#1c1c1c",
                   secondColor: "#000000",

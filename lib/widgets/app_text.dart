@@ -13,11 +13,13 @@ class AppText extends StatelessWidget {
   FocusNode nextFocus;
   String mainColor;
   String secondColor;
+  double myFontSize;
 
   AppText(
     this.label,
-    this.hint, 
     {
+      this.myFontSize = 18,
+      this.hint, 
       this.password = false,
       this.controller,
       this.validator,
@@ -49,7 +51,7 @@ class AppText extends StatelessWidget {
 
       //estilo do texto qdo começa a digitação
       style: TextStyle(
-        fontSize: 18,
+        fontSize: myFontSize,
         color: hexToColor(secondColor),
       ),
 
@@ -57,7 +59,7 @@ class AppText extends StatelessWidget {
         //estilo do texto principal
         labelText: label,
         labelStyle: TextStyle(
-          fontSize: 18,
+          fontSize: myFontSize,
           color: hexToColor(mainColor),
         ),
         enabledBorder: UnderlineInputBorder(
@@ -69,7 +71,7 @@ class AppText extends StatelessWidget {
         hintText: hint,
         hintStyle: TextStyle(
           color: hexToColor(secondColor),
-          fontSize: 18,
+          fontSize: myFontSize,
         ),
       ),
     );
