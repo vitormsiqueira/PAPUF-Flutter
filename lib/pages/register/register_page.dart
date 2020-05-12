@@ -12,7 +12,7 @@ var _currencies = [
   "Professor(a)",
   "Técnico(a)",
   "Administrador(a)",
-  "Desenvolvedores(as)",
+  "Desenvolvedor(a)",
 ];
 String _selectedCurrencie;
 
