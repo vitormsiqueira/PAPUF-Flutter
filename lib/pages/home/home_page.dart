@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage> {
                   indicator: BoxDecoration(
                     color: hexToColor("#4DE4B2"),
                     shape: BoxShape.circle,
+                    
                   ),
                   tabs: myTabs,
                   onTap: (index){
