@@ -5,6 +5,7 @@ import 'package:papuf/color_hex.dart';
 import 'package:papuf/utils/connect_MQTT.dart';
 import 'package:papuf/widgets/controle.dart';
 import 'package:papuf/widgets/text_appbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                   indicator: BoxDecoration(
                     color: hexToColor("#4DE4B2"),
                     shape: BoxShape.circle,
-                    
+
                   ),
                   tabs: myTabs,
                   onTap: (index){
