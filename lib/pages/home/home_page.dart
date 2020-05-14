@@ -179,15 +179,30 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 25,
             ),
-            _textDetails(Icon(MdiIcons.schoolOutline, color: Colors.black54,), "Sala ", "$textSala"),
+
+            _buildBody(Icon(MdiIcons.schoolOutline, color: Colors.black54,),"Sala", context),
+            //_textDetails(Icon(MdiIcons.schoolOutline, color: Colors.black54,), "Sala ", "$textSala"),
             _textDetails(Icon(Icons.business, color: Colors.black54,),"Bloco ", textBloco),
             _textDetails(Icon(Icons.layers, color: Colors.black54,),"Andar ", textAndar),
             _textDetails(Icon(MdiIcons.clockOutline, color: Colors.black54,),"Tempo Atividade\nAr esquerda ", tempAtividadeArLeft),
+            
+            
             _textDetails(Icon(MdiIcons.clockOutline, color: Colors.black54,),"Tempo Atividade\nAr direita ", tempAtividadeArRight),
           ],
         ),
 
       ),
+    );
+  }
+
+  Widget _buildBody(Icon iconButton, String label, BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('sala').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+
+        return _textDetails(iconButton, label, Firestore.instance.collection('sala').document("n15IeKqB1F0qkUAZQWvF").toString());
+      },
     );
   }
 
