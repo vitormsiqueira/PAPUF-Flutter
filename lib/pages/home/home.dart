@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pageOptions[_selectedPage], 
+      body: _pageOptions[_selectedPage],
       bottomNavigationBar: new Theme(
         data: Theme.of(context).copyWith(
           // sets the background color of the `BottomNavigationBar`
@@ -38,67 +38,79 @@ class _HomeState extends State<Home> {
           },
           items: [
             BottomNavigationBarItem(
-              icon:  _selectedPage == 0 ? 
-                Icon(
-                  MdiIcons.home,
-                  color: hexToColor("#4163CD"),
-                )
-              : 
-                Icon(
-                  MdiIcons.homeOutline,
-                  color: Colors.black54,
-                ),
+              icon: _selectedPage == 0
+                  ? Icon(
+                      MdiIcons.home,
+                      color: hexToColor("#4163CD"),
+                    )
+                  : Icon(
+                      MdiIcons.homeOutline,
+                      color: Colors.black54,
+                    ),
               title: Text(
                 'Home',
-                style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 0 ? hexToColor("#4163CD") : Colors.black54),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: _selectedPage == 0
+                        ? hexToColor("#4163CD")
+                        : Colors.black54),
               ),
             ),
             BottomNavigationBarItem(
-              icon:  _selectedPage == 1 ? 
-                Icon(
-                  MdiIcons.chartLineStacked,
-                  color: hexToColor("#4163CD"),
-                )
-              : 
-                Icon(
-                  MdiIcons.chartLine,
-                  color: Colors.black54,
-                  ),
+              icon: _selectedPage == 1
+                  ? Icon(
+                      MdiIcons.chartLineStacked,
+                      color: hexToColor("#4163CD"),
+                    )
+                  : Icon(
+                      MdiIcons.chartLine,
+                      color: Colors.black54,
+                    ),
               title: Text(
                 'Dashboard',
-                style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 1 ? hexToColor("#4163CD") : Colors.black54),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: _selectedPage == 1
+                        ? hexToColor("#4163CD")
+                        : Colors.black54),
               ),
             ),
             BottomNavigationBarItem(
-              icon:  _selectedPage == 2 ? 
-                Icon(
-                  MdiIcons.bell,
-                  color: hexToColor("#4163CD"),
-                )
-              : 
-                Icon(
-                  MdiIcons.bellOutline,
-                  color: Colors.black54,
-                  ),
+              icon: _selectedPage == 2
+                  ? Icon(
+                      MdiIcons.bell,
+                      color: hexToColor("#4163CD"),
+                    )
+                  : Icon(
+                      MdiIcons.bellOutline,
+                      color: Colors.black54,
+                    ),
               title: Text(
                 'Notificações',
-                style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 2 ? hexToColor("#4163CD") : Colors.black54),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: _selectedPage == 2
+                        ? hexToColor("#4163CD")
+                        : Colors.black54),
               ),
             ),
             BottomNavigationBarItem(
-              icon:  _selectedPage == 3 ? 
-                Icon(
-                  MdiIcons.account,
-                  color: hexToColor("#4163CD"),
-                )
-              : 
-                Icon(
-                  MdiIcons.accountOutline,
-                  color: Colors.black54,
-                  ),
+              icon: _selectedPage == 3
+                  ? Icon(
+                      MdiIcons.account,
+                      color: hexToColor("#4163CD"),
+                    )
+                  : Icon(
+                      MdiIcons.accountOutline,
+                      color: Colors.black54,
+                    ),
               title: Text(
                 'Perfil',
-                style: TextStyle(fontWeight: FontWeight.bold, color: _selectedPage == 3 ? hexToColor("#4163CD") : Colors.black54),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: _selectedPage == 3
+                        ? hexToColor("#4163CD")
+                        : Colors.black54),
               ),
             ),
           ],
