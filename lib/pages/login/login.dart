@@ -11,10 +11,9 @@ import 'package:papuf/widgets/app_button_outline.dart';
 import 'package:papuf/widgets/app_text.dart';
 
 class LoginPage extends StatefulWidget {
-  
   const LoginPage({this.onSignedIn});
   final VoidCallback onSignedIn;
-  
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -62,7 +61,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Container(
                     child: _img("assets/images/logo_bloco.jpg"),
-                    constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+                    constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10),
@@ -80,7 +80,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-        
         SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 400.0),
@@ -174,21 +173,20 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final BaseAuth auth = AuthProvider.of(context).auth;
-      final String userId = await auth.signInWithEmailAndPassword(login, password);
+      final String userId =
+          await auth.signInWithEmailAndPassword(login, password);
       print('Signed in: $userId');
 
-      // widget.onSignedIn(); // does't work
-      
+      // widget.onSignedIn(); // doesn't work
+
       // redireciona para a RootPage que verifica se foi logado. Se sim, redireciona para Home, com substituição da tela atual
       push(context, RootPage(), replace: true);
-  
     } catch (e) {
       print('Error: $e');
     }
-
   }
 
-  _onClickRegister() async{
+  _onClickRegister() async {
     push(context, RegisterPage(), replace: false);
   }
 
