@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart' as mqtt;
 
-
 // Var's necessarias p/ conexão
 String broker = 'soldier.cloudmqtt.com';
 int port = 17843;
@@ -11,11 +10,11 @@ String passwd = 'FWF3kqx3Yupz';
 String clientIdentifier = '27843';
 String topic = "temp";
 
-int ar1 = 19;
-int ar2 = 19;
-
 mqtt.MqttClient client;
 mqtt.MqttConnectionState connectionState;
+
+int ar1 = 19;
+int ar2 = 17;
 
 class ConnectMQTT extends StatefulWidget {
   @override
@@ -36,9 +35,7 @@ class _ConnectMQTTState extends State<ConnectMQTT> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-    
-    );
+    return Container();
   }
 
   Future _connect() async {
@@ -149,14 +146,13 @@ class _ConnectMQTTState extends State<ConnectMQTT> {
       });
     }
   }
-
 }
 
 void publishM(String mes, String topic) {
   final mqtt.MqttClientPayloadBuilder builder = mqtt.MqttClientPayloadBuilder();
   builder.addString(mes);
   client.publishMessage(
-    topic, 
+    topic,
     mqtt.MqttQos.values[1],
     builder.payload,
     retain: true,

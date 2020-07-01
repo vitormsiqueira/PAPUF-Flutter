@@ -8,7 +8,6 @@ import 'package:papuf/widgets/text_appbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -19,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedClass = 0;
   final _classOptions = [print("Sala 1")];
   int currentClassRoom = 1;
-  
+
   // lista que gera a lista de salas presentes na tabBar, assim como algumas configurações
   final List<Tab> myTabs = List.generate(
     15,
@@ -35,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.center,
           child: Center(
             child: Text(
-              (index+1).toString(),
+              (index + 1).toString(),
               style: TextStyle(
                 fontSize: 21,
               ),
@@ -48,90 +47,121 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: myTabs.length,
-      child: Scaffold(
-        // backgroundColor: Colors.yellow,
-        // appBar: CustomAppBar(),
-        appBar: AppBar(
-          brightness: Brightness.light, // status bar brightness
-          title: textAppBar("Salas de Aula"),
-          elevation: 1,
-          backgroundColor: Colors.white,
-          /////
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(53.0), // altura é de 48+5 do padding bottom na linha abaixo
-            child: Container(
-              padding: EdgeInsets.only(bottom: 5),
-              child: Theme(
-                data: Theme.of(context).copyWith(accentColor: Colors.white),
-                child: TabBar(
-                  indicatorSize: TabBarIndicatorSize.label, // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
-                  isScrollable: true,
-                  labelColor: Colors.white, // cor da label da tab selecionada
-                  unselectedLabelColor: hexToColor("#4DE4B2"), // cor da label da tab não selecionada
-                  indicator: BoxDecoration(
-                    color: hexToColor("#4DE4B2"),
-                    shape: BoxShape.circle,
+    // variavel que recebe do firebase os dados da collection "sala" quando o estado é verdadeiro ("On")
+    var snapshots = Firestore.instance.collection('sala').snapshots();
 
+    return DefaultTabController(
+        length: myTabs.length,
+        child: Scaffold(
+          // backgroundColor: Colors.yellow,
+          // appBar: CustomAppBar(),
+          appBar: AppBar(
+            brightness: Brightness.light, // status bar brightness
+            title: textAppBar("Salas de Aula"),
+            elevation: 1,
+            backgroundColor: Colors.white,
+            /////
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(
+                  53.0), // altura é de 48+5 do padding bottom na linha abaixo
+              child: Container(
+                padding: EdgeInsets.only(bottom: 5),
+                child: Theme(
+                  data: Theme.of(context).copyWith(accentColor: Colors.white),
+                  child: TabBar(
+                    indicatorSize: TabBarIndicatorSize
+                        .label, // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
+                    isScrollable: true,
+                    labelColor: Colors.white, // cor da label da tab selecionada
+                    unselectedLabelColor: hexToColor(
+                        "#4DE4B2"), // cor da label da tab não selecionada
+                    indicator: BoxDecoration(
+                      color: hexToColor("#4DE4B2"),
+                      shape: BoxShape.circle,
+                    ),
+                    tabs: myTabs,
+                    onTap: (index) {
+                      setState(() {
+                        print(index + 1);
+                        currentClassRoom = index + 1;
+                      });
+                    },
                   ),
-                  tabs: myTabs,
-                  onTap: (index){
-                    setState(() {
-                      print(index+1);
-                      currentClassRoom = index+1;
-                    });
-                  },
                 ),
               ),
             ),
           ),
-        ),
-        body: _body(context),
-      ),
-    );
-  }
+          body: StreamBuilder(
+            stream: snapshots,
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error ${snapshot.error}"),
+                );
+              }
 
+              return ListView.builder(
+                // snapshot recebe uma lista de de coleções e aqui pegamos o tamanho da lista
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (BuildContext context, int i) {
+                  // aqui estamos percorrendo a lista de coleções do firebase
+                  var item = snapshot.data.documents[i].data;
+                  print("Print{$item}");
+                  return ListTile(
+                      // title: Text(item['name']),
+                      // subtitle: Text("item['state']"),
+                      );
+                },
+              );
+            },
+          ),
+        ));
+  }
 
   _body(BuildContext context) {
     return Container(
       color: Colors.white,
-      height: MediaQuery.of(context).size.height, //Add a full heigh white container 
+      height:
+          MediaQuery.of(context).size.height, //Add a full heigh white container
       child: SingleChildScrollView(
-          padding: EdgeInsets.only(bottom: 30),
-          //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
-          child: Column(
-            children: <Widget>[
-              _textControle("Controle | Sala $currentClassRoom"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center, // centraliza os controles
-                children: <Widget>[
-                  Controle(ar1, "temp-1", currentSala: currentClassRoom),
-                  SizedBox(width: 40,),
-                  Controle(ar2, "temp-2", currentSala: currentClassRoom),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              // ListTile(
-              //   leading: Icon(Icons.details),
-              //   title: Text(
-              //     "Detalhes",
-              //     style: TextStyle(
-              //       fontSize: 20,
-              //       color: Colors.black54,
-              //     ),
-              //   ),
-              //   onTap: () => _onButtonPressedDetails(context),
-              // ),
-              _textControle("Detalhes"),
-              _cardDetails(currentClassRoom, "Piso 1", "BD-1", "45:07", "45:18"),
-              // _textDashboard(),
-              // _dashboard(context),
-            ],
-          ),
+        padding: EdgeInsets.only(bottom: 30),
+        //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
+        child: Column(
+          children: <Widget>[
+            _textControle("Controle | Sala $currentClassRoom"),
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // centraliza os controles
+              children: <Widget>[
+                Controle(ar1, "temp-1", currentSala: currentClassRoom),
+                SizedBox(
+                  width: 40,
+                ),
+                Controle(ar2, "temp-2", currentSala: currentClassRoom),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            // ListTile(
+            //   leading: Icon(Icons.details),
+            //   title: Text(
+            //     "Detalhes",
+            //     style: TextStyle(
+            //       fontSize: 20,
+            //       color: Colors.black54,
+            //     ),
+            //   ),
+            //   onTap: () => _onButtonPressedDetails(context),
+            // ),
+            _textControle("Detalhes"),
+            _cardDetails(currentClassRoom, "Piso 1", "BD-1", "45:07", "45:18"),
+            // _textDashboard(),
+            // _dashboard(context),
+          ],
         ),
+      ),
     );
   }
 
@@ -156,7 +186,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _cardDetails(int textSala, String textAndar, String textBloco, String tempAtividadeArLeft, String tempAtividadeArRight) {
+  _cardDetails(int textSala, String textAndar, String textBloco,
+      String tempAtividadeArLeft, String tempAtividadeArRight) {
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20),
       child: Container(
@@ -180,17 +211,45 @@ class _HomePageState extends State<HomePage> {
               height: 25,
             ),
 
-            _buildBody(Icon(MdiIcons.schoolOutline, color: Colors.black54,),"Sala", context),
+            _buildBody(
+                Icon(
+                  MdiIcons.schoolOutline,
+                  color: Colors.black54,
+                ),
+                "Sala",
+                context),
             //_textDetails(Icon(MdiIcons.schoolOutline, color: Colors.black54,), "Sala ", "$textSala"),
-            _textDetails(Icon(Icons.business, color: Colors.black54,),"Bloco ", textBloco),
-            _textDetails(Icon(Icons.layers, color: Colors.black54,),"Andar ", textAndar),
-            _textDetails(Icon(MdiIcons.clockOutline, color: Colors.black54,),"Tempo Atividade\nAr esquerda ", tempAtividadeArLeft),
-            
-            
-            _textDetails(Icon(MdiIcons.clockOutline, color: Colors.black54,),"Tempo Atividade\nAr direita ", tempAtividadeArRight),
+            _textDetails(
+                Icon(
+                  Icons.business,
+                  color: Colors.black54,
+                ),
+                "Bloco ",
+                textBloco),
+            _textDetails(
+                Icon(
+                  Icons.layers,
+                  color: Colors.black54,
+                ),
+                "Andar ",
+                textAndar),
+            _textDetails(
+                Icon(
+                  MdiIcons.clockOutline,
+                  color: Colors.black54,
+                ),
+                "Tempo Atividade\nAr esquerda ",
+                tempAtividadeArLeft),
+
+            _textDetails(
+                Icon(
+                  MdiIcons.clockOutline,
+                  color: Colors.black54,
+                ),
+                "Tempo Atividade\nAr direita ",
+                tempAtividadeArRight),
           ],
         ),
-
       ),
     );
   }
@@ -201,12 +260,18 @@ class _HomePageState extends State<HomePage> {
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
 
-        return _textDetails(iconButton, label, Firestore.instance.collection('sala').document("n15IeKqB1F0qkUAZQWvF").toString());
+        return _textDetails(
+            iconButton,
+            label,
+            Firestore.instance
+                .collection('sala')
+                .document("n15IeKqB1F0qkUAZQWvF")
+                .toString());
       },
     );
   }
 
-  _textDetails(Icon iconButton, String label, String myText){
+  _textDetails(Icon iconButton, String label, String myText) {
     return Padding(
       padding: const EdgeInsets.only(left: 30.0, right: 30, top: 7, bottom: 7),
       child: Row(
@@ -221,13 +286,12 @@ class _HomePageState extends State<HomePage> {
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54
-                ),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54),
               ),
             ],
-           ),
+          ),
           Text(
             myText,
             style: TextStyle(
@@ -235,7 +299,6 @@ class _HomePageState extends State<HomePage> {
               color: Colors.black54,
             ),
           ),
-         
         ],
       ),
     );

@@ -4,14 +4,13 @@ import 'package:papuf/utils/control_temperature.dart';
 import 'package:papuf/widgets/jsonToSend.dart';
 import '../color_hex.dart';
 
-
 bool pressed = false;
 
 class Controle extends StatefulWidget {
   final int currentSala;
   final int temp;
   final String topic;
-  
+
   const Controle(this.temp, this.topic, {this.currentSala});
   @override
   _ControleState createState() => _ControleState();
@@ -39,14 +38,14 @@ class _ControleState extends State<Controle> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        _modulo(selected1, topic, um), // variavel ar1 e ar2 definida em connect_MQTT.dart
+        _modulo(selected1, topic,
+            um), // variavel ar1 e ar2 definida em connect_MQTT.dart
       ],
     );
   }
 
   _modulo(String selected, String topic, int i) {
-    return 
-    Container(
+    return Container(
       padding: EdgeInsets.all(15),
       width: 150,
       height: 350,
@@ -70,23 +69,25 @@ class _ControleState extends State<Controle> {
                 //print('++++++++'+temp.toString());
               });
               //envia um json {"temp": temp, "state": "on"} com temperatura e estado
-              publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
+              publishM(
+                  createJsonTempState(temp.toString(), _setStateOn(i)), topic);
             },
             child: _textOthers(selected, '+', 45, FontWeight.w400),
             shape: CircleBorder(),
           ),
-          
+
           Container(
-            child: _textOthers(selected, temp.toString()+'º', 45, FontWeight.w300),
+            child: _textOthers(
+                selected, temp.toString() + 'º', 45, FontWeight.w300),
           ),
-          
+
           RawMaterialButton(
             onPressed: () {
               setState(() {
                 temp--;
               });
-              publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
-              
+              publishM(
+                  createJsonTempState(temp.toString(), _setStateOn(i)), topic);
             },
             child: _textOthers(selected, '-', 50, FontWeight.w400),
             shape: CircleBorder(),
@@ -114,15 +115,13 @@ class _ControleState extends State<Controle> {
               shape: CircleBorder(),
             ),
           ),
-          
         ],
       ),
     );
-
   }
 
   // essa função força a setar o estado de "On" sempre que trocar a temperatura com o estado atual "Off"
-  _setStateOn(int i){
+  _setStateOn(int i) {
     if (selected1 == 'Off' && i == 1) {
       selected1 = 'On';
     } else if (selected2 == 'Off' && i == 2) {
@@ -131,7 +130,7 @@ class _ControleState extends State<Controle> {
   }
 
   // essa função faz o "switch" do estado do controle
-  _currentState(int i){
+  _currentState(int i) {
     if (selected1 == 'Off' && i == 1) {
       selected1 = 'On';
     } else if (selected1 == 'On' && i == 1) {
@@ -186,7 +185,6 @@ class _ControleState extends State<Controle> {
     );
   }
 }
-
 
 _img(String img) {
   return Container(
