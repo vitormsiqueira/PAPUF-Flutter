@@ -47,103 +47,53 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // variavel que recebe do firebase os dados da collection "sala" quando o estado é verdadeiro ("On")
-    var snapshots = Firestore.instance
-        .collection('bd-2')
-        .where('sala', isEqualTo: currentClassRoom)
-        .snapshots();
-
     return DefaultTabController(
-        length: myTabs.length,
-        child: Scaffold(
-          appBar: AppBar(
-            brightness: Brightness.light, // status bar brightness
-            title: textAppBar("Salas de Aula"),
-            elevation: 1,
-            backgroundColor: Colors.white,
-            /////
-            bottom: PreferredSize(
-              //
-              // altura é de 48+5 do padding bottom na linha abaixo
-              preferredSize: const Size.fromHeight(53.0),
-              child: Container(
-                padding: EdgeInsets.only(bottom: 5),
-                child: Theme(
-                  data: Theme.of(context).copyWith(accentColor: Colors.white),
-                  child: TabBar(
-                    //
-                    // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
-                    indicatorSize: TabBarIndicatorSize.label,
-                    isScrollable: true,
-                    //
-                    // cor da label da tab selecionada
-                    labelColor: Colors.white,
-                    // cor da label da tab não selecionada
-                    unselectedLabelColor: hexToColor("#4DE4B2"),
-                    indicator: BoxDecoration(
-                      color: hexToColor("#4DE4B2"),
-                      shape: BoxShape.circle,
-                    ),
-                    tabs: myTabs,
-                    onTap: (index) {
-                      setState(() {
-                        currentClassRoom = index + 1;
-                        print("sala clicada " + currentClassRoom.toString());
-                      });
-                    },
+      length: myTabs.length,
+      child: Scaffold(
+        // backgroundColor: Colors.yellow,
+        // appBar: CustomAppBar(),
+        appBar: AppBar(
+          brightness: Brightness.light, // status bar brightness
+          title: textAppBar("Salas de Aula"),
+          elevation: 1,
+          backgroundColor: Colors.white,
+          /////
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(
+                53.0), // altura é de 48+5 do padding bottom na linha abaixo
+            child: Container(
+              padding: EdgeInsets.only(bottom: 5),
+              child: Theme(
+                data: Theme.of(context).copyWith(accentColor: Colors.white),
+                child: TabBar(
+                  indicatorSize: TabBarIndicatorSize
+                      .label, // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
+                  isScrollable: true,
+                  labelColor: Colors.white, // cor da label da tab selecionada
+                  unselectedLabelColor: hexToColor(
+                      "#4DE4B2"), // cor da label da tab não selecionada
+                  indicator: BoxDecoration(
+                    color: hexToColor("#4DE4B2"),
+                    shape: BoxShape.circle,
                   ),
+                  tabs: myTabs,
+                  onTap: (index) {
+                    setState(() {
+                      print(index + 1);
+                      currentClassRoom = index + 1;
+                    });
+                  },
                 ),
               ),
             ),
           ),
-          // O streambuilder controi os widgets com as informações mais recentes, nesse
-          // caso as informações que são recebidas via firebase
-          body: StreamBuilder(
-            stream: snapshots,
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasError) {
-                return Center(
-                  child:
-                      Text("Error: \n Sala não encontrada ${snapshot.error}"),
-                );
-              }
-
-              // Recebe uma lista de "documents", que no nosso caso sempre receberá um elemento,
-              // pois no inicio desse build foi definido que o snapshot vai receber dados referentes
-              // apenas a sala que foi clicada (currentClassRoom)
-              var item = snapshot.data.documents;
-              var primeiroElementoLista = item[0].data;
-              int nomeSalaRecebidaFirebase = primeiroElementoLista['sala'];
-              int tempLeftFirebase = primeiroElementoLista['temp-left'];
-              int tempRightFirebase = primeiroElementoLista['temp-right'];
-              print(nomeSalaRecebidaFirebase);
-
-              // all método streambuilder precisa retornar algo
-              // return _bodyConstruction(context, nomeSalaRecebidaFirebase,
-              // tempLeftFirebase, tempRightFirebase);
-              return ListView.builder(
-                // snapshot recebe uma lista de de coleções e aqui pegamos o tamanho da lista
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (BuildContext context, int i) {
-                  // all aqui estamos percorrendo a lista de coleções do firebase
-                  var item = snapshot.data.documents[i].data;
-                  // print("Print{$item}");
-                  // return ListTile(
-                  //   title: Text(item['sala'].toString()),
-                  //   subtitle: Text(item['temp-left'].toString()),
-                  // );
-                  return _bodyConstruction(context, nomeSalaRecebidaFirebase,
-                      tempLeftFirebase, tempRightFirebase);
-                },
-              );
-            },
-          ),
-        ));
+        ),
+        body: _body(context),
+      ),
+    );
   }
 
-  _bodyConstruction(BuildContext context, int nomeSalaRecebidaFirebase,
-      int tempLeftFirebase, int tempRightFirebase) {
+  _body(BuildContext context) {
     return Container(
       color: Colors.white,
       height:
@@ -153,18 +103,16 @@ class _HomePageState extends State<HomePage> {
         //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
         child: Column(
           children: <Widget>[
-            _textControle("Controle | Sala $nomeSalaRecebidaFirebase"),
+            _textControle("Controle | Sala $currentClassRoom"),
             Row(
               mainAxisAlignment:
                   MainAxisAlignment.center, // centraliza os controles
               children: <Widget>[
-                Controle(tempLeftFirebase, "temp-1",
-                    currentSala: nomeSalaRecebidaFirebase),
+                Controle(ar1, "temp-1", currentSala: currentClassRoom),
                 SizedBox(
                   width: 40,
                 ),
-                Controle(tempRightFirebase, "temp-2",
-                    currentSala: nomeSalaRecebidaFirebase),
+                Controle(ar2, "temp-2", currentSala: currentClassRoom),
               ],
             ),
             SizedBox(
