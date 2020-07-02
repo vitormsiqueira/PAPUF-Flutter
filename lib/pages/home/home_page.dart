@@ -109,9 +109,9 @@ class _HomePageState extends State<HomePage> {
                   var item = snapshot.data.documents[i].data;
                   print("Print{$item}");
                   return ListTile(
-                      // title: Text(item['name']),
-                      // subtitle: Text("item['state']"),
-                      );
+                    title: Text(item['name']),
+                    subtitle: Text(item['state'].toString()),
+                  );
                 },
               );
             },
