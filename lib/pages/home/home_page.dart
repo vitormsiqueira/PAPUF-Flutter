@@ -120,21 +120,23 @@ class _HomePageState extends State<HomePage> {
               print(nomeSalaRecebidaFirebase);
 
               // all método streambuilder precisa retornar algo
-              return _bodyConstruction(context, nomeSalaRecebidaFirebase,
-                  tempLeftFirebase, tempRightFirebase);
-              // return ListView.builder(
-              //   // snapshot recebe uma lista de de coleções e aqui pegamos o tamanho da lista
-              //   itemCount: snapshot.data.documents.length,
-              //   itemBuilder: (BuildContext context, int i) {
-              //     // todo aqui estamos percorrendo a lista de coleções do firebase
-              //     var item = snapshot.data.documents[i].data;
-              //     print("Print{$item}");
-              //     return ListTile(
-              //       title: Text(item['name']),
-              //       subtitle: Text(item['temp-left'].toString()),
-              //     );
-              //   },
-              // );
+              // return _bodyConstruction(context, nomeSalaRecebidaFirebase,
+              // tempLeftFirebase, tempRightFirebase);
+              return ListView.builder(
+                // snapshot recebe uma lista de de coleções e aqui pegamos o tamanho da lista
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (BuildContext context, int i) {
+                  // all aqui estamos percorrendo a lista de coleções do firebase
+                  var item = snapshot.data.documents[i].data;
+                  // print("Print{$item}");
+                  // return ListTile(
+                  //   title: Text(item['sala'].toString()),
+                  //   subtitle: Text(item['temp-left'].toString()),
+                  // );
+                  return _bodyConstruction(context, nomeSalaRecebidaFirebase,
+                      tempLeftFirebase, tempRightFirebase);
+                },
+              );
             },
           ),
         ));
