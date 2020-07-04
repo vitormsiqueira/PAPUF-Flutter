@@ -1,28 +1,28 @@
 {
     "project_info": {
-        "project_number": "142050009873",
-        "firebase_url": "https://papuf-uf20.firebaseio.com",
-        "project_id": "papuf-uf20",
-        "storage_bucket": "papuf-uf20.appspot.com"
+        "project_number": "998339693861",
+        "firebase_url": "https://papuf-20mt.firebaseio.com",
+        "project_id": "papuf-20mt",
+        "storage_bucket": "papuf-20mt.appspot.com"
     },
     "client": [{
         "client_info": {
-            "mobilesdk_app_id": "1:142050009873:android:03f1ebda91eb2162d022b0",
+            "mobilesdk_app_id": "1:998339693861:android:c761da1be97a179cb21ecc",
             "android_client_info": {
                 "package_name": "com.example.papuf"
             }
         },
         "oauth_client": [{
-            "client_id": "142050009873-2l7p59gmr291dutcusrubjotn392btbh.apps.googleusercontent.com",
+            "client_id": "998339693861-1th2dn9vjisntol8ngu6obrli83pna4e.apps.googleusercontent.com",
             "client_type": 3
         }],
         "api_key": [{
-            "current_key": "AIzaSyDig3WJWvXh0H_GKGVuC3e6m2IWW3NSoBo"
+            "current_key": "AIzaSyANubH9i_PQdPpuro9jfADAoo68vxpXFus"
         }],
         "services": {
             "appinvite_service": {
                 "other_platform_oauth_client": [{
-                    "client_id": "142050009873-2l7p59gmr291dutcusrubjotn392btbh.apps.googleusercontent.com",
+                    "client_id": "998339693861-1th2dn9vjisntol8ngu6obrli83pna4e.apps.googleusercontent.com",
                     "client_type": 3
                 }]
             }
