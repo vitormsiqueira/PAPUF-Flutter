@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:papuf/utils/connect_MQTT.dart';
 import 'package:papuf/utils/control_temperature.dart';
@@ -15,6 +17,13 @@ class Controle extends StatefulWidget {
   @override
   _ControleState createState() => _ControleState();
 }
+
+// class TemperatureCreator {
+//   TemperatureCreator() {
+//     _controller.sink.add(temp);
+//     temp++;
+//   }
+// }
 
 class _ControleState extends State<Controle> {
   int temp;
@@ -45,6 +54,8 @@ class _ControleState extends State<Controle> {
   }
 
   _modulo(String selected, String topic, int i) {
+    final _controller = StreamController<int>();
+
     return Container(
       padding: EdgeInsets.all(15),
       width: 150,
