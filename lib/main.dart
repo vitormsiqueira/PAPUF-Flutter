@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:papuf/utils/auth.dart';
 import 'package:papuf/utils/auth_provider.dart';
 import 'package:papuf/utils/root_pages.dart';
-import 'package:papuf/pages/dashboard/get_data_to_dash.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
