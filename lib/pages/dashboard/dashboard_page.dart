@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/widgets/text_appbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -17,247 +18,126 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
-_body(BuildContext context) {
-  return SingleChildScrollView(
+String currentSala = '1';
+Widget cardsDashboard(context, altura, label, info) {
+  return Card(
+    elevation: 5,
     child: Container(
-      color: Colors.white,
+      padding: EdgeInsets.all(20),
+      height: altura,
+      width: MediaQuery.of(context).size.width / 2,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(16),
-                child: Center(
-                  child: Text(
-                    "STATUS EM TEMPO REAL",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 25.0,
+              color: Colors.black54,
+            ),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(left: 4),
-                width: MediaQuery.of(context).size.width/2,
-
-                // Container de cards da esquerda
-                child: Column(
-                  children: <Widget>[
-                    Card(
-                      elevation: 5,
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        height: 109.0,
-                        width: MediaQuery.of(context).size.width/2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Consumo",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "1.250 kW",
-                              style: TextStyle(
-                                fontSize: 38,
-                                // fontWeight: FontWeight.bold,
-                                color: Colors.black87
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-                      color: Colors.white,
-                      
-                    ),
-                    Card(
-                      elevation: 5,
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        height: 250.0,
-                        width: MediaQuery.of(context).size.width/2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Usuários ativos",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "23",
-                              style: TextStyle(
-                                fontSize: 38,
-                                // fontWeight: FontWeight.bold,
-                                color: Colors.black
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "-3%",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black54,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      color: Colors.white,
-                    ),
-                    Card(
-                      elevation: 5,
-                      child: Container(
-                        height: 200.0,
-                        
-                      ),
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-              ),
-
-              // Container de cards a direita
-              Container(
-                padding: EdgeInsets.only(right: 4),
-                width: MediaQuery.of(context).size.width/2,
-                child: Column(
-                  children: <Widget>[
-                    Card(
-                      elevation: 5,
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        height: 230.0,
-                        width: MediaQuery.of(context).size.width/2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Previsão",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "150 kW",
-                              style: TextStyle(
-                                fontSize: 38,
-                                // fontWeight: FontWeight.bold,
-                                color: Colors.black
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "+16% no consumo",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black54,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      color: Colors.white,
-                      
-                    ),
-                    Card(
-                      elevation: 5,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 5),
-                        height: 150.0,
-                        width: MediaQuery.of(context).size.width/2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Ar-Condicionados\nAtivos",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black54
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "21",
-                              style: TextStyle(
-                                fontSize: 38,
-                                // fontWeight: FontWeight.bold,
-                                color: Colors.black
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Container(
-                              child: Row(
-
-                                children: <Widget>[
-                                  Text(
-                                    "Atualizado 12/05 às 15:24",
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.black45,
-                                      fontStyle: FontStyle.italic,
-                                    ),
-                                  ),
-                                  
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      color:Colors.white,
-                    ),
-                    Card(
-                      elevation: 5,
-                      child: Container(
-                        height: 150.0,
-                        
-                      ),
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          SizedBox(
+            height: 8,
+          ),
+          Text(
+            info,
+            style: TextStyle(
+                fontSize: 30,
+                // fontWeight: FontWeight.bold,
+                color: Colors.black87),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
     ),
+    color: Colors.white,
+  );
+}
+
+_body(BuildContext context) {
+  return StreamBuilder<DocumentSnapshot>(
+    stream: Firestore.instance
+        .collection('bd-2')
+        .document('sala-${currentSala}')
+        .snapshots(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) return LinearProgressIndicator();
+      /*
+      return Column(
+        children: <Widget>[
+          Text(snapshot.data['ar-l']['state'].toString()),
+          Text(snapshot.data['ar-l']['temperature'].toString()),
+        ],
+      );
+      */
+
+      return SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.all(16),
+                    child: Center(
+                      child: Text(
+                        "STATUS EM TEMPO REAL SALA ${currentSala}",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(left: 4),
+                    width: MediaQuery.of(context).size.width / 2,
+
+                    // Container de cards da esquerda
+                    child: Column(
+                      children: <Widget>[
+                        cardsDashboard(
+                            context,
+                            150.0,
+                            (snapshot.data['ar-l']['state'] == 'off')
+                                ? 'Desligado desde'
+                                : 'Ligado desde',
+                            snapshot.data['ar-l']['time-activity']),
+                      ],
+                    ),
+                  ),
+
+                  // Container de cards a direita
+                  Container(
+                    padding: EdgeInsets.only(right: 4),
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Column(
+                      children: <Widget>[
+                        cardsDashboard(
+                            context,
+                            150.0,
+                            (snapshot.data['ar-r']['state'] == 'off')
+                                ? 'Desligado desde'
+                                : 'Ligado desde',
+                            snapshot.data['ar-r']['time-activity']),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
   );
 }
