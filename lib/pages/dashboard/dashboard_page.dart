@@ -1,7 +1,9 @@
+import 'package:papuf/pages/dashboard/dash_func.dart';
 import 'package:flutter/material.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:papuf/pages/current_class.dart';
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -18,43 +20,11 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
-String currentSala = '1';
-Widget cardsDashboard(context, altura, label, info) {
-  return Card(
-    elevation: 5,
-    child: Container(
-      padding: EdgeInsets.all(20),
-      height: altura,
-      width: MediaQuery.of(context).size.width / 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 25.0,
-              color: Colors.black54,
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            info,
-            style: TextStyle(
-                fontSize: 30,
-                // fontWeight: FontWeight.bold,
-                color: Colors.black87),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    ),
-    color: Colors.white,
-  );
-}
+//  funções do MAP
+//  https://api.dart.dev/stable/2.8.4/dart-core/Map-class.html
 
 _body(BuildContext context) {
+  String currentSala = currentClassRoom.toString();
   return StreamBuilder<DocumentSnapshot>(
     stream: Firestore.instance
         .collection('bd-2')
@@ -62,6 +32,8 @@ _body(BuildContext context) {
         .snapshots(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) return LinearProgressIndicator();
+      String consumoMesArL = calculoDeConsumoMes(snapshot, "ar-l").toString();
+      String consumoMesArR = calculoDeConsumoMes(snapshot, "ar-r").toString();
       /*
       return Column(
         children: <Widget>[
@@ -105,6 +77,13 @@ _body(BuildContext context) {
                     // Container de cards da esquerda
                     child: Column(
                       children: <Widget>[
+                        Container(
+                            //width: 100.00,
+                            height: 90.0,
+                            child: Image(
+                                color: Colors.blueAccent,
+                                image: AssetImage(
+                                    "assets/images/icon_ar_branco.png"))),
                         cardsDashboard(
                             context,
                             150.0,
@@ -112,6 +91,8 @@ _body(BuildContext context) {
                                 ? 'Desligado desde'
                                 : 'Ligado desde',
                             snapshot.data['ar-l']['time-activity']),
+                        cardsDashboard(context, 400.0, 'consumo neste mês',
+                            '${consumoMesArL} kWh')
                       ],
                     ),
                   ),
@@ -122,6 +103,13 @@ _body(BuildContext context) {
                     width: MediaQuery.of(context).size.width / 2,
                     child: Column(
                       children: <Widget>[
+                        Container(
+                            //width: 100.00,
+                            height: 90.0,
+                            child: Image(
+                                color: Colors.blueAccent,
+                                image: AssetImage(
+                                    "assets/images/icon_ar_branco.png"))),
                         cardsDashboard(
                             context,
                             150.0,
@@ -129,6 +117,8 @@ _body(BuildContext context) {
                                 ? 'Desligado desde'
                                 : 'Ligado desde',
                             snapshot.data['ar-r']['time-activity']),
+                        cardsDashboard(context, 400.0, 'consumo neste mês',
+                            '${consumoMesArR} kWh')
                       ],
                     ),
                   ),

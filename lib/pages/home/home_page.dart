@@ -5,6 +5,7 @@ import 'package:papuf/color_hex.dart';
 import 'package:papuf/utils/connect_MQTT.dart';
 import 'package:papuf/widgets/controle.dart';
 import 'package:papuf/widgets/text_appbar.dart';
+import 'package:papuf/pages/current_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,9 +16,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
   bool pressed = false;
-  int _selectedClass = 0;
+  int _selectedClass = currentClassRoom;
   final _classOptions = [print("Sala 1")];
-  int currentClassRoom = 1;
+  //int currentClassRoom;
 
   // lista que gera a lista de salas presentes na tabBar, assim como algumas configurações
   final List<Tab> myTabs = List.generate(

@@ -13,20 +13,41 @@ void main() {
     ),
   );
   runApp(MyApp());
+  //setDataEstrutura();
 }
 
 void setDataEstrutura() {
   for (int i = 1; i <= 15; i++) {
+    var dadosUpdate = {
+      "ar-l": {
+        "consumo": {
+          "2020": {
+            'jul': {
+              "9": [5, 3, 9, 9]
+            }
+          }
+        }
+      },
+      "ar-r": {
+        "consumo": {
+          "2020": {
+            'jul': {
+              "19": [5, 3, 9, 9]
+            }
+          }
+        }
+      }
+    };
     var dados = {
       "ar-l": {
         "id": "${i}-dvf",
         "state": "off",
         "temperature": "19",
-        "time-activity": "0:02:37 h",
+        "time-activity": "2:37 h",
         "consumo": {
           "2020": {
-            "jun": {
-              "26": {"5": "5", "6": "23", "7": "34"}
+            "7": {
+              "10": [1, 4, 3, 7, 6]
             }
           }
         }
@@ -35,11 +56,11 @@ void setDataEstrutura() {
         "id": "${i}-kjh",
         "state": "off",
         "temperature": "19",
-        "time-activity": "0:27:14 h",
+        "time-activity": "23:14 h",
         "consumo": {
           "2020": {
-            "jun": {
-              "26": {"5": "5", "6": "23", "7": "34"}
+            "7": {
+              "26": [1, 4, 3, 7, 6]
             }
           }
         }
