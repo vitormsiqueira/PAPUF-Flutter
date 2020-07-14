@@ -65,10 +65,10 @@ void setDataEstrutura() {
           }
         }
       },
-      "details": {"name": "sala ${i}", "bloco": "BD-1", "andar": "Piso 1"}
+      "details": {"name": "sala $i", "bloco": "BD-1", "andar": "Piso 1"}
     };
-    Firestore.instance.collection('bd-2').document('sala-${i}').setData(dados);
-    print('update ${i}');
+    Firestore.instance.collection('bd-2').document('sala-$i').setData(dados);
+    print('update $i');
   }
 }
 

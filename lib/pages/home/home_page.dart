@@ -95,48 +95,63 @@ class _HomePageState extends State<HomePage> {
   }
 
   _body(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      height:
-          MediaQuery.of(context).size.height, //Add a full heigh white container
-      child: SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 30),
-        //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
-        child: Column(
+    String currentSala = currentClassRoom.toString();
+    return StreamBuilder<DocumentSnapshot>(
+      stream: Firestore.instance
+          .collection('bd-2')
+          .document('sala-$currentSala')
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+        // String consumoMesArL = calculoDeConsumoMes(snapshot, "ar-l").toString();
+        // String consumoMesArR = calculoDeConsumoMes(snapshot, "ar-r").toString();
+        /*
+        return Column(
           children: <Widget>[
-            _textControle("Controle | Sala $currentClassRoom"),
-            Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // centraliza os controles
+            Text(snapshot.data['ar-l']['state'].toString()),
+            Text(snapshot.data['ar-l']['temperature'].toString()),
+          ],
+        );
+        */
+        return Container(
+          color: Colors.white,
+          height: MediaQuery.of(context)
+              .size
+              .height, //Add a full heigh white container
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(bottom: 30),
+            //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
+            child: Column(
               children: <Widget>[
-                Controle(ar1, "temp-1", currentSala: currentClassRoom),
-                SizedBox(
-                  width: 40,
+                _textControle("Controle | Sala $currentClassRoom"),
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // centraliza os controles
+                  children: <Widget>[
+                    Controle(ar1, "temp-1", currentSala: currentClassRoom),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Controle(ar2, "temp-2", currentSala: currentClassRoom),
+                  ],
                 ),
-                Controle(ar2, "temp-2", currentSala: currentClassRoom),
+                SizedBox(
+                  height: 20,
+                ),
+                _textControle("Detalhes"),
+
+                // Adiciona informações coletadas do firebase no card Detalhes
+                _cardDetails(
+                    snapshot.data['details']['name'],
+                    snapshot.data['details']['andar'],
+                    snapshot.data['details']['bloco'],
+                    snapshot.data['ar-l']['time-activity'],
+                    snapshot.data['ar-r']['time-activity']),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            // ListTile(
-            //   leading: Icon(Icons.details),
-            //   title: Text(
-            //     "Detalhes",
-            //     style: TextStyle(
-            //       fontSize: 20,
-            //       color: Colors.black54,
-            //     ),
-            //   ),
-            //   onTap: () => _onButtonPressedDetails(context),
-            // ),
-            _textControle("Detalhes"),
-            _cardDetails(currentClassRoom, "Piso 1", "BD-1", "45:07", "45:18"),
-            // _textDashboard(),
-            // _dashboard(context),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -161,7 +176,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _cardDetails(int textSala, String textAndar, String textBloco,
+  _cardDetails(String textSala, String textAndar, String textBloco,
       String tempAtividadeArLeft, String tempAtividadeArRight) {
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, right: 20),
@@ -186,13 +201,13 @@ class _HomePageState extends State<HomePage> {
               height: 25,
             ),
 
-            _buildBody(
+            _textDetails(
                 Icon(
                   MdiIcons.schoolOutline,
                   color: Colors.black54,
                 ),
                 "Sala",
-                context),
+                textSala.toString()),
             //_textDetails(Icon(MdiIcons.schoolOutline, color: Colors.black54,), "Sala ", "$textSala"),
             _textDetails(
                 Icon(
@@ -226,23 +241,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildBody(Icon iconButton, String label, BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('sala').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-
-        return _textDetails(
-            iconButton,
-            label,
-            Firestore.instance
-                .collection('sala')
-                .document("n15IeKqB1F0qkUAZQWvF")
-                .toString());
-      },
     );
   }
 

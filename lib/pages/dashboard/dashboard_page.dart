@@ -28,7 +28,7 @@ _body(BuildContext context) {
   return StreamBuilder<DocumentSnapshot>(
     stream: Firestore.instance
         .collection('bd-2')
-        .document('sala-${currentSala}')
+        .document('sala-$currentSala')
         .snapshots(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) return LinearProgressIndicator();
@@ -56,7 +56,7 @@ _body(BuildContext context) {
                     padding: EdgeInsets.all(16),
                     child: Center(
                       child: Text(
-                        "STATUS EM TEMPO REAL SALA ${currentSala}",
+                        "STATUS EM TEMPO REAL SALA $currentSala",
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
@@ -92,7 +92,7 @@ _body(BuildContext context) {
                                 : 'Ligado desde',
                             snapshot.data['ar-l']['time-activity']),
                         cardsDashboard(context, 400.0, 'consumo neste mês',
-                            '${consumoMesArL} kWh')
+                            '$consumoMesArL kWh')
                       ],
                     ),
                   ),
@@ -118,7 +118,7 @@ _body(BuildContext context) {
                                 : 'Ligado desde',
                             snapshot.data['ar-r']['time-activity']),
                         cardsDashboard(context, 400.0, 'consumo neste mês',
-                            '${consumoMesArR} kWh')
+                            '$consumoMesArR kWh')
                       ],
                     ),
                   ),
