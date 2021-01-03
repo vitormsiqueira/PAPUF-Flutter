@@ -4,6 +4,7 @@ import 'package:papuf/utils/auth.dart';
 import 'package:papuf/utils/auth_provider.dart';
 import 'package:papuf/utils/root_pages.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -22,8 +23,8 @@ void setDataEstrutura() {
       "ar-l": {
         "consumo": {
           "2020": {
-            'jul': {
-              "9": [5, 3, 9, 9]
+            'dez': {
+              "29": [5, 3, 9, 9]
             }
           }
         }
@@ -31,8 +32,8 @@ void setDataEstrutura() {
       "ar-r": {
         "consumo": {
           "2020": {
-            'jul': {
-              "19": [5, 3, 9, 9]
+            'dez': {
+              "29": [5, 3, 9, 9]
             }
           }
         }
@@ -85,8 +86,45 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.cyan,
         ),
-        home: RootPage(),
+        home: MyHomePage(),
       ),
     );
   }
+}
+
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return _introScreen();
+  }
+}
+
+Widget _introScreen() {
+  return Stack(
+    children: <Widget>[
+      SplashScreen(
+        seconds: 5,
+        
+        navigateAfterSeconds: RootPage(),
+        loaderColor: Colors.transparent,
+      ),
+      Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/logo-faeng.png"),
+            fit: BoxFit.none,
+          ),
+        ),
+      ),
+    ],
+  );
 }

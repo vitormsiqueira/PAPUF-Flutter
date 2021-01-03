@@ -21,6 +21,7 @@ dependencies:
   cloud_firestore: ^0.13.5
   flutter:
     sdk: flutter
+  splashscreen: ^1.2.0
   mqtt_client: ^5.5.3
   material_design_icons_flutter: ^4.0.5145
   intl: ^0.16.1

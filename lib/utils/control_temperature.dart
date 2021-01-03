@@ -52,7 +52,7 @@ class _ControlTemperatureState extends State<ControlTemperature> {
                 setState(() {
                   temp--;
                 });
-                publishM(createJsonTempState(temp.toString(), "on"), topic);
+                publishM('RGB-L', topic);
               },
               child: _textOthers(selected, '-', 50, FontWeight.w400),
               shape: CircleBorder(),

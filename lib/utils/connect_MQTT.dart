@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart' as mqtt;
 
 // Var's necessarias p/ conexão
-String broker = 'soldier.cloudmqtt.com';
-int port = 17843;
-String username = 'efbwcvvu';
-String passwd = 'FWF3kqx3Yupz';
-String clientIdentifier = '27843';
-String topic = "temp";
+String broker = 'test.mosquitto.org';
+int port = 1883;
+String username = '';
+String passwd = '';
+String clientIdentifier = 'awpsdasasas3333';
+String topic = "MQTTJorgeLuiz980Envia2";
 
 mqtt.MqttClient client;
 mqtt.MqttConnectionState connectionState;
