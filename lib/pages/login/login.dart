@@ -101,7 +101,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: ListView(
                   primary: false, //desabilita o scroll padrão do ListView
                   children: <Widget>[
-                    SizedBox(height: 5),
                     AppText(
                       "Login",
                       hint: "Digite seu login",
