@@ -2,8 +2,8 @@
 import 'package:papuf/utils/connect_MQTT.dart';
 
 String createJsonTempState(String temp, String state){
-  String json = '{\"temp\": \"${temp}\", \"state\": \"${state}\"}';
-  print('json a ser enviado: ${json}');
+  String json = '{\"temp\": \"$temp\", \"state\": \"on\"}';
+  print('json a ser enviado: $json');
   return json;
 }
 

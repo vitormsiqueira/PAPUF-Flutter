@@ -60,19 +60,16 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white,
           /////
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(
-                53.0), // altura é de 48+5 do padding bottom na linha abaixo
+            preferredSize: const Size.fromHeight(53.0), // altura é de 48+5 do padding bottom na linha abaixo
             child: Container(
               padding: EdgeInsets.only(bottom: 5),
               child: Theme(
                 data: Theme.of(context).copyWith(accentColor: Colors.white),
                 child: TabBar(
-                  indicatorSize: TabBarIndicatorSize
-                      .label, // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
+                  indicatorSize: TabBarIndicatorSize.label, // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
                   isScrollable: true,
                   labelColor: Colors.white, // cor da label da tab selecionada
-                  unselectedLabelColor: hexToColor(
-                      "#4DE4B2"), // cor da label da tab não selecionada
+                  unselectedLabelColor: hexToColor("#4DE4B2"), // cor da label da tab não selecionada
                   indicator: BoxDecoration(
                     color: hexToColor("#4DE4B2"),
                     shape: BoxShape.circle,
@@ -115,9 +112,7 @@ class _HomePageState extends State<HomePage> {
         */
         return Container(
           color: Colors.white,
-          height: MediaQuery.of(context)
-              .size
-              .height, //Add a full heigh white container
+          height: MediaQuery.of(context).size.height, //Add a full heigh white container
           child: SingleChildScrollView(
             padding: EdgeInsets.only(bottom: 30),
             //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura

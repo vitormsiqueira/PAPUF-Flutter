@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:papuf/pages/dashboard/dashboard_page.dart';
+import 'package:papuf/pages/dashboard/dashboardpage2.dart';
 import 'package:papuf/pages/home/home_page.dart';
 import 'package:papuf/pages/notifications/notifications_page.dart';
 import 'package:papuf/pages/profile/profile.dart';
@@ -16,7 +17,7 @@ class _HomeState extends State<Home> {
   int _selectedPage = 0;
   final _pageOptions = [
     HomePage(),
-    DashboardPage(),
+    DashboardPage2(),
     NotificationsPage(),
     ProfilePage(),
   ];

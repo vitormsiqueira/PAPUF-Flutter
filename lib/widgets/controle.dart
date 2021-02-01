@@ -47,8 +47,7 @@ class _ControleState extends State<Controle> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        _modulo(selected1, topic,
-            um), // variavel ar1 e ar2 definida em connect_MQTT.dart
+        _modulo(selected1, topic, um), // variavel ar1 e ar2 definida em connect_MQTT.dart
       ],
     );
   }
@@ -159,7 +158,7 @@ class _ControleState extends State<Controle> {
       color: selected == "On" ? hexToColor("#4163CD") : Colors.white,
       boxShadow: [
         BoxShadow(
-          color: selected == "On" ? hexToColor("#838BDA") : Colors.black26,
+          color: selected == "On" ? hexToColor("#838BDA") : Colors.grey[200],
           blurRadius: 15.0, // has the effect of softening the shadow
           spreadRadius: 0.5, // has the effect of extending the shadow
         )

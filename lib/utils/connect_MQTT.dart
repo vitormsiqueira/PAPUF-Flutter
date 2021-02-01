@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart' as mqtt;
 
 // Var's necessarias p/ conexão
-String broker = 'test.mosquitto.org';
+String broker = 'broker.emqx.io';
 int port = 1883;
-String username = '';
-String passwd = '';
-String clientIdentifier = 'awpsdasasas3333';
-String topic = "MQTTJorgeLuiz980Envia2";
+String username = 'admin';
+String passwd = 'public';
+String clientIdentifier = 'test1';
+String topic = "topic/test";
 
 mqtt.MqttClient client;
 mqtt.MqttConnectionState connectionState;
@@ -83,7 +83,7 @@ class _ConnectMQTTState extends State<ConnectMQTT> {
     /// notifications of published updates to each subscribed topic.
     subscription = client.updates.listen(_onMessage);
 
-    _subscribeToTopic("temp-1");
+    _subscribeToTopic("topic/test");
     _subscribeToTopic("temp-2");
   }
 
