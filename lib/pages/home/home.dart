@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:papuf/pages/dashboard/dashboard_page.dart';
 import 'package:papuf/pages/dashboard/dashboardpage2.dart';
 import 'package:papuf/pages/home/home_page.dart';
 import 'package:papuf/pages/notifications/notifications_page.dart';
