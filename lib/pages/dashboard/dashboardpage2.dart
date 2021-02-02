@@ -233,7 +233,23 @@ class _DashboardPage2State extends State<DashboardPage2> {
                                 ),
                               ),
                             ],
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.all(20),
+                            height: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey[100],
+                                  blurRadius: 15.0,
+                                )
+                              ]
+                            ),
                           )
+
                         ]
                       ),
                     ),
