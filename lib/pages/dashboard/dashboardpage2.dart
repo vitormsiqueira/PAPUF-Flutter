@@ -14,14 +14,6 @@ class DashboardPage2 extends StatefulWidget {
 class _DashboardPage2State extends State<DashboardPage2> {
    // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
   bool pressed = false;
-  
-  List<Color> gradientColors = [
-    const Color(0xff23b6e6),
-    const Color(0xff02d39a),
-  ];
-
-  bool showAvg = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +237,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey[100],
-                                  blurRadius: 15.0,
+                                  blurRadius: 1.0,
                                 )
                               ]
                             ),
@@ -281,27 +273,31 @@ class _DashboardPage2State extends State<DashboardPage2> {
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
+         spots: [
+            FlSpot(0, 3.7),
+            FlSpot(2.1, 3.2),
+            FlSpot(4.5, 4.3),
+            FlSpot(6.3, 3.7),
+            FlSpot(8, 4.6),
+            FlSpot(9.5, 2.2),
+            FlSpot(11, 4.2),
+          ],
+          isCurved: true,
+          colors: [Colors.blueAccent.withOpacity(0.35)],
+          barWidth: 5,
+          dotData: FlDotData(
+            show: false,
+          ),
+        ),
+        LineChartBarData(
           spots: [
-            FlSpot(0, 3.3),
-            FlSpot(0.5, 3.4),
-            FlSpot(1.0, 3.9),
-            FlSpot(1.5, 3.7),
-            FlSpot(2.0, 2.5),
-            FlSpot(2.5, 2.0),
-            FlSpot(3.0, 2.0),
-            FlSpot(3.5, 2.3),
-            FlSpot(4.0, 3.0),
-            FlSpot(4.5, 3.5),
-            FlSpot(5.0, 3.7),
-            FlSpot(5.5, 3.5),
-            FlSpot(6.0, 2.7),
-            FlSpot(6.5, 2.4),
-            FlSpot(7.0, 2.4),
-            FlSpot(7.5, 2.9),
-            FlSpot(8.0, 3.2),
-            FlSpot(8.5, 3.2),
-            FlSpot(9.0, 2.3),
-            FlSpot(9.5, 2.1),
+            FlSpot(0, 3),
+            FlSpot(2.1, 2.1),
+            FlSpot(4.5, 4.9),
+            FlSpot(6.3, 3.1),
+            FlSpot(8, 4),
+            FlSpot(9.5, 3),
+            FlSpot(11, 5.1),
           ],
           isCurved: true,
           colors: [Colors.white,],
@@ -310,24 +306,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
             show: false,
           )
         ),
-        LineChartBarData(
-          spots: [
-            FlSpot(0, 5),
-            FlSpot(2.1, 5.4),
-            FlSpot(4.5, 4.0),
-            FlSpot(6.3, 2.7),
-            FlSpot(8, 5.0),
-            FlSpot(9.5, 1.5),
-            FlSpot(11, 6.1),
-          ],
-          isCurved: true,
-          colors: [Colors.blueAccent.withOpacity(0.2)],
-          barWidth: 5,
-          dotData: FlDotData(
-            show: false,
-          ),
-          
-        ),
+        
       ],
     );
   }
