@@ -97,172 +97,167 @@ class _DashboardPage2State extends State<DashboardPage2> {
 
 
   return Container(
+    height: MediaQuery.of(context).size.height,
+    color: hexToColor("#4163CD"),
     child: SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 0),
         child: Column(
           children: [
             Container(
-              height: 450,
-              color: hexToColor("#4163CD"),
+              padding: EdgeInsets.only(top: 5),
               child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(top: 5),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                      
-                      Container(
-                          padding: const EdgeInsets.only(top: 11, bottom: 11),
-                          child: FlutterDatePickerTimeline(
-                            startDate: DateTime(2021, 01, 01),
-                            endDate: DateTime.now(),
-                            initialFocusedDate: DateTime.now(),
-                            initialSelectedDate: DateTime.now(),
-                            selectedItemBackgroundColor: hexToColor("#4169E1"),
-                            unselectedItemBackgroundColor: Colors.transparent,
-                            selectedItemTextStyle: TextStyle(color: Colors.white),
-                            unselectedItemTextStyle: TextStyle(color: Colors.white70),
-                            itemRadius: 15,
-                            onSelectedDateChange: (DateTime dateTime) {
-                              print(dateTime);
-                            },
-                          )),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width, //subtrair o valor do padding
-                          //height: 250,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            //color: Colors.white, 
-                            /*boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey[100],
-                                blurRadius: 15.0,
-                              )
-                            ]*/
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 30, top: 20),
-                                  child: Text("Consumo", 
-                                    style: TextStyle(
-                                      fontSize: 22.0,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  height: 100,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [
-                                          Text("410", 
-                                            style: TextStyle(
-                                              fontSize: 72.0,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(bottom: 10),
-                                            child: Text("KWH", 
-                                              style: TextStyle(
-                                                fontSize: 24.0,
-                                                color: Colors.white54,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                          
-                                        ],
-                                      ),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          Icon(
-                                            Icons.arrow_drop_up,  // Add this
-                                            color: Colors.white,
-                                            size: 35.0,
-                                          ),
-                                          Text(
-                                            "Sala 12", 
-                                            style: TextStyle(
-                                              fontSize: 19.0,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_down,  // Add this
-                                            color: Colors.white,
-                                            size: 35.0,
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                    
-                                  ),
-                                ),
-
-                                Stack(
-                                  children: <Widget>[
-                                    AspectRatio(
-                                      aspectRatio: 1.70,
-                                      child: Container(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(0),
-                                          child: LineChart(
-                                            mainData(),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ]
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )  
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                
+                Container(
+                    padding: const EdgeInsets.only(top: 11, bottom: 11),
+                    child: FlutterDatePickerTimeline(
+                      startDate: DateTime(2021, 01, 01),
+                      endDate: DateTime.now(),
+                      initialFocusedDate: DateTime.now(),
+                      initialSelectedDate: DateTime.now(),
+                      selectedItemBackgroundColor: hexToColor("#4169E1"),
+                      unselectedItemBackgroundColor: Colors.transparent,
+                      selectedItemTextStyle: TextStyle(color: Colors.white),
+                      unselectedItemTextStyle: TextStyle(color: Colors.white70),
+                      itemRadius: 15,
+                      onSelectedDateChange: (DateTime dateTime) {
+                        print(dateTime);
+                      },
+                    )),
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(top: 0),
-              margin: EdgeInsets.all(20),
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey[100],
-                    blurRadius: 15.0,
-                  )
-                ]
-              ),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width, //subtrair o valor do padding
+                    //height: 250,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      //color: Colors.white, 
+                      /*boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[100],
+                          blurRadius: 15.0,
+                        )
+                      ]*/
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 20),
+                            child: Text("Consumo", 
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text("410", 
+                                      style: TextStyle(
+                                        fontSize: 72.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("KWH", 
+                                        style: TextStyle(
+                                          fontSize: 24.0,
+                                          color: Colors.white54,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_drop_up,  // Add this
+                                      color: Colors.white,
+                                      size: 35.0,
+                                    ),
+                                    Text(
+                                      "Sala 12", 
+                                      style: TextStyle(
+                                        fontSize: 19.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_drop_down,  // Add this
+                                      color: Colors.white,
+                                      size: 35.0,
+                                    )
+                                  ],
+                                ),
+                              ],
+                              
+                            ),
+                          ),
+
+                          Stack(
+                            children: <Widget>[
+                              AspectRatio(
+                                aspectRatio: 1.70,
+                                child: Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(0),
+                                    child: LineChart(
+                                      mainData(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.all(20),
+                            height: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey[100],
+                                  blurRadius: 15.0,
+                                )
+                              ]
+                            ),
+                          )
+
+                        ]
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )  
           ],
         ),
       ),
