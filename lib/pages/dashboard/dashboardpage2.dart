@@ -29,10 +29,10 @@ class _DashboardPage2State extends State<DashboardPage2> {
       length: 3, 
       child: Scaffold(
         appBar: AppBar(
-          brightness: Brightness.light, // status bar brightness
-          title: textAppBar("Dashboard"),
+          brightness: Brightness.dark, // status bar brightness
+          title: textAppBar("Dashboard", color: false),
           elevation: 0,
-          backgroundColor: Colors.white,
+          backgroundColor: hexToColor("#4163CD"),
           
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(53.0), // altura é de 48+5 do padding bottom na linha abaixo
@@ -45,7 +45,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
               height: 50,
               child: TabBar(
                 
-                unselectedLabelColor: hexToColor("#4DE4B2"),
+                unselectedLabelColor: Colors.white,
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
                   color: hexToColor("#4DE4B2"),
@@ -97,166 +97,172 @@ class _DashboardPage2State extends State<DashboardPage2> {
 
 
   return Container(
-    height: MediaQuery.of(context).size.height,
-    color: Colors.white,
     child: SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 0),
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 5),
+              height: 450,
+              color: hexToColor("#4163CD"),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                
-                Container(
-                    
-                    padding: const EdgeInsets.only(top: 11, bottom: 11),
-                    decoration: BoxDecoration(color: Colors.white),
-                    child: FlutterDatePickerTimeline(
-                      startDate: DateTime(2021, 01, 01),
-                      endDate: DateTime.now(),
-                      initialFocusedDate: DateTime.now(),
-                      initialSelectedDate: DateTime.now(),
-                      selectedItemBackgroundColor: Colors.grey[50],
-                      unselectedItemBackgroundColor: Colors.transparent,
-                      selectedItemTextStyle: TextStyle(color: hexToColor("#026cff")),
-                      unselectedItemTextStyle: TextStyle(color: Colors.grey[400]),
-                      itemRadius: 15,
-                      onSelectedDateChange: (DateTime dateTime) {
-                        print(dateTime);
-                      },
-                    )),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width, //subtrair o valor do padding
-                    //height: 250,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white, 
-                      /*boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey[100],
-                          blurRadius: 15.0,
-                        )
-                      ]*/
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                      
+                      Container(
+                          padding: const EdgeInsets.only(top: 11, bottom: 11),
+                          child: FlutterDatePickerTimeline(
+                            startDate: DateTime(2021, 01, 01),
+                            endDate: DateTime.now(),
+                            initialFocusedDate: DateTime.now(),
+                            initialSelectedDate: DateTime.now(),
+                            selectedItemBackgroundColor: hexToColor("#4169E1"),
+                            unselectedItemBackgroundColor: Colors.transparent,
+                            selectedItemTextStyle: TextStyle(color: Colors.white),
+                            unselectedItemTextStyle: TextStyle(color: Colors.white70),
+                            itemRadius: 15,
+                            onSelectedDateChange: (DateTime dateTime) {
+                              print(dateTime);
+                            },
+                          )),
+                      ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 20),
-                            child: Text("Consumo", 
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width, //subtrair o valor do padding
+                          //height: 250,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            //color: Colors.white, 
+                            /*boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey[100],
+                                blurRadius: 15.0,
+                              )
+                            ]*/
                           ),
-                          Container(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                          child: Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text("410", 
-                                      style: TextStyle(
-                                        fontSize: 72.0,
-                                        color: hexToColor("#026cff"),
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    Text("KWH", 
-                                      style: TextStyle(
-                                        fontSize: 24.0,
-                                        color: Colors.grey[400],
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.arrow_drop_up,  // Add this
-                                      color: hexToColor("#026cff"),
-                                      size: 35.0,
-                                    ),
-                                    Text(
-                                      "Sala 12", 
-                                      style: TextStyle(
-                                        fontSize: 19.0,
-                                        color: hexToColor("#026cff"),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.arrow_drop_down,  // Add this
-                                      color: hexToColor("#026cff"),
-                                      size: 35.0,
-                                    )
-                                  ],
-                                ),
-                              ],
-                              
-                            ),
-                          ),
-
-                          Stack(
-                            children: <Widget>[
-                              AspectRatio(
-                                aspectRatio: 1.70,
-                                child: Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(0),
-                                    child: LineChart(
-                                      mainData(),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30, top: 20),
+                                  child: Text("Consumo", 
+                                    style: TextStyle(
+                                      fontSize: 22.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                                Container(
+                                  height: 100,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          Text("410", 
+                                            style: TextStyle(
+                                              fontSize: 72.0,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(bottom: 10),
+                                            child: Text("KWH", 
+                                              style: TextStyle(
+                                                fontSize: 24.0,
+                                                color: Colors.white54,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ),
+                                          
+                                        ],
+                                      ),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Icon(
+                                            Icons.arrow_drop_up,  // Add this
+                                            color: Colors.white,
+                                            size: 35.0,
+                                          ),
+                                          Text(
+                                            "Sala 12", 
+                                            style: TextStyle(
+                                              fontSize: 19.0,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_drop_down,  // Add this
+                                            color: Colors.white,
+                                            size: 35.0,
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                    
+                                  ),
+                                ),
 
-                          Container(
-                            margin: EdgeInsets.all(20),
-                            height: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey[100],
-                                  blurRadius: 15.0,
-                                )
+                                Stack(
+                                  children: <Widget>[
+                                    AspectRatio(
+                                      aspectRatio: 1.70,
+                                      child: Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(0),
+                                          child: LineChart(
+                                            mainData(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ]
                             ),
-                          )
-
-                        ]
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ],
-            )  
+                    ],
+                  )  
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 0),
+              margin: EdgeInsets.all(20),
+              height: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey[100],
+                    blurRadius: 15.0,
+                  )
+                ]
+              ),
+            )
           ],
         ),
       ),
@@ -271,33 +277,61 @@ class _DashboardPage2State extends State<DashboardPage2> {
         leftTitles: SideTitles(
           showTitles: false,
         ),
+       
       ),
-      borderData: FlBorderData(show: false, border: Border.all(color: Colors.grey[50], width: 1)),
+      borderData: FlBorderData(show: false, border: Border.all(color: Colors.white, width: 0)),
       minX: 0,
-      maxX: 11,
+      maxX: 10,
       minY: 0,
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
           spots: [
-            FlSpot(0, 3),
-            FlSpot(2.1, 2),
-            FlSpot(4.5, 4.9),
-            FlSpot(6.3, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 5.1),
+            FlSpot(0, 3.3),
+            FlSpot(0.5, 3.4),
+            FlSpot(1.0, 3.9),
+            FlSpot(1.5, 3.7),
+            FlSpot(2.0, 2.5),
+            FlSpot(2.5, 2.0),
+            FlSpot(3.0, 2.0),
+            FlSpot(3.5, 2.3),
+            FlSpot(4.0, 3.0),
+            FlSpot(4.5, 3.5),
+            FlSpot(5.0, 3.7),
+            FlSpot(5.5, 3.5),
+            FlSpot(6.0, 2.7),
+            FlSpot(6.5, 2.4),
+            FlSpot(7.0, 2.4),
+            FlSpot(7.5, 2.9),
+            FlSpot(8.0, 3.2),
+            FlSpot(8.5, 3.2),
+            FlSpot(9.0, 2.3),
+            FlSpot(9.5, 2.1),
           ],
           isCurved: true,
-          colors: gradientColors,
+          colors: [Colors.white,],
+          barWidth: 5,
+          dotData: FlDotData(
+            show: false,
+          )
+        ),
+        LineChartBarData(
+          spots: [
+            FlSpot(0, 5),
+            FlSpot(2.1, 5.4),
+            FlSpot(4.5, 4.0),
+            FlSpot(6.3, 2.7),
+            FlSpot(8, 5.0),
+            FlSpot(9.5, 1.5),
+            FlSpot(11, 6.1),
+          ],
+          isCurved: true,
+          colors: [Colors.blueAccent.withOpacity(0.2)],
           barWidth: 5,
           dotData: FlDotData(
             show: false,
           ),
-          belowBarData: BarAreaData(
-            show: true,
-            colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
-          ),
+          
         ),
       ],
     );
