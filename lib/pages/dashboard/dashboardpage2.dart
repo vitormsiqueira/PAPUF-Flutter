@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_date_picker_timeline/flutter_date_picker_timeline.dart';
 import 'package:papuf/widgets/text_appbar.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../color_hex.dart';
 
@@ -156,7 +157,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
                             ),
                           ),
                           Container(
-                            height: 100,
+                            height: 130,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -172,7 +173,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.only(bottom:10.0),
                                       child: Text("KWH", 
                                         style: TextStyle(
                                           fontSize: 24.0,
@@ -181,34 +182,42 @@ class _DashboardPage2State extends State<DashboardPage2> {
                                         ),
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Icon(
-                                      Icons.arrow_drop_up,  // Add this
-                                      color: Colors.white,
-                                      size: 35.0,
-                                    ),
-                                    Text(
-                                      "Sala 12", 
-                                      style: TextStyle(
-                                        fontSize: 19.0,
+                                    IconButton(
+                                      onPressed: (){
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_drop_up,  // Add this
                                         color: Colors.white,
-                                        fontWeight: FontWeight.w500,
+                                        size: 35.0,
+                                      )
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        "Sala 12", 
+                                        style: TextStyle(
+                                          fontSize: 19.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
-                                    Icon(
-                                      Icons.arrow_drop_down,  // Add this
-                                      color: Colors.white,
-                                      size: 35.0,
-                                    )
+                                    IconButton(
+                                      onPressed: (){
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_drop_down,  // Add this
+                                        color: Colors.white,
+                                        size: 35.0,
+                                      )
+                                    ),
                                   ],
                                 ),
                               ],
-                              
                             ),
                           ),
 
@@ -230,7 +239,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
 
                           Container(
                             margin: EdgeInsets.all(20),
-                            height: 150,
+                            height: 200,
+                            width: MediaQuery.of(context).size.width-20,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
@@ -240,6 +250,35 @@ class _DashboardPage2State extends State<DashboardPage2> {
                                   blurRadius: 1.0,
                                 )
                               ]
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                CircularPercentIndicator(
+                                  radius: 120.0,
+                                  lineWidth: 11.0,
+                                  animation: true,
+                                  percent: 0.85,
+                                  center: new Text(
+                                    "26",
+                                    style:
+                                        new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                                  ),
+                                  
+                                  circularStrokeCap: CircularStrokeCap.round,
+                                  progressColor: hexToColor("#4163CD"),
+                                ),
+                                Container(
+                                  child: Text(
+                                    "Salas Cadastradas", 
+                                    style: TextStyle(
+                                      fontSize: 19.0,
+                                      color: hexToColor("#4163CD"),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           )
 
@@ -273,9 +312,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-         spots: [
+          spots: [
             FlSpot(0, 3.7),
-            FlSpot(2.1, 3.2),
+            FlSpot(2.0, 3.2),
             FlSpot(4.5, 4.3),
             FlSpot(6.3, 3.7),
             FlSpot(8, 4.6),
