@@ -252,25 +252,78 @@ class _DashboardPage2State extends State<DashboardPage2> {
                               ]
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CircularPercentIndicator(
-                                  radius: 120.0,
-                                  lineWidth: 11.0,
-                                  animation: true,
-                                  percent: 0.85,
-                                  center: new Text(
-                                    "26",
-                                    style:
-                                        new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                                Container(
+                                  padding: EdgeInsets.all(20),
+                                  child: CircularPercentIndicator(
+                                    radius: 120.0,
+                                    lineWidth: 11.0,
+                                    animation: true,
+                                    percent: 0.85,
+                                    center: new Text(
+                                      "26",
+                                      style:
+                                          new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                                    ),
+                                    
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor: hexToColor("#4163CD"),
                                   ),
-                                  
-                                  circularStrokeCap: CircularStrokeCap.round,
-                                  progressColor: hexToColor("#4163CD"),
                                 ),
                                 Container(
+                                  padding: EdgeInsets.all(20),
                                   child: Text(
-                                    "Salas Cadastradas", 
+                                    "Ares Cadastrados", 
+                                    style: TextStyle(
+                                      fontSize: 19.0,
+                                      color: hexToColor("#4163CD"),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(left:20, right: 20, bottom: 20),
+                            height: 200,
+                            width: MediaQuery.of(context).size.width-20,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey[100],
+                                  blurRadius: 1.0,
+                                )
+                              ]
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(20),
+                                  child: CircularPercentIndicator(
+                                    radius: 120.0,
+                                    lineWidth: 11.0,
+                                    animation: true,
+                                    percent: 0.48,
+                                    center: new Text(
+                                      "14",
+                                      style:
+                                          new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                                    ),
+                                    
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    progressColor: hexToColor("#4163CD"),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(20),
+                                  child: Text(
+                                    "Ares Ligados", 
                                     style: TextStyle(
                                       fontSize: 19.0,
                                       color: hexToColor("#4163CD"),
