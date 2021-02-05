@@ -110,7 +110,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
                       endDate: DateTime.now(),
                       initialFocusedDate: DateTime.now(),
                       initialSelectedDate: DateTime.now(),
-                      selectedItemBackgroundColor: hexToColor("#4169E1"),
+                      selectedItemBackgroundColor: hexToColor("#3B53C9"),
                       unselectedItemBackgroundColor: Colors.transparent,
                       selectedItemTextStyle: TextStyle(color: Colors.white),
                       unselectedItemTextStyle: TextStyle(color: Colors.white70),
@@ -236,60 +236,109 @@ class _DashboardPage2State extends State<DashboardPage2> {
                               ),
                             ],
                           ),
-
-                          Container(
-                            margin: EdgeInsets.all(20),
-                            height: 200,
-                            width: MediaQuery.of(context).size.width-20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey[100],
-                                  blurRadius: 1.0,
-                                )
-                              ]
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(20),
-                                  child: CircularPercentIndicator(
-                                    radius: 120.0,
-                                    lineWidth: 11.0,
-                                    animation: true,
-                                    percent: 0.85,
-                                    center: new Text(
-                                      "26",
-                                      style:
-                                          new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                                    ),
-                                    
-                                    circularStrokeCap: CircularStrokeCap.round,
-                                    progressColor: hexToColor("#4163CD"),
-                                  ),
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(20),
+                                height: 225,
+                                width: MediaQuery.of(context).size.width/2-30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[100],
+                                      blurRadius: 1.0,
+                                    )
+                                  ]
                                 ),
-                                Container(
-                                  padding: EdgeInsets.all(20),
-                                  child: Text(
-                                    "Ares Cadastrados", 
-                                    style: TextStyle(
-                                      fontSize: 19.0,
-                                      color: hexToColor("#4163CD"),
-                                      fontWeight: FontWeight.w500,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(20),
+                                      child: CircularPercentIndicator(
+                                        radius: 120.0,
+                                        lineWidth: 11.0,
+                                        animation: true,
+                                        percent: 0.85,
+                                        center: Text(
+                                          "26",
+                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+                                        ),
+                                        circularStrokeCap: CircularStrokeCap.round,
+                                        progressColor: hexToColor("#4163CD"),
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            ),
+                                    Container(
+                                      padding: EdgeInsets.only(bottom:20),
+                                      child: Text(
+                                        "Ares\nCadastrados", 
+                                        style: TextStyle(
+                                          fontSize: 19.0,
+                                          color: hexToColor("#4163CD"),
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
+                                height: 225,
+                                width: MediaQuery.of(context).size.width/2-30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[100],
+                                      blurRadius: 1.0,
+                                    )
+                                  ]
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(20),
+                                      child: CircularPercentIndicator(
+                                        radius: 120.0,
+                                        lineWidth: 11.0,
+                                        animation: true,
+                                        percent: 0.48,
+                                        center: Text(
+                                          "14",
+                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                                        ),
+                                        circularStrokeCap: CircularStrokeCap.round,
+                                        progressColor: hexToColor("#4163CD"),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(bottom:20),
+                                      child: Text(
+                                        "Ares\nLigados", 
+                                        style: TextStyle(
+                                          fontSize: 19.0,
+                                          color: hexToColor("#4163CD"),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
-
                           Container(
-                            margin: EdgeInsets.only(left:20, right: 20, bottom: 20),
-                            height: 200,
-                            width: MediaQuery.of(context).size.width-20,
+                            margin: EdgeInsets.only(left: 20, right: 20),
+                            height: 150,
+                            width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
@@ -299,42 +348,42 @@ class _DashboardPage2State extends State<DashboardPage2> {
                                   blurRadius: 1.0,
                                 )
                               ]
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(20),
-                                  child: CircularPercentIndicator(
-                                    radius: 120.0,
-                                    lineWidth: 11.0,
-                                    animation: true,
-                                    percent: 0.48,
-                                    center: new Text(
-                                      "14",
-                                      style:
-                                          new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                                    ),
-                                    
-                                    circularStrokeCap: CircularStrokeCap.round,
-                                    progressColor: hexToColor("#4163CD"),
-                                  ),
+                            ),                            
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(20),
+                                height: 225,
+                                width: MediaQuery.of(context).size.width/2-30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[100],
+                                      blurRadius: 1.0,
+                                    )
+                                  ]
                                 ),
-                                Container(
-                                  padding: EdgeInsets.all(20),
-                                  child: Text(
-                                    "Ares Ligados", 
-                                    style: TextStyle(
-                                      fontSize: 19.0,
-                                      color: hexToColor("#4163CD"),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
+                                height: 225,
+                                width: MediaQuery.of(context).size.width/2-30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey[100],
+                                      blurRadius: 1.0,
+                                    )
+                                  ]
+                                ),
+                              )
+                            ],
+                          ),
                         ]
                       ),
                     ),
@@ -360,7 +409,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
       ),
       borderData: FlBorderData(show: false, border: Border.all(color: Colors.white, width: 0)),
       minX: 0,
-      maxX: 10,
+      maxX: 11,
       minY: 0,
       maxY: 6,
       lineBarsData: [
@@ -372,7 +421,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
             FlSpot(6.3, 3.7),
             FlSpot(8, 4.6),
             FlSpot(9.5, 2.2),
-            FlSpot(11, 4.2),
+            FlSpot(10.5, 3),
           ],
           isCurved: true,
           colors: [Colors.blueAccent.withOpacity(0.35)],
@@ -389,7 +438,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
             FlSpot(6.3, 3.1),
             FlSpot(8, 4),
             FlSpot(9.5, 3),
-            FlSpot(11, 5.1),
+            FlSpot(10.5, 5.1),
           ],
           isCurved: true,
           colors: [Colors.white,],
