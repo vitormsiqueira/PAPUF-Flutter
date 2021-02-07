@@ -94,303 +94,272 @@ class _DashboardPage2State extends State<DashboardPage2> {
     color: hexToColor("#4163CD"),
     child: SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 0),
+        padding: const EdgeInsets.all(0), // necessário ser 0, p/ o gráfico atingir as bordas
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 5),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                
-                Container(
-                    padding: const EdgeInsets.only(top: 11, bottom: 11),
-                    child: FlutterDatePickerTimeline(
-                      startDate: DateTime(2021, 01, 01),
-                      endDate: DateTime.now(),
-                      initialFocusedDate: DateTime.now(),
-                      initialSelectedDate: DateTime.now(),
-                      selectedItemBackgroundColor: hexToColor("#3B53C9"),
-                      unselectedItemBackgroundColor: Colors.transparent,
-                      selectedItemTextStyle: TextStyle(color: Colors.white),
-                      unselectedItemTextStyle: TextStyle(color: Colors.white70),
-                      itemRadius: 15,
-                      onSelectedDateChange: (DateTime dateTime) {
-                        print(dateTime);
-                      },
-                    )),
-                ],
-              ),
+              padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
+              child: FlutterDatePickerTimeline(
+                startDate: DateTime(2021, 01, 01),
+                endDate: DateTime.now(),
+                initialFocusedDate: DateTime.now(),
+                initialSelectedDate: DateTime.now(),
+                selectedItemBackgroundColor: hexToColor("#3B53C9"),
+                unselectedItemBackgroundColor: Colors.transparent,
+                selectedItemTextStyle: TextStyle(color: Colors.white),
+                unselectedItemTextStyle: TextStyle(color: Colors.white70),
+                itemRadius: 15,
+                onSelectedDateChange: (DateTime dateTime) {
+                  print(dateTime);
+                },
+              )
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width, //subtrair o valor do padding
-                    //height: 250,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      //color: Colors.white, 
-                      /*boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey[100],
-                          blurRadius: 15.0,
-                        )
-                      ]*/
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 20),
-                            child: Text("Consumo", 
-                              style: TextStyle(
-                                fontSize: 22.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 130,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text("410", 
-                                      style: TextStyle(
-                                        fontSize: 72.0,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom:10.0),
-                                      child: Text("KWH", 
-                                        style: TextStyle(
-                                          fontSize: 24.0,
-                                          color: Colors.white54,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    IconButton(
-                                      onPressed: (){
-                                      },
-                                      icon: Icon(
-                                        Icons.arrow_drop_up,  // Add this
-                                        color: Colors.white,
-                                        size: 35.0,
-                                      )
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        "Sala 12", 
-                                        style: TextStyle(
-                                          fontSize: 19.0,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    IconButton(
-                                      onPressed: (){
-                                      },
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,  // Add this
-                                        color: Colors.white,
-                                        size: 35.0,
-                                      )
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          Stack(
-                            children: <Widget>[
-                              AspectRatio(
-                                aspectRatio: 1.70,
-                                child: Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(0),
-                                    child: LineChart(
-                                      mainData(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.all(20),
-                                height: 225,
-                                width: MediaQuery.of(context).size.width/2-30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey[100],
-                                      blurRadius: 1.0,
-                                    )
-                                  ]
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(20),
-                                      child: CircularPercentIndicator(
-                                        radius: 120.0,
-                                        lineWidth: 11.0,
-                                        animation: true,
-                                        percent: 0.85,
-                                        center: Text(
-                                          "26",
-                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
-                                        ),
-                                        circularStrokeCap: CircularStrokeCap.round,
-                                        progressColor: hexToColor("#4163CD"),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(bottom:20),
-                                      child: Text(
-                                        "Ares\nCadastrados", 
-                                        style: TextStyle(
-                                          fontSize: 19.0,
-                                          color: hexToColor("#4163CD"),
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
-                                height: 225,
-                                width: MediaQuery.of(context).size.width/2-30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey[100],
-                                      blurRadius: 1.0,
-                                    )
-                                  ]
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(20),
-                                      child: CircularPercentIndicator(
-                                        radius: 120.0,
-                                        lineWidth: 11.0,
-                                        animation: true,
-                                        percent: 0.48,
-                                        center: Text(
-                                          "14",
-                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                                        ),
-                                        circularStrokeCap: CircularStrokeCap.round,
-                                        progressColor: hexToColor("#4163CD"),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(bottom:20),
-                                      child: Text(
-                                        "Ares\nLigados", 
-                                        style: TextStyle(
-                                          fontSize: 19.0,
-                                          color: hexToColor("#4163CD"),
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20, right: 20),
-                            height: 150,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey[100],
-                                  blurRadius: 1.0,
-                                )
-                              ]
-                            ),                            
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.all(20),
-                                height: 225,
-                                width: MediaQuery.of(context).size.width/2-30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey[100],
-                                      blurRadius: 1.0,
-                                    )
-                                  ]
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
-                                height: 225,
-                                width: MediaQuery.of(context).size.width/2-30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey[100],
-                                      blurRadius: 1.0,
-                                    )
-                                  ]
-                                ),
-                              )
-                            ],
-                          ),
-                        ]
-                      ),
+                  padding: const EdgeInsets.only(left: 20, top: 15),
+                  child: Text("Consumo", 
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
+              ] 
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [ 
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text("410", 
+                          style: TextStyle(
+                            fontSize: 72.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top:30.0), // deixa o "KWH" alinhado na base do valor do consumo
+                          child: Text("KWH", 
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              color: Colors.white54,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        onPressed: (){
+                        },
+                        icon: Icon(
+                          Icons.arrow_drop_up,  // Add this
+                          color: Colors.white,
+                          size: 35.0,
+                        )
+                      ),
+                      Container(
+                        child: Text(
+                          "Sala 12", 
+                          style: TextStyle(
+                            fontSize: 19.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: (){
+                        },
+                        icon: Icon(
+                          Icons.arrow_drop_down,  // Add this
+                          color: Colors.white,
+                          size: 35.0,
+                        )
+                      ),
+                    ],
+                  ),
+                ]
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height*0.35,
+              child: AspectRatio(
+                aspectRatio: 1.70,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: LineChart(
+                      mainData(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                height: 225,
+                width: MediaQuery.of(context).size.width/2-30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[200],
+                      blurRadius: 10.0,
+                    )
+                  ]
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: CircularPercentIndicator(
+                        radius: 120.0,
+                        lineWidth: 11.0,
+                        animation: true,
+                        percent: 0.85,
+                        center: Text(
+                          "26",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+                        ),
+                        circularStrokeCap: CircularStrokeCap.round,
+                        progressColor: hexToColor("#4163CD"),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(bottom:20),
+                      child: Text(
+                        "Ares\nCadastrados", 
+                        style: TextStyle(
+                          fontSize: 19.0,
+                          color: hexToColor("#4163CD"),
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+                Container(
+                  margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
+                  height: 225,
+                  width: MediaQuery.of(context).size.width/2-30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey[200],
+                        blurRadius: 10.0,
+                      )
+                    ]
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(20),
+                        child: CircularPercentIndicator(
+                          radius: 120.0,
+                          lineWidth: 11.0,
+                          animation: true,
+                          percent: 0.48,
+                          center: Text(
+                            "14",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                          ),
+                          circularStrokeCap: CircularStrokeCap.round,
+                          progressColor: hexToColor("#4163CD"),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(bottom:20),
+                        child: Text(
+                          "Ares\nLigados", 
+                          style: TextStyle(
+                            fontSize: 19.0,
+                            color: hexToColor("#4163CD"),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
+                  ),
+                )
               ],
-            )  
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  height: 150,
+                  width: MediaQuery.of(context).size.width-40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                      color: Colors.grey[200],
+                      blurRadius: 10.0,
+                      )
+                    ]
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.all(20),
+                  height: 225,
+                  width: MediaQuery.of(context).size.width/2-30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey[200],
+                        blurRadius: 10.0,
+                      )
+                    ]
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
+                  height: 225,
+                  width: MediaQuery.of(context).size.width/2-30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey[200],
+                        blurRadius: 10.0,
+                      )
+                    ]
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),
@@ -410,8 +379,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
       borderData: FlBorderData(show: false, border: Border.all(color: Colors.white, width: 0)),
       minX: 0,
       maxX: 11,
-      minY: 0,
-      maxY: 6,
+      minY: 1,
+      maxY: 5,
       lineBarsData: [
         LineChartBarData(
           spots: [
