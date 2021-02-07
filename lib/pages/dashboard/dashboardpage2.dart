@@ -91,13 +91,25 @@ class _DashboardPage2State extends State<DashboardPage2> {
 
   return Container(
     height: MediaQuery.of(context).size.height,
-    color: hexToColor("#4163CD"),
     child: SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(0), // necessário ser 0, p/ o gráfico atingir as bordas
-        child: Column(
+        child: Stack(
           children: [
+            Column(
+              children: [
+                Container(
+                  height: 500,
+                  color: hexToColor("#4163CD"),
+                ),
+                Container(
+                  height: 620,
+                  color: Colors.white,
+                )
+              ],
+            ),
             Container(
+              alignment: Alignment.topCenter,
               padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
               child: FlutterDatePickerTimeline(
                 startDate: DateTime(2021, 01, 01),
@@ -114,88 +126,97 @@ class _DashboardPage2State extends State<DashboardPage2> {
                 },
               )
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 15),
-                  child: Text("Consumo", 
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ] 
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+            Container(
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.only(top: 70),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [ 
+                children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text("410", 
-                          style: TextStyle(
-                            fontSize: 72.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top:30.0), // deixa o "KWH" alinhado na base do valor do consumo
-                          child: Text("KWH", 
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              color: Colors.white54,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text("Consumo", 
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: (){
-                        },
-                        icon: Icon(
-                          Icons.arrow_drop_up,  // Add this
-                          color: Colors.white,
-                          size: 35.0,
-                        )
-                      ),
-                      Container(
-                        child: Text(
-                          "Sala 12", 
-                          style: TextStyle(
-                            fontSize: 19.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: (){
-                        },
-                        icon: Icon(
-                          Icons.arrow_drop_down,  // Add this
-                          color: Colors.white,
-                          size: 35.0,
-                        )
-                      ),
-                    ],
-                  ),
-                ]
+                ] 
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height*0.35,
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.only(top: 90),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [ 
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text("410", 
+                            style: TextStyle(
+                              fontSize: 72.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top:30.0), // deixa o "KWH" alinhado na base do valor do consumo
+                            child: Text("KWH", 
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                color: Colors.white54,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: (){
+                          },
+                          icon: Icon(
+                            Icons.arrow_drop_up,  // Add this
+                            color: Colors.white,
+                            size: 35.0,
+                          )
+                        ),
+                        Container(
+                          child: Text(
+                            "Sala 12", 
+                            style: TextStyle(
+                              fontSize: 19.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: (){
+                          },
+                          icon: Icon(
+                            Icons.arrow_drop_down,  // Add this
+                            color: Colors.white,
+                            size: 35.0,
+                          )
+                        ),
+                      ],
+                    ),
+                  ]
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.only(top: 220),
               child: AspectRatio(
                 aspectRatio: 1.70,
                 child: Container(
@@ -208,157 +229,169 @@ class _DashboardPage2State extends State<DashboardPage2> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
-                height: 225,
-                width: MediaQuery.of(context).size.width/2-30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey[200],
-                      blurRadius: 10.0,
-                    )
-                  ]
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      child: CircularPercentIndicator(
-                        radius: 120.0,
-                        lineWidth: 11.0,
-                        animation: true,
-                        percent: 0.85,
-                        center: Text(
-                          "26",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
-                        ),
-                        circularStrokeCap: CircularStrokeCap.round,
-                        progressColor: hexToColor("#4163CD"),
-                      ),
+            Container(
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.only(top: 430),
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 20, right: 20),
+                    height: 225,
+                    width: MediaQuery.of(context).size.width/2-30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[200],
+                          blurRadius: 10.0,
+                        )
+                      ]
                     ),
-                    Container(
-                      padding: EdgeInsets.only(bottom:20),
-                      child: Text(
-                        "Ares\nCadastrados", 
-                        style: TextStyle(
-                          fontSize: 19.0,
-                          color: hexToColor("#4163CD"),
-                          fontWeight: FontWeight.w600,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          child: CircularPercentIndicator(
+                            radius: 120.0,
+                            lineWidth: 11.0,
+                            animation: true,
+                            percent: 0.85,
+                            center: Text(
+                              "26",
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+                            ),
+                            circularStrokeCap: CircularStrokeCap.round,
+                            progressColor: hexToColor("#4163CD"),
+                          ),
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                  ],
-                ),
+                        Container(
+                          padding: EdgeInsets.only(bottom:20),
+                          child: Text(
+                            "Ares\nCadastrados", 
+                            style: TextStyle(
+                              fontSize: 19.0,
+                              color: hexToColor("#4163CD"),
+                              fontWeight: FontWeight.w600,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
+                    height: 225,
+                    width: MediaQuery.of(context).size.width/2-30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[200],
+                          blurRadius: 10.0,
+                        )
+                      ]
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          child: CircularPercentIndicator(
+                            radius: 120.0,
+                            lineWidth: 11.0,
+                            animation: true,
+                            percent: 0.48,
+                            center: Text(
+                              "14",
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                            ),
+                            circularStrokeCap: CircularStrokeCap.round,
+                            progressColor: hexToColor("#4163CD"),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(bottom:20),
+                          child: Text(
+                            "Ares\nLigados", 
+                            style: TextStyle(
+                              fontSize: 19.0,
+                              color: hexToColor("#4163CD"),
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
-                  height: 225,
-                  width: MediaQuery.of(context).size.width/2-30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey[200],
-                        blurRadius: 10.0,
-                      )
-                    ]
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(20),
-                        child: CircularPercentIndicator(
-                          radius: 120.0,
-                          lineWidth: 11.0,
-                          animation: true,
-                          percent: 0.48,
-                          center: Text(
-                            "14",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                          ),
-                          circularStrokeCap: CircularStrokeCap.round,
-                          progressColor: hexToColor("#4163CD"),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(bottom:20),
-                        child: Text(
-                          "Ares\nLigados", 
-                          style: TextStyle(
-                            fontSize: 19.0,
-                            color: hexToColor("#4163CD"),
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
             ),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
-                  height: 150,
-                  width: MediaQuery.of(context).size.width-40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                      color: Colors.grey[200],
-                      blurRadius: 10.0,
-                      )
-                    ]
+            Container(
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.only(top: 700),
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 20, right: 20),
+                    height: 150,
+                    width: MediaQuery.of(context).size.width-40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                        color: Colors.grey[200],
+                        blurRadius: 10.0,
+                        )
+                      ]
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(20),
-                  height: 225,
-                  width: MediaQuery.of(context).size.width/2-30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey[200],
-                        blurRadius: 10.0,
-                      )
-                    ]
+            Container(
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.only(top: 850),
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    height: 225,
+                    width: MediaQuery.of(context).size.width/2-30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[200],
+                          blurRadius: 10.0,
+                        )
+                      ]
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
-                  height: 225,
-                  width: MediaQuery.of(context).size.width/2-30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey[200],
-                        blurRadius: 10.0,
-                      )
-                    ]
-                  ),
-                )
-              ],
+                  Container(
+                    margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
+                    height: 225,
+                    width: MediaQuery.of(context).size.width/2-30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[200],
+                          blurRadius: 10.0,
+                        )
+                      ]
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
         ),
