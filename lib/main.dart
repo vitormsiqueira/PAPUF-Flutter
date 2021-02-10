@@ -113,7 +113,6 @@ Widget _introScreen() {
     children: <Widget>[
       SplashScreen(
         seconds: 2,
-        
         navigateAfterSeconds: RootPage(),
         loaderColor: Colors.transparent,
       ),

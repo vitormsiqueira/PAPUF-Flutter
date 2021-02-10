@@ -5,7 +5,6 @@ import 'package:flutter_date_picker_timeline/flutter_date_picker_timeline.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 import '../../color_hex.dart';
 
@@ -17,6 +16,43 @@ class DashboardPage2 extends StatefulWidget {
 class _DashboardPage2State extends State<DashboardPage2> {
    // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
   bool pressed = false;
+  SalaItem selectedUser;
+
+  List<SalaItem> salas = [
+    SalaItem('Sala 01', false, false,158.2),
+    SalaItem('Sala 02', true, true, 158.2),
+    SalaItem('Sala 03', false, true, 270.2),
+    SalaItem('Sala 04', false, true, 158.2),
+    SalaItem('Sala 05', true, false, 159.2),
+    SalaItem('Sala 06', true, false, 158.2),
+    SalaItem('Sala 07', true, false, 147.2),
+    SalaItem('Sala 08', false, true, 158.2),
+    SalaItem('Sala 09', false, true, 190.2),
+    SalaItem('Sala 10', false, true, 278.2),
+    SalaItem('Sala 11', true, true, 265.2),
+    SalaItem('Sala 12', true,false, 258.2),
+    SalaItem('Sala 13', true,false, 198.2),
+    SalaItem('Sala 14', false, false, 168.2),
+    SalaItem('Sala 15', false, true, 178.2),
+  ];
+
+  final List<ConsumoData> chartData = [
+    ConsumoData(1, 15, '1'),
+    ConsumoData(2, 28, '2'),
+    ConsumoData(3, 34, '3'),
+    ConsumoData(4, 32, '4'),
+    ConsumoData(5, 20, '5'),
+    ConsumoData(6, 35, '6'),
+    ConsumoData(7, 38, '7'),
+    ConsumoData(8, 34, '8'),
+    ConsumoData(9, 36, '9'),
+    ConsumoData(10, 29, '10'),
+    ConsumoData(11, 32, '11'),
+    ConsumoData(12, 28, '12'),
+    ConsumoData(13, 34, '13'),
+    ConsumoData(14, 39, '14'),
+    ConsumoData(15, 19, '15')
+  ];
 
 
   @override
@@ -87,26 +123,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
     );
   }
 
-
-
   _tabDia(BuildContext context) {
-    final List<SalesData> chartData = [
-      SalesData(1, 15),
-      SalesData(2, 28),
-      SalesData(3, 34),
-      SalesData(4, 32),
-      SalesData(5, 20),
-      SalesData(6, 35),
-      SalesData(7, 38),
-      SalesData(8, 34),
-      SalesData(9, 36),
-      SalesData(10, 29),
-      SalesData(11, 32),
-      SalesData(12, 28),
-      SalesData(13, 34),
-      SalesData(14, 39),
-      SalesData(15, 19)
-  ];
     return Container(
       height: MediaQuery.of(context).size.height,
       child: SingleChildScrollView(
@@ -163,7 +180,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ] 
                 ),
               ),
-              Container( // Informações de consumo e escolha de sala
+              Container( // Informações de consumo
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 90),
                 child: Padding(
@@ -196,54 +213,18 @@ class _DashboardPage2State extends State<DashboardPage2> {
                           ],
                         ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                            onPressed: (){
-                            },
-                            icon: Icon(
-                              Icons.arrow_drop_up,  // Add this
-                              color: Colors.white,
-                              size: 35.0,
-                            )
-                          ),
-                          Container(
-                            child: Text(
-                              "Sala 12", 
-                              style: TextStyle(
-                                fontSize: 19.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: (){
-                            },
-                            icon: Icon(
-                              Icons.arrow_drop_down,  // Add this
-                              color: Colors.white,
-                              size: 35.0,
-                            )
-                          ),
-                        ],
-                      ),
                     ]
                   ),
                 ),
               ),
-              Container( // Gráfico interativo
+              Container( // Gráfico de consumo
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 220),
                 child: AspectRatio(
                   aspectRatio: 1.70,
                   child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: LineChart(
-                        mainData(),
-                      ),
+                    child: LineChart(
+                      mainData(), 
                     ),
                   ),
                 ),
@@ -292,8 +273,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                             child: Text(
                               "Ares Ligados", 
                               style: TextStyle(
-                                fontSize: 19.0,
-                                color: hexToColor("#4163CD"),
+                                fontSize: 20.0,
+                                color: Colors.black,
                                 fontWeight: FontWeight.w500,
                               ),
                               textAlign: TextAlign.center,
@@ -305,14 +286,14 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ],
                 ),
               ),
-              Container( // Outros cards
+              Container( // Card - Comparação entre salas
                 alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(top: 655),
+                padding: EdgeInsets.only(top: 650),
                 child: Row(
                   children: [
                     Container(
                       margin: EdgeInsets.only(left: 20, right: 20),
-                      height: 250,
+                      height: 270,
                       width: MediaQuery.of(context).size.width-40,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -324,42 +305,69 @@ class _DashboardPage2State extends State<DashboardPage2> {
                           )
                         ]
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: SfCartesianChart(
-                          borderWidth: 0,
-                          plotAreaBorderWidth: 0.0,
-                          enableAxisAnimation: false,
-                          selectionType: SelectionType.cluster,
-                          series: <ChartSeries>[
-                              ColumnSeries<SalesData, double>(
-                                dataSource: chartData,
-                                isTrackVisible: true,
-                                xValueMapper: (SalesData sales, _) => sales.year,
-                                yValueMapper: (SalesData sales, _) => sales.sales,
-                                // Sets the corner radius
-                                borderRadius: BorderRadius.all(Radius.circular(20)),
-                                trackColor: Colors.grey[100],
-                                color: hexToColor("#4163CD"),
-                                isVisibleInLegend: true,
-                                width: .5
-                              )
-                          ]
-                        ),
-                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 30, right: 20, top: 23),
+                            child: Text(
+                              'Consumo entre salas',
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 220,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: SfCartesianChart(
+                                borderWidth: 0,
+                                plotAreaBorderColor: Colors.purpleAccent,
+                                plotAreaBorderWidth: 0.0,
+                                enableAxisAnimation: true,
+                                selectionType: SelectionType.cluster,
+                                enableSideBySideSeriesPlacement: true,
+                             
+                                series: <ChartSeries>[
+                                    ColumnSeries<ConsumoData, double>(
+                                      dataSource: chartData,
+                                      isTrackVisible: true,
+                                      xValueMapper: (ConsumoData data, _) => data.day,
+                                      yValueMapper: (ConsumoData data, _) => data.consumo,
+                                      dataLabelMapper: (ConsumoData data, _) => data.category,
+                                      
+
+                                      // Sets the corner radius
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      trackColor: Colors.grey[200],
+                                      color: hexToColor("#4163CD"),
+                                      isVisibleInLegend: false,
+                                      width: 0.55,
+                                      enableTooltip: true,
+                                    ),
+                                    
+                                ]
+                              ),
+                            ),
+                          ),
+                        ],
+                      ), 
                     ),
                   ],
                 ),
               ),
               Container( // Outros cards
                 alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(top: 910),
+                padding: EdgeInsets.only(top: 920),
                 child: Row(
                   children: [
                     Container(
                       margin: EdgeInsets.all(20),
-                      height: 225,
-                      width: MediaQuery.of(context).size.width/2-30,
+                      height: 300,
+                      width: MediaQuery.of(context).size.width-40,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
@@ -368,24 +376,82 @@ class _DashboardPage2State extends State<DashboardPage2> {
                             color: Colors.black12,
                             blurRadius: 10.0,
                           )
+                        ]
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(left: 30, right: 0, top: 25),
+                            child: Text(
+                              'Consumo por sala',
+                              style: TextStyle(
+                                fontSize: 22.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 20, right: 30, top: 0),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<SalaItem>(
+                                iconEnabledColor: hexToColor("#4163CD"),
+                                focusColor: hexToColor("#4163CD"),
+                                hint:  Text("Selecione" ,style: TextStyle(color: Colors.blue),),
+                                value: selectedUser,
+                                onChanged: (SalaItem Value) {
+                                  setState(() {
+                                    selectedUser = Value;
+                                    print(Value.nomeSala);
+                                  });
+                                },
+                                items: salas.map((SalaItem salas) {
+                                  return  DropdownMenuItem(
+                                    value: salas,
+                                    child: Row(
+                                      children: <Widget>[
+                                        SizedBox(width: 10,),
+                                        Text(
+                                          salas.nomeSala,
+                                          style:  TextStyle(color: hexToColor("#4163CD")),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 30),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text("209", 
+                                  style: TextStyle(
+                                    fontSize: 60.0,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top:30.0), // deixa o "KWH" alinhado na base com o valor do consumo
+                                  child: Text("KWH", 
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.black38,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ]
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20, right: 20, bottom: 20),
-                      height: 225,
-                      width: MediaQuery.of(context).size.width/2-30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                          )
-                        ]
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -439,7 +505,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
             FlSpot(10.5, 5.1),
           ],
           isCurved: true,
-          colors: [Colors.white,],
+          colors: [Colors.white],
           barWidth: 5,
           dotData: FlDotData(
             show: false,
@@ -451,10 +517,19 @@ class _DashboardPage2State extends State<DashboardPage2> {
   }
 }
 
-class SalesData {
-  SalesData(this.year, this.sales);
-  final double year;
-  final double sales;
+class SalaItem {
+  SalaItem(this.nomeSala, this.estadoArL, this.estadoArD, this.consumo);
+  final String nomeSala;
+  final bool estadoArL;
+  final bool estadoArD;
+  final double consumo;
+}
+
+class ConsumoData {
+  ConsumoData(this.day, this.consumo, this.category);
+  final double day;
+  final double consumo;
+  final String category;
 }
 
 
