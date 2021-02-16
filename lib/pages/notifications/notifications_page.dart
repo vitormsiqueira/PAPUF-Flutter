@@ -7,7 +7,7 @@ class NotificationsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light, // status bar brightness
-        title: textAppBar("Notificações"),
+        title: textAppBar("Notificações", isDark: false),
         elevation: 1,
         backgroundColor: Colors.white,
       ),

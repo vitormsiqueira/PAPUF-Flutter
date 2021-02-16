@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         // ativa barra de status claro
         brightness: Brightness.dark, 
-        title: textAppBar("Perfil", color: false),
+        title: textAppBar("Perfil", isDark: true),
         elevation: 0,
         backgroundColor: hexToColor("#4163CD"),
       ),

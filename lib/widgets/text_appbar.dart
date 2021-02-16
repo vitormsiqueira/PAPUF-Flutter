@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-textAppBar(String txt, {bool color = true}) {
+textAppBar(String txt, {bool isDark = true}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 15.0),
+    padding: const EdgeInsets.only(left: 10.0),
     child: Text(
       txt,
       style: TextStyle(
-        color: color ? Colors.black : Colors.white,
+        color: isDark ? Colors.white : Colors.black,
         fontSize: 25,
         fontWeight: FontWeight.bold,
       ),

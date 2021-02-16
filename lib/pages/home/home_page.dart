@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         // appBar: CustomAppBar(),
         appBar: AppBar(
           brightness: Brightness.light, // status bar brightness
-          title: textAppBar("Salas de Aula"),
+          title: textAppBar("Salas de Aula", isDark: false),
           elevation: 1,
           backgroundColor: Colors.white,
           /////
