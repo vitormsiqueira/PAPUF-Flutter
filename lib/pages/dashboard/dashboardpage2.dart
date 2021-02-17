@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_date_picker_timeline/flutter_date_picker_timeline.dart';
+import 'package:papuf/widgets/details_table.dart';
 import 'package:papuf/widgets/grafico_salas.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -297,7 +298,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   children: [
                     Container(
                       margin: EdgeInsets.all(20),
-                      height: 200,
+                      height: 660,
                       width: MediaQuery.of(context).size.width-40,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -314,77 +315,21 @@ class _DashboardPage2State extends State<DashboardPage2> {
                         children: [
                           Container(
                             padding: EdgeInsets.only(left: 30, right: 0, top: 25),
-                            child: Text(
-                              'Consumo por sala',
+                            child:Text(
+                              'Informações detalhadas',
                               style: TextStyle(
-                                fontSize: 22.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600
+                                color: Colors.black, 
+                                fontSize: 24, 
+                                fontWeight: FontWeight.bold
                               ),
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.only(left: 30),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<SalaItem>(
-                                iconEnabledColor: hexToColor("#4163CD"),
-                                focusColor: hexToColor("#4163CD"),
-                                hint:  Text(
-                                  "Selecione",
-                                  style: TextStyle(
-                                    color: Colors.blue
-                                  ),
-                                ),
-                                value: selectedUser,
-                                onChanged: (SalaItem Value) {
-                                  setState(() {
-                                    selectedUser = Value;
-                                    print(Value.nomeSala);
-                                  });
-                                },
-                                items: salas.map((SalaItem salas) {
-                                  return  DropdownMenuItem(
-                                    value: salas,
-                                    child: Row(
-                                      children: <Widget>[
-                                        SizedBox(width: 10,),
-                                        Text(
-                                          salas.nomeSala,
-                                          style:  TextStyle(color: hexToColor("#4163CD")),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
+                          SizedBox(
+                            height: 4,
                           ),
                           Container(
-                            padding: EdgeInsets.only(left: 30),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text("209", 
-                                  style: TextStyle(
-                                    fontSize: 48.0,
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top:25.0), // deixa o "KWH" alinhado na base com o valor do consumo
-                                  child: Text("KWH", 
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: Colors.black38,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                            child: Details(),
+                          )
                         ]
                       ),
                     ),

@@ -156,7 +156,7 @@ class GraficoSalasState extends State<GraficoSalas> {
       case 11:
         return makeGroupData(11, 9.1, isTouched: i == touchedIndex);
       case 12:
-        return makeGroupData(12, 15.5, isTouched: i == touchedIndex);
+        return makeGroupData(12, 14.5, isTouched: i == touchedIndex);
       case 13:
         return makeGroupData(13, 5.5, isTouched: i == touchedIndex);
       case 14:
