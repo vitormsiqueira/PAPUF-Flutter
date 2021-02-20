@@ -56,7 +56,7 @@ class GraficoSalasState extends State<GraficoSalas> {
                           'Consumo entre salas',
                           style: TextStyle(
                             color: Colors.black, 
-                            fontSize: 24, 
+                            fontSize: 22, 
                             fontWeight: FontWeight.bold
                           ),
                         ),
@@ -70,8 +70,7 @@ class GraficoSalasState extends State<GraficoSalas> {
                           'Gráfico comparativo',
                           style: TextStyle(
                             color: Colors.black54, 
-                            fontSize: 18, 
-                            fontWeight: FontWeight.bold
+                            fontSize: 16, 
                           ),
                         ),
                       ),

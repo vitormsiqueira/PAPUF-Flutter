@@ -272,13 +272,12 @@ class _DashboardPage2State extends State<DashboardPage2> {
                           Container(
                             padding: EdgeInsets.all(20),
                             child: Text(
-                              "Ares Ligados", 
+                              'Ares ligados',
                               style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
+                                color: Colors.black, 
+                                fontSize: 22, 
+                                fontWeight: FontWeight.bold
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           )
                         ],
@@ -316,10 +315,10 @@ class _DashboardPage2State extends State<DashboardPage2> {
                           Container(
                             padding: EdgeInsets.only(left: 30, right: 0, top: 25),
                             child:Text(
-                              'Informações detalhadas',
+                              'Mais detalhes',
                               style: TextStyle(
                                 color: Colors.black, 
-                                fontSize: 24, 
+                                fontSize: 22, 
                                 fontWeight: FontWeight.bold
                               ),
                             ),
