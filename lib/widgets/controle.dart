@@ -161,12 +161,16 @@ class _ControleState extends State<Controle> {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(20),
       color: selected == "On" ? hexToColor("#4163CD") : Colors.white,
+      border: Border.all(
+          color:
+              selected == "On" ? hexToColor("#3359D0") : hexToColor("#EBEBEB"),
+          width: 1.0),
       boxShadow: [
         BoxShadow(
-          color: selected == "On" ? hexToColor("#838BDA") : Colors.grey[200],
-          blurRadius: 15.0, // has the effect of softening the shadow
+          color: selected == "On" ? hexToColor("#838BDA") : Colors.black12,
+          blurRadius: 10.0, // has the effect of softening the shadow
           spreadRadius: 0.5, // has the effect of extending the shadow
-        )
+        ),
       ],
     );
   }

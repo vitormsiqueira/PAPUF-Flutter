@@ -60,19 +60,19 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white,
           /////
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(
-                53.0), // altura é de 48+5 do padding bottom na linha abaixo
+            // altura é de 48+5 do padding bottom na linha abaixo
+            preferredSize: const Size.fromHeight(53.0),
             child: Container(
               padding: EdgeInsets.only(bottom: 5),
               child: Theme(
                 data: Theme.of(context).copyWith(accentColor: Colors.white),
                 child: TabBar(
-                  indicatorSize: TabBarIndicatorSize
-                      .label, // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
+                  // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
+                  indicatorSize: TabBarIndicatorSize.label,
                   isScrollable: true,
                   labelColor: Colors.white, // cor da label da tab selecionada
-                  unselectedLabelColor: hexToColor(
-                      "#4DE4B2"), // cor da label da tab não selecionada
+                  // cor da label da tab não selecionada
+                  unselectedLabelColor: hexToColor("#4DE4B2"),
                   indicator: BoxDecoration(
                     color: hexToColor("#4DE4B2"),
                     shape: BoxShape.circle,
@@ -198,10 +198,12 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
+          border: Border.all(color: hexToColor("#EBEBEB"), width: 1.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey[200],
-              blurRadius: 15.0,
+              color: Colors.black12,
+              blurRadius: 10.0, // has the effect of softening the shadow
+              spreadRadius: 0.5, // has the effect of extending the shadow
             )
           ],
         ),

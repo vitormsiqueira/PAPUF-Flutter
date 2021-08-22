@@ -66,9 +66,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
               elevation: 0,
               backgroundColor: hexToColor("#4163CD"),
               bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(
-                    53.0), // altura é de 48+5 do padding bottom na linha abaixo
-
+                // altura é de 48+5 do padding bottom na linha abaixo
+                preferredSize: const Size.fromHeight(53.0),
                 child: Container(
                   padding:
                       EdgeInsets.only(left: 85, right: 85, bottom: 10, top: 10),
@@ -222,8 +221,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
                       ]),
                 ),
               ),
+              //---------------------------------------
+              // Gráfico de consumo
               Container(
-                // Gráfico de consumo
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 220),
                 child: AspectRatio(
@@ -235,6 +235,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ),
                 ),
               ),
+              //---------------------------------------
+              // KPI Qtde. Ar Consdicionados Ligados
               Container(
                 // Cards de ares ligados
                 alignment: Alignment.topCenter,
@@ -248,6 +250,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white,
+                          border: Border.all(
+                              color: hexToColor("#EBEBEB"), width: 1.0),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
@@ -255,34 +259,45 @@ class _DashboardPage2State extends State<DashboardPage2> {
                             )
                           ]),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          //-----------------------------------------
+                          // Gráfico de Pizza (QTD.)
                           Container(
                             padding: EdgeInsets.all(20),
                             child: CircularPercentIndicator(
                               backgroundColor: Colors.grey[200],
                               radius: 120.0,
-                              lineWidth: 11.0,
+                              lineWidth: 12.0,
                               animation: true,
-                              percent: 0.48,
-                              center: Text(
-                                "14",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 24),
+                              percent: 18 / 30,
+                              center: Center(
+                                child: Text(
+                                  "18",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24),
+                                ),
                               ),
                               circularStrokeCap: CircularStrokeCap.round,
                               progressColor: hexToColor("#4163CD"),
                             ),
                           ),
+                          //-----------------------------------------
+                          // Titulo (Ares-Condionados)
                           Container(
-                            padding: EdgeInsets.all(20),
-                            child: Text(
-                              'Ares ligados',
-                              style: TextStyle(
+                            padding: EdgeInsets.all(15),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Ares-\nCondicionados\nligados',
+                                style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           )
                         ],
@@ -291,11 +306,15 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ],
                 ),
               ),
+              //---------------------------------------
+              // Gráfico Consumo Entre Salas
               Container(
                 // Card - Comparação entre salas
                 padding: EdgeInsets.only(top: 650, left: 18, right: 18),
                 child: GraficoSalas(),
               ),
+              //---------------------------------------
+              // Tabela Mais Detalhes
               Container(
                 // Outros cards
                 alignment: Alignment.topCenter,
@@ -309,6 +328,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white,
+                          border: Border.all(
+                              color: hexToColor("#EBEBEB"), width: 1.0),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,

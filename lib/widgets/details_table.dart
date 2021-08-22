@@ -17,10 +17,7 @@ class _DetailsState extends State<Details> {
           DataColumn(
             label: Text(
               'Sala',
-              style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontSize: 15
-              ),
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 15),
             ),
           ),
           DataColumn(
@@ -115,7 +112,7 @@ class _DetailsState extends State<Details> {
               DataCell(Text('120V')),
             ],
           ),
-           DataRow(
+          DataRow(
             cells: <DataCell>[
               DataCell(Text('07')),
               DataCell(Text('Off')),
