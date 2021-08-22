@@ -93,7 +93,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -113,7 +112,7 @@ Widget _introScreen() {
   return Stack(
     children: <Widget>[
       SplashScreen(
-        seconds: 2,
+        seconds: 3,
         navigateAfterSeconds: RootPage(),
         loaderColor: Colors.transparent,
       ),

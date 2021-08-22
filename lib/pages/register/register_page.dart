@@ -22,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light, // status bar brightness
-        title: textAppBar("Cadastrar"),
+        title: textAppBar("Cadastrar", isDark: false),
         elevation: 1,
         backgroundColor: Colors.white,
       ),
@@ -41,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Container(
                   padding: EdgeInsets.all(16),
                   child: AppText(
-                    "Nome", 
+                    "Nome",
                     keyboardType: TextInputType.emailAddress,
                     mainColor: "#555555",
                     secondColor: "#000000",
@@ -51,11 +51,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 Container(
                   padding: EdgeInsets.all(16),
                   child: DropdownButtonFormField(
-                    hint: Text(
-                      'Selecione o tipo de acesso'
-                    ),
+                    hint: Text('Selecione o tipo de acesso'),
                     value: _selectedCurrencie,
-                    onChanged: (newValue){
+                    onChanged: (newValue) {
                       setState(() {
                         _selectedCurrencie = newValue;
                       });
@@ -71,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Container(
                   padding: EdgeInsets.all(16),
                   child: AppText(
-                    "Email", 
+                    "Email",
                     hint: "Digite um email válido",
                     keyboardType: TextInputType.emailAddress,
                     mainColor: "#555555",
@@ -84,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: EdgeInsets.all(16),
                   child: AppButton(
                     "ENVIAR",
-                    onPressed: (){},
+                    onPressed: () {},
                   ),
                 ),
               ],

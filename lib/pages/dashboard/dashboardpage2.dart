@@ -15,12 +15,12 @@ class DashboardPage2 extends StatefulWidget {
 }
 
 class _DashboardPage2State extends State<DashboardPage2> {
-   // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
+  // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
   bool pressed = false;
   SalaItem selectedUser;
 
   List<SalaItem> salas = [
-    SalaItem('Sala 01', false, false,158.2),
+    SalaItem('Sala 01', false, false, 158.2),
     SalaItem('Sala 02', true, true, 158.2),
     SalaItem('Sala 03', false, true, 270.2),
     SalaItem('Sala 04', false, true, 158.2),
@@ -31,8 +31,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
     SalaItem('Sala 09', false, true, 190.2),
     SalaItem('Sala 10', false, true, 278.2),
     SalaItem('Sala 11', true, true, 265.2),
-    SalaItem('Sala 12', true,false, 258.2),
-    SalaItem('Sala 13', true,false, 198.2),
+    SalaItem('Sala 12', true, false, 258.2),
+    SalaItem('Sala 13', true, false, 198.2),
     SalaItem('Sala 14', false, false, 168.2),
     SalaItem('Sala 15', false, true, 178.2),
   ];
@@ -55,73 +55,70 @@ class _DashboardPage2State extends State<DashboardPage2> {
     ConsumoData(15, 19, '15')
   ];
 
-
   @override
   Widget build(BuildContext context) {
-
-    
-
     return DefaultTabController(
-      length: 3, 
-      child: Scaffold(
-        appBar: AppBar(
-          brightness: Brightness.dark, // status bar brightness
-          title: textAppBar("Dashboard", isDark: true),
-          elevation: 0,
-          backgroundColor: hexToColor("#4163CD"),
-          
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(53.0), // altura é de 48+5 do padding bottom na linha abaixo
-            
-            child: Container(
-              padding: EdgeInsets.only(left: 85, right: 85, bottom: 10, top: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              height: 50,
-              child: TabBar(
-                
-                unselectedLabelColor: Colors.white,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: hexToColor("#4DE4B2"),
-                 
-                ),
-                labelColor: Colors.white,
-                tabs: [
-                  Tab(
-                    child:  Align(
-                        child: Text("Dia", style: TextStyle(fontSize: 18),),
-                        alignment: Alignment.center,
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+              brightness: Brightness.dark, // status bar brightness
+              title: textAppBar("Dashboard", isDark: true),
+              elevation: 0,
+              backgroundColor: hexToColor("#4163CD"),
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(
+                    53.0), // altura é de 48+5 do padding bottom na linha abaixo
+
+                child: Container(
+                  padding:
+                      EdgeInsets.only(left: 85, right: 85, bottom: 10, top: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  height: 50,
+                  child: TabBar(
+                    unselectedLabelColor: Colors.white,
+                    indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: hexToColor("#4DE4B2"),
+                    ),
+                    labelColor: Colors.white,
+                    tabs: [
+                      Tab(
+                        child: Align(
+                          child: Text(
+                            "Dia",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          alignment: Alignment.center,
+                        ),
                       ),
-                    
+                      Tab(
+                        child: Align(
+                          child: Text(
+                            "Mês",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                      Tab(
+                        child: Align(
+                          child: Text(
+                            "Ano",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                    ],
                   ),
-                  Tab(
-                    child: Align(
-                      child: Text("Mês", style: TextStyle(fontSize: 18),),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                   Tab(
-                    child: Align(
-                      child: Text("Ano", style: TextStyle(fontSize: 18),),
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        ),
-        body: TabBarView(
-          children: [
-            _tabDia(context),
-            _tabMes(),
-            _tabAno()
-          ],
-        ),
-      )
-    );
+                ),
+              )),
+          body: TabBarView(
+            children: [_tabDia(context), _tabMes(), _tabAno()],
+          ),
+        ));
   }
 
   _tabDia(BuildContext context) {
@@ -129,10 +126,12 @@ class _DashboardPage2State extends State<DashboardPage2> {
       height: MediaQuery.of(context).size.height,
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(0), // necessário ser 0, p/ o gráfico atingir as bordas
+          padding: const EdgeInsets.all(
+              0), // necessário ser 0, p/ o gráfico atingir as bordas
           child: Stack(
             children: [
-              Column( // Define o tamnho e cor dos containers de fundo
+              Column(
+                // Define o tamnho e cor dos containers de fundo
                 children: [
                   Container(
                     height: 500,
@@ -144,93 +143,100 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   )
                 ],
               ),
-              Container( // Calendário dinâmico
-                alignment: Alignment.topCenter,
-                padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
-                child: FlutterDatePickerTimeline(
-                  startDate: DateTime(2021, 01, 01),
-                  endDate: DateTime.now(),
-                  initialFocusedDate: DateTime.now(),
-                  initialSelectedDate: DateTime.now(),
-                  selectedItemBackgroundColor: hexToColor("#3B53C9"),
-                  unselectedItemBackgroundColor: Colors.transparent,
-                  selectedItemTextStyle: TextStyle(color: Colors.white),
-                  unselectedItemTextStyle: TextStyle(color: Colors.white70),
-                  itemRadius: 14,
-                  selectedItemWidth: 150,
-                  onSelectedDateChange: (DateTime dateTime) {
-                    print(dateTime);
-                  },
-                )
-              ),
-              Container( // Texto Consumo
+              Container(
+                  // Calendário dinâmico
+                  alignment: Alignment.topCenter,
+                  padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
+                  child: FlutterDatePickerTimeline(
+                    startDate: DateTime(2021, 05, 01),
+                    endDate: DateTime.now(),
+                    initialFocusedDate: DateTime.now(),
+                    initialSelectedDate: DateTime.now(),
+                    selectedItemBackgroundColor: hexToColor("#3B53C9"),
+                    unselectedItemBackgroundColor: Colors.transparent,
+                    selectedItemTextStyle: TextStyle(color: Colors.white),
+                    unselectedItemTextStyle: TextStyle(color: Colors.white70),
+                    itemRadius: 14,
+                    selectedItemWidth: 150,
+                    onSelectedDateChange: (DateTime dateTime) {
+                      print(dateTime);
+                    },
+                  )),
+              Container(
+                // Texto Consumo
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 70),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Text("Consumo", 
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                child: Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Consumo",
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ] 
-                ),
+                  ),
+                ]),
               ),
-              Container( // Informações de consumo
+              Container(
+                // Informações de consumo
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 90),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [ 
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text("410", 
-                              style: TextStyle(
-                                fontSize: 72.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top:30.0), // deixa o "KWH" alinhado na base do valor do consumo
-                              child: Text("KWH", 
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                "410",
                                 style: TextStyle(
-                                  fontSize: 24.0,
-                                  color: Colors.white54,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 72.0,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top:
+                                        30.0), // deixa o "KWH" alinhado na base do valor do consumo
+                                child: Text(
+                                  "KWH",
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.white54,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ]
-                  ),
+                      ]),
                 ),
               ),
-              Container( // Gráfico de consumo
+              Container(
+                // Gráfico de consumo
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 220),
                 child: AspectRatio(
                   aspectRatio: 1.70,
                   child: Container(
                     child: LineChart(
-                      mainData(), 
+                      mainData(),
                     ),
                   ),
                 ),
               ),
-              Container( // Cards de ares ligados
+              Container(
+                // Cards de ares ligados
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 450),
                 child: Row(
@@ -238,17 +244,16 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   children: [
                     Container(
                       height: 180,
-                      width: MediaQuery.of(context).size.width-40,
+                      width: MediaQuery.of(context).size.width - 40,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                          )
-                        ]
-                      ),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 10.0,
+                            )
+                          ]),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -263,7 +268,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                               percent: 0.48,
                               center: Text(
                                 "14",
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 24),
                               ),
                               circularStrokeCap: CircularStrokeCap.round,
                               progressColor: hexToColor("#4163CD"),
@@ -274,10 +280,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
                             child: Text(
                               'Ares ligados',
                               style: TextStyle(
-                                color: Colors.black, 
-                                fontSize: 22, 
-                                fontWeight: FontWeight.bold
-                              ),
+                                  color: Colors.black,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
@@ -286,11 +291,13 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ],
                 ),
               ),
-              Container( // Card - Comparação entre salas
+              Container(
+                // Card - Comparação entre salas
                 padding: EdgeInsets.only(top: 650, left: 18, right: 18),
                 child: GraficoSalas(),
               ),
-              Container( // Outros cards
+              Container(
+                // Outros cards
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 1005),
                 child: Row(
@@ -298,39 +305,37 @@ class _DashboardPage2State extends State<DashboardPage2> {
                     Container(
                       margin: EdgeInsets.all(20),
                       height: 660,
-                      width: MediaQuery.of(context).size.width-40,
+                      width: MediaQuery.of(context).size.width - 40,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                          )
-                        ]
-                      ),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 10.0,
+                            )
+                          ]),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(left: 30, right: 0, top: 25),
-                            child:Text(
-                              'Mais detalhes',
-                              style: TextStyle(
-                                color: Colors.black, 
-                                fontSize: 22, 
-                                fontWeight: FontWeight.bold
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding:
+                                  EdgeInsets.only(left: 30, right: 0, top: 25),
+                              child: Text(
+                                'Mais detalhes',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Container(
-                            child: Details(),
-                          )
-                        ]
-                      ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Container(
+                              child: Details(),
+                            )
+                          ]),
                     ),
                   ],
                 ),
@@ -349,9 +354,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
         leftTitles: SideTitles(
           showTitles: false,
         ),
-       
       ),
-      borderData: FlBorderData(show: false, border: Border.all(color: Colors.white, width: 0)),
+      borderData: FlBorderData(
+          show: false, border: Border.all(color: Colors.white, width: 0)),
       minX: 0,
       maxX: 11,
       minY: 1,
@@ -375,23 +380,21 @@ class _DashboardPage2State extends State<DashboardPage2> {
           ),
         ),
         LineChartBarData(
-          spots: [
-            FlSpot(0, 3),
-            FlSpot(2.1, 2.1),
-            FlSpot(4.5, 4.9),
-            FlSpot(6.3, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(10.5, 5.1),
-          ],
-          isCurved: true,
-          colors: [Colors.white],
-          barWidth: 5,
-          dotData: FlDotData(
-            show: false,
-          )
-        ),
-        
+            spots: [
+              FlSpot(0, 3),
+              FlSpot(2.1, 2.1),
+              FlSpot(4.5, 4.9),
+              FlSpot(6.3, 3.1),
+              FlSpot(8, 4),
+              FlSpot(9.5, 3),
+              FlSpot(10.5, 5.1),
+            ],
+            isCurved: true,
+            colors: [Colors.white],
+            barWidth: 5,
+            dotData: FlDotData(
+              show: false,
+            )),
       ],
     );
   }
@@ -411,7 +414,6 @@ class ConsumoData {
   final double consumo;
   final String category;
 }
-
 
 _tabMes() {
   return Container(

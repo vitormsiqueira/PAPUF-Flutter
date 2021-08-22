@@ -12,8 +12,8 @@ class Controle extends StatefulWidget {
   final int currentSala;
   final int temp;
   final String topic;
-
-  const Controle(this.temp, this.topic, {this.currentSala});
+  const Controle(this.temp, this.topic, BuildContext context,
+      {this.currentSala});
   @override
   _ControleState createState() => _ControleState();
 }
@@ -47,12 +47,13 @@ class _ControleState extends State<Controle> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        _modulo(selected1, topic, um), // variavel ar1 e ar2 definida em connect_MQTT.dart
+        // variavel ar1 e ar2 definida em connect_MQTT.dart
+        _modulo(selected1, topic, um, context),
       ],
     );
   }
 
-  _modulo(String selected, String topic, int i) {
+  _modulo(String selected, String topic, int i, BuildContext context) {
     final _controller = StreamController<int>();
 
     return Container(
@@ -75,22 +76,24 @@ class _ControleState extends State<Controle> {
             onPressed: () {
               setState(() {
                 temp++;
-                print(temp);
+                //print(temp);
                 //print('++++++++'+temp.toString());
               });
               //envia um json {"temp": temp, "state": "on"} com temperatura e estado
               publishM(
                   createJsonTempState(temp.toString(), _setStateOn(i)), topic);
             },
-            child: _textOthers(selected, '+', 45, FontWeight.w400),
+            child: _textOthers(selected, '+', 45, FontWeight.w400, context),
             shape: CircleBorder(),
           ),
 
+          // Temperatura
           Container(
             child: _textOthers(
-                selected, temp.toString() + 'º', 45, FontWeight.w300),
+                selected, temp.toString() + 'º', 45, FontWeight.w300, context),
           ),
 
+          // Botão ' - '
           RawMaterialButton(
             onPressed: () {
               setState(() {
@@ -99,7 +102,7 @@ class _ControleState extends State<Controle> {
               publishM(
                   createJsonTempState(temp.toString(), _setStateOn(i)), topic);
             },
-            child: _textOthers(selected, '-', 50, FontWeight.w400),
+            child: _textOthers(selected, '-', 50, FontWeight.w400, context),
             shape: CircleBorder(),
           ),
 
@@ -107,6 +110,8 @@ class _ControleState extends State<Controle> {
             height: 10,
           ),
           //ControlTemperature(ar2, "temp-2"),
+
+          // Container que mostra o botão On/Off
           Container(
             width: 60,
             height: 60,
@@ -180,9 +185,9 @@ class _ControleState extends State<Controle> {
     );
   }
 
-  _textOthers(
-      String selected, String texto, int size, FontWeight myFontWeight) {
-    print(texto);
+  _textOthers(String selected, String texto, int size, FontWeight myFontWeight,
+      BuildContext context) {
+    //print(texto);
     return Center(
       child: Text(
         texto,
