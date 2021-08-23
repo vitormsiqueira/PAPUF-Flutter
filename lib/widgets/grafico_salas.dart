@@ -11,7 +11,6 @@ class GraficoSalas extends StatefulWidget {
     Colors.pink,
     Colors.redAccent,
   ];
-
   @override
   State<StatefulWidget> createState() => GraficoSalasState();
 }
@@ -29,6 +28,7 @@ class GraficoSalasState extends State<GraficoSalas> {
     return AspectRatio(
       aspectRatio: 1,
       child: Container(
+        width: MediaQuery.of(context).size.width * .9,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Colors.white,
@@ -54,7 +54,7 @@ class GraficoSalasState extends State<GraficoSalas> {
                       'Consumo entre salas',
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -67,7 +67,7 @@ class GraficoSalasState extends State<GraficoSalas> {
                       'Gráfico comparativo',
                       style: TextStyle(
                         color: Colors.black54,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                   ),

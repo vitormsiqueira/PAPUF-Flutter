@@ -61,12 +61,13 @@ class _DashboardPage2State extends State<DashboardPage2> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-              brightness: Brightness.dark, // status bar brightness
+              //// status bar brightness
+              brightness: Brightness.dark,
               title: textAppBar("Dashboard", isDark: true),
               elevation: 0,
               backgroundColor: hexToColor("#4163CD"),
               bottom: PreferredSize(
-                // altura é de 48+5 do padding bottom na linha abaixo
+                //// altura é de 48+5 do padding bottom na linha abaixo
                 preferredSize: const Size.fromHeight(53.0),
                 child: Container(
                   padding:
@@ -115,7 +116,7 @@ class _DashboardPage2State extends State<DashboardPage2> {
                 ),
               )),
           body: TabBarView(
-            children: [_tabDia(context), _tabMes(), _tabAno()],
+            children: [_tabDia(context), _tabMes(context), _tabAno()],
           ),
         ));
   }
@@ -125,12 +126,13 @@ class _DashboardPage2State extends State<DashboardPage2> {
       height: MediaQuery.of(context).size.height,
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(
-              0), // necessário ser 0, p/ o gráfico atingir as bordas
+          // necessário ser 0, p/ o gráfico atingir as bordas
+          padding: const EdgeInsets.all(0),
           child: Stack(
             children: [
+              ////---------------------------------------
+              //// Define o tamnho e cor dos containers de fundo
               Column(
-                // Define o tamnho e cor dos containers de fundo
                 children: [
                   Container(
                     height: 500,
@@ -142,8 +144,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   )
                 ],
               ),
+              ////---------------------------------------
+              //// Calendário Dinâmico
               Container(
-                  // Calendário dinâmico
                   alignment: Alignment.topCenter,
                   padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
                   child: FlutterDatePickerTimeline(
@@ -161,8 +164,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
                       print(dateTime);
                     },
                   )),
+              ////---------------------------------------
+              //// Texto Consumo
               Container(
-                // Texto Consumo
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 70),
                 child: Row(children: [
@@ -179,8 +183,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ),
                 ]),
               ),
+              ////---------------------------------------
+              //// Informações de Consumo
               Container(
-                // Informações de consumo
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 90),
                 child: Padding(
@@ -221,8 +226,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                       ]),
                 ),
               ),
-              //---------------------------------------
-              // Gráfico de consumo
+              ////---------------------------------------
+              //// Gráfico de consumo
               Container(
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(top: 220),
@@ -235,8 +240,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ),
                 ),
               ),
-              //---------------------------------------
-              // KPI Qtde. Ar Consdicionados Ligados
+              ////---------------------------------------
+              //// KPI Qtde. Ar Consdicionados Ligados
               Container(
                 // Cards de ares ligados
                 alignment: Alignment.topCenter,
@@ -246,7 +251,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   children: [
                     Container(
                       height: 180,
-                      width: MediaQuery.of(context).size.width - 40,
+                      //// Define a largura do Card para 90%
+                      width: MediaQuery.of(context).size.width * .9,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white,
@@ -306,25 +312,33 @@ class _DashboardPage2State extends State<DashboardPage2> {
                   ],
                 ),
               ),
-              //---------------------------------------
-              // Gráfico Consumo Entre Salas
-              Container(
-                // Card - Comparação entre salas
-                padding: EdgeInsets.only(top: 650, left: 18, right: 18),
-                child: GraficoSalas(),
+              ////---------------------------------------
+              //// Gráfico Consumo Entre Salas
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    // Card - Comparação entre salas
+                    padding: EdgeInsets.only(top: 650),
+                    child: GraficoSalas(),
+                  ),
+                ],
               ),
-              //---------------------------------------
-              // Tabela Mais Detalhes
+              ////---------------------------------------
+              //// Tabela Mais Detalhes
               Container(
                 // Outros cards
                 alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(top: 1005),
+                padding: EdgeInsets.only(top: 1030),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.all(20),
+                      //margin: EdgeInsets.all(20),
                       height: 660,
-                      width: MediaQuery.of(context).size.width - 40,
+                      width: MediaQuery.of(context).size.width * .9,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white,
@@ -340,13 +354,12 @@ class _DashboardPage2State extends State<DashboardPage2> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding:
-                                  EdgeInsets.only(left: 30, right: 0, top: 25),
+                              padding: EdgeInsets.only(left: 30, top: 25),
                               child: Text(
                                 'Mais detalhes',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 22,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -419,6 +432,306 @@ class _DashboardPage2State extends State<DashboardPage2> {
       ],
     );
   }
+
+  _tabMes(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: SingleChildScrollView(
+        child: Padding(
+          // necessário ser 0, p/ o gráfico atingir as bordas
+          padding: const EdgeInsets.all(0),
+          child: Stack(
+            children: [
+              ////---------------------------------------
+              //// Define o tamnho e cor dos containers de fundo
+              Column(
+                children: [
+                  Container(
+                    height: 500,
+                    color: hexToColor("#4163CD"),
+                  ),
+                  Container(
+                    height: 620,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+              ////---------------------------------------
+              //// Calendário Dinâmico
+              Container(
+                  alignment: Alignment.topCenter,
+                  padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
+                  child: FlutterDatePickerTimeline(
+                    startDate: DateTime(2021, 05, 01),
+                    endDate: DateTime.now(),
+                    initialFocusedDate: DateTime.now(),
+                    initialSelectedDate: DateTime.now(),
+                    selectedItemBackgroundColor: hexToColor("#3B53C9"),
+                    unselectedItemBackgroundColor: Colors.transparent,
+                    selectedItemTextStyle: TextStyle(color: Colors.white),
+                    unselectedItemTextStyle: TextStyle(color: Colors.white70),
+                    itemRadius: 14,
+                    selectedItemWidth: 150,
+                    onSelectedDateChange: (DateTime dateTime) {
+                      print(dateTime);
+                    },
+                  )),
+              ////---------------------------------------
+              //// Texto Consumo
+              Container(
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.only(top: 70),
+                child: Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Consumo",
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ]),
+              ),
+              ////---------------------------------------
+              //// Informações de Consumo
+              Container(
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.only(top: 90),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                "8720",
+                                style: TextStyle(
+                                  fontSize: 72.0,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top:
+                                        30.0), // deixa o "KWH" alinhado na base do valor do consumo
+                                child: Text(
+                                  "KWH",
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.white54,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+              ////---------------------------------------
+              //// Gráfico de consumo
+              Container(
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.only(top: 220),
+                child: AspectRatio(
+                  aspectRatio: 1.70,
+                  child: Container(
+                    child: LineChart(
+                      mainData(),
+                    ),
+                  ),
+                ),
+              ),
+              ////---------------------------------------
+              //// KPI
+              Container(
+                ////
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.only(top: 450),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 220,
+                      ////----------------------------------
+                      //// Define a largura do card como 90%
+                      width: MediaQuery.of(context).size.width * .9,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          border: Border.all(
+                              color: hexToColor("#EBEBEB"), width: 1.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 10.0,
+                            )
+                          ]),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ////-----------------------------------------
+                            //// Card Sala com Maior Consumo
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 30, right: 0, top: 25),
+                                      child: Text(
+                                        'Sala com maior Consumo',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 30, right: 0, top: 0),
+                                      child: Text(
+                                        'Gráfico comparativo',
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                  ]),
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width * .3,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          '11',
+                                          style: TextStyle(
+                                              color: hexToColor("#4163CD"),
+                                              fontSize: 56,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ////-----------------------------------------
+                                /// Cards Detalhes de consumo e atividade
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * .59,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          'Consumo Total',
+                                          style: TextStyle(
+                                              color: Colors.black45,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          '3.890 KWh',
+                                          style: TextStyle(
+                                              color: Colors.black87,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          'Tempo de Atividade Total',
+                                          style: TextStyle(
+                                              color: Colors.black45,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          '76:35h',
+                                          style: TextStyle(
+                                              color: Colors.black87,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ]),
+                    ),
+                  ],
+                ),
+              ),
+              ////---------------------------------------
+              //// Gráfico Consumo Entre Salas
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    // Card - Comparação entre salas
+
+                    padding: EdgeInsets.only(top: 690),
+                    child: GraficoSalas(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _tabAno() {
+    return Container(
+      color: Colors.lightBlueAccent,
+    );
+  }
 }
 
 class SalaItem {
@@ -434,16 +747,4 @@ class ConsumoData {
   final double day;
   final double consumo;
   final String category;
-}
-
-_tabMes() {
-  return Container(
-    color: Colors.lightGreenAccent,
-  );
-}
-
-_tabAno() {
-  return Container(
-    color: Colors.lightBlueAccent,
-  );
 }
