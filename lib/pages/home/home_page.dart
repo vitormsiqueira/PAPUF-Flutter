@@ -7,6 +7,7 @@ import 'package:papuf/widgets/controle.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 import 'package:papuf/pages/current_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:papuf/widgets/jsonToSend.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,9 +17,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
   bool pressed = false;
-  int _selectedClass = currentClassRoom;
-  final _classOptions = [print("Sala 1")];
+  //int _selectedClass = currentClassRoom;
+  //final _classOptions = [print("Sala 1")];
   //int currentClassRoom;
+
+  ///////////////////////
+  bool selected1 = false;
+  bool selected2 = false;
+  bool um = false;
+  bool dois = false;
+  //////////////////////
 
   // lista que gera a lista de salas presentes na tabBar, assim como algumas configurações
   final List<Tab> myTabs = List.generate(
@@ -49,10 +57,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      // Armazena o estado selecionado na Tab
+      initialIndex: currentClassRoom - 1,
       length: myTabs.length,
       child: Scaffold(
-        // backgroundColor: Colors.yellow,
-        // appBar: CustomAppBar(),
         appBar: AppBar(
           brightness: Brightness.light, // status bar brightness
           title: textAppBar("Salas de Aula", isDark: false),
@@ -70,7 +78,8 @@ class _HomePageState extends State<HomePage> {
                   // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
                   indicatorSize: TabBarIndicatorSize.label,
                   isScrollable: true,
-                  labelColor: Colors.white, // cor da label da tab selecionada
+                  // cor da label da tab selecionada
+                  labelColor: Colors.white,
                   // cor da label da tab não selecionada
                   unselectedLabelColor: hexToColor("#4DE4B2"),
                   indicator: BoxDecoration(
@@ -80,8 +89,8 @@ class _HomePageState extends State<HomePage> {
                   tabs: myTabs,
                   onTap: (index) {
                     setState(() {
-                      print(index + 1);
                       currentClassRoom = index + 1;
+                      print("test print $currentClassRoom");
                     });
                   },
                 ),
@@ -96,15 +105,16 @@ class _HomePageState extends State<HomePage> {
 
   _body(BuildContext context) {
     String currentSala = currentClassRoom.toString();
+
     return StreamBuilder<DocumentSnapshot>(
-      stream: Firestore.instance
+      stream: FirebaseFirestore.instance
           .collection('bd-2')
-          .document('sala-$currentSala')
-          .snapshots(),
+          .doc('sala-$currentSala')
+          .snapshots(includeMetadataChanges: true),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        print(snapshot.data['ar-l']['temperature']);
-        print(snapshot.data['ar-r']['temperature']);
+        // print(snapshot.data['ar-l']['temperature']);
+        // print(snapshot.data['ar-r']['temperature']);
         if (!snapshot.hasData) return LinearProgressIndicator();
         // String consumoMesArL = calculoDeConsumoMes(snapshot, "ar-l").toString();
         // String consumoMesArR = calculoDeConsumoMes(snapshot, "ar-r").toString();
@@ -126,23 +136,21 @@ class _HomePageState extends State<HomePage> {
             //height: MediaQuery.of(context).size.height, // Permite expandir para toda a tela na altura
             child: Column(
               children: <Widget>[
-                _textControle("Controle | Sala $currentSala"),
+                _textControle("Controle"),
                 Row(
                   mainAxisAlignment:
                       MainAxisAlignment.center, // centraliza os controles
                   children: <Widget>[
                     // Aqui passamos as informações de controle: Temperatura, tópico e o  numero da sala
 
-                    Controle(
-                        snapshot.data['ar-l']['temperature'], "temp-1", context,
-                        currentSala: currentClassRoom),
+                    _modulo(1, snapshot.data['ar-l']['state'], um,
+                        snapshot.data['ar-l']['temperature']),
                     SizedBox(
                       width: 40,
                     ),
                     // Aqui passamos as informações de controle: Temperatura, tópico e o  numero da sala
-                    Controle(
-                        snapshot.data['ar-r']['temperature'], "temp-2", context,
-                        currentSala: currentClassRoom),
+                    _modulo(2, snapshot.data['ar-r']['state'], um,
+                        snapshot.data['ar-r']['temperature']),
                   ],
                 ),
                 SizedBox(
@@ -288,4 +296,158 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  /////////////////////////////////
+  _modulo(int controle, bool selected, bool i, int temp) {
+    //final _controller = StreamController<int>();
+
+    return Container(
+      padding: EdgeInsets.all(15),
+      width: 150,
+      height: 350,
+      decoration: _controleBoxDecoration(selected),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            child: selected
+                ? _img("assets/images/icon_ar_branco.png")
+                : _img("assets/images/icon_ar_azul.png"),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          RawMaterialButton(
+            onPressed: () {
+              setState(() {
+                temp++;
+                //print(temp);
+                //print('++++++++'+temp.toString());
+              });
+              //envia um json {"temp": temp, "state": "on"} com temperatura e estado
+              //publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
+            },
+            child: _textOthers(selected, '+', 45, FontWeight.w400, context),
+            shape: CircleBorder(),
+          ),
+
+          // Temperatura
+          Container(
+            child: _textOthers(
+                selected, temp.toString() + 'º', 45, FontWeight.w300, context),
+          ),
+
+          // Botão ' - '
+          RawMaterialButton(
+            onPressed: () {
+              setState(() {
+                temp--;
+              });
+              //publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
+            },
+            child: _textOthers(selected, '-', 50, FontWeight.w400, context),
+            shape: CircleBorder(),
+          ),
+
+          SizedBox(
+            height: 10,
+          ),
+          //ControlTemperature(ar2, "temp-2"),
+
+          // Container que mostra o botão On/Off
+          Container(
+            width: 60,
+            height: 60,
+            child: RawMaterialButton(
+              onPressed: () {
+                //RequestState(topic);
+                //print('selected'+selected);
+                // aqui o selected não estava alterando o estado global, apenas qdo especificando se seelcted1 ou selected2
+                // mas ta aí uma solução porca
+                setState(() {});
+                // publishM(createJsonTempState("0" ,selected), topic);
+                FirebaseFirestore.instance
+                    .collection('bd-2')
+                    .doc('sala-1')
+                    .update({
+                  'ar-l': {'state': true}
+                });
+              },
+              child: _textOnOff(selected),
+              shape: CircleBorder(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // essa função faz o "switch" do estado do controle
+  _currentState(bool selected) {
+    if (selected1 == false && selected == true) {
+      selected1 = true;
+    } else if (selected1 == true && selected == true) {
+      selected1 = false;
+    } else if (selected2 == false && selected == false) {
+      selected2 = true;
+    } else if (selected2 == true && selected == false) {
+      selected2 = false;
+    }
+  }
+
+  _controleBoxDecoration(bool selected) {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      color: selected ? hexToColor("#4163CD") : Colors.white,
+      border: Border.all(
+          color: selected ? hexToColor("#3359D0") : hexToColor("#EBEBEB"),
+          width: 1.0),
+      boxShadow: [
+        BoxShadow(
+          color: selected ? hexToColor("#838BDA") : Colors.black12,
+          blurRadius: 10.0, // has the effect of softening the shadow
+          spreadRadius: 0.5, // has the effect of extending the shadow
+        ),
+      ],
+    );
+  }
+
+  _textOnOff(bool selected) {
+    return Center(
+      child: Text(
+        selected ? "On" : "Off",
+        style: TextStyle(
+          fontSize: 25,
+          letterSpacing: .6,
+          color: selected ? Colors.white : hexToColor("#4163CD"),
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
+  _textOthers(bool selected, String texto, int size, FontWeight myFontWeight,
+      BuildContext context) {
+    //print(texto);
+    return Center(
+      child: Text(
+        texto,
+        style: TextStyle(
+          fontSize: size.toDouble(),
+          color: selected ? Colors.white : hexToColor("#4163CD"),
+          fontWeight: myFontWeight,
+        ),
+      ),
+    );
+  }
+}
+
+_img(String img) {
+  return Container(
+    height: 60,
+    child: Image.asset(
+      img,
+      fit: BoxFit.cover,
+    ),
+  );
 }

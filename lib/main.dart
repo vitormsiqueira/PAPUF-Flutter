@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:papuf/utils/auth.dart';
@@ -14,10 +15,14 @@ void main() {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(App());
   //setDataEstrutura();
 }
 
+//void main() async{ await Firebase.initializeApp(); runApp(MyApp());}
+
+/*
 void setDataEstrutura() {
   for (int i = 1; i <= 15; i++) {
     var dadosUpdate = {
@@ -69,12 +74,59 @@ void setDataEstrutura() {
       },
       "details": {"name": "sala $i", "bloco": "BD-1", "andar": "Piso 1"}
     };
-    Firestore.instance.collection('bd-2').document('sala-$i').setData(dados);
+    FirebaseFirestore.instance.collection('bd-2').doc('sala-$i').set(dados);
     print('update $i');
   }
 }
+*/
 
-class MyApp extends StatelessWidget {
+class App extends StatefulWidget {
+  // Create the initialization Future outside of `build`:
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  /// The future is part of the state of our widget. We should not call `initializeApp`
+  /// directly inside [build].
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return SomethingWentWrong();
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MyAwesomeApp();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return Container();
+      },
+    );
+  }
+}
+
+class SomethingWentWrong extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Center(
+      child: Text(
+        'Não inicializado',
+        style: TextStyle(fontSize: 22),
+      ),
+    ));
+  }
+}
+
+class MyAwesomeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

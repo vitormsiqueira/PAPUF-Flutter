@@ -22,11 +22,10 @@ class _RootPageState extends State<RootPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final BaseAuth auth = AuthProvider.of(context).auth;
-    auth.currentUser().then((String userId) {
-      setState(() {
-        authStatus =
-            userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
-      });
+    setState(() {
+      authStatus = auth.signInWithEmailAndPassword == null
+          ? AuthStatus.notSignedIn
+          : AuthStatus.signedIn;
     });
   }
 

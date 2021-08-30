@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:papuf/pages/login/login.dart';
 import 'package:papuf/utils/auth.dart';
 import 'package:papuf/utils/nav.dart';
 import 'package:papuf/utils/root_pages.dart';
@@ -8,12 +9,10 @@ import 'package:papuf/widgets/text_appbar.dart';
 
 import '../../color_hex.dart';
 
-
 // Variável global responsável por guardar o valor do switch do Dark Mode.
 bool isSwitched = false;
 
 class ProfilePage extends StatefulWidget {
-
   // Variável responsável por realizar o logout.
   final VoidCallback onSignedOut;
 
@@ -40,13 +39,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    
-    final double size_card = MediaQuery.of(context).size.height/2;
+    final double size_card = MediaQuery.of(context).size.height / 2;
 
     return Scaffold(
       appBar: AppBar(
         // ativa barra de status claro
-        brightness: Brightness.dark, 
+        brightness: Brightness.dark,
         title: textAppBar("Perfil", isDark: true),
         elevation: 0,
         backgroundColor: hexToColor("#4163CD"),
@@ -74,7 +72,8 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               children: <Widget>[
                 // Mostra a foto de perfil.
-                _pictureProfileCenter("https://www.leadsdeconsorcio.com.br/blog/wp-content/uploads/2019/11/04-1.jpg"),
+                _pictureProfileCenter(
+                    "https://www.leadsdeconsorcio.com.br/blog/wp-content/uploads/2019/11/04-1.jpg"),
                 // Mostra o nome do usuário.
                 _nameProfile('Test Lastname'),
                 // Mostra o email.
@@ -91,11 +90,19 @@ class _ProfilePageState extends State<ProfilePage> {
           SizedBox(
             height: 16.0,
           ),
-         
+
           // Constroi os botões de Configurações e Logout.
-          _buttonSettingsLogout(context, "Configurações", iconButton: Icon(Icons.settings_applications, color: Colors.black54,)),
-          _buttonSettingsLogout(context, "Sair", iconButton: Icon(Icons.exit_to_app, color: Colors.black54,), logout: true),
-              
+          _buttonSettingsLogout(context, "Configurações",
+              iconButton: Icon(
+                Icons.settings_applications,
+                color: Colors.black54,
+              )),
+          _buttonSettingsLogout(context, "Sair",
+              iconButton: Icon(
+                Icons.exit_to_app,
+                color: Colors.black54,
+              ),
+              logout: true),
         ],
       ),
     );
@@ -104,76 +111,73 @@ class _ProfilePageState extends State<ProfilePage> {
   // Show modal bottom sheet construction
   void _onButtonPressedSettings(BuildContext context) {
     showModalBottomSheet(
-      // Adiciona bordas arredondadas nos cantos superiores.
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25.0),
-          topRight: Radius.circular(25.0),
-        ),
-      ),
-      context: context, 
-      builder: (context) {
-        return Container(
-          child: Column(
-            children: <Widget>[
-              // Adiciona espaço vertical.
-              SizedBox(
-                height: 16,
-              ),
-
-              // Cria uma switch list
-              SwitchListTile(
-                secondary: Icon(isSwitched ? MdiIcons.brightness7 : MdiIcons.brightness4),
-                title: Text("Dark mode"),
-                value: isSwitched, 
-                onChanged: (value){
-                  setState((){
-                    isSwitched = value;
-                    print(isSwitched);
-                  });
-                },
-                activeTrackColor: Colors.blue,
-                activeColor: Colors.white,
-              ),
-
-              SizedBox(
-                height: 16,
-              ),
-
-              // Cria um button
-              ListTile(
-                leading: Icon(MdiIcons.helpCircle),
-                title: Text(
-                  "Precisa de ajuda?",
-                ),
-                onTap: (){},
-              ),
-
-              SizedBox(
-                height: 16,
-              ),
-
-              // Mostra ainformação do aplicativo
-              ListTile(
-                leading: Icon(MdiIcons.information),
-                title: Text(
-                  "Versão do aplicativo",
-                ),
-                subtitle: Text(
-                  "v1.0201"
-                ),
-              ),
-              
-            ],
+        // Adiciona bordas arredondadas nos cantos superiores.
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(25.0),
+            topRight: Radius.circular(25.0),
           ),
-        );
-      }
-    );
+        ),
+        context: context,
+        builder: (context) {
+          return Container(
+            child: Column(
+              children: <Widget>[
+                // Adiciona espaço vertical.
+                SizedBox(
+                  height: 16,
+                ),
+
+                // Cria uma switch list
+                SwitchListTile(
+                  secondary: Icon(
+                      isSwitched ? MdiIcons.brightness7 : MdiIcons.brightness4),
+                  title: Text("Dark mode"),
+                  value: isSwitched,
+                  onChanged: (value) {
+                    setState(() {
+                      isSwitched = value;
+                      print(isSwitched);
+                    });
+                  },
+                  activeTrackColor: Colors.blue,
+                  activeColor: Colors.white,
+                ),
+
+                SizedBox(
+                  height: 16,
+                ),
+
+                // Cria um button
+                ListTile(
+                  leading: Icon(MdiIcons.helpCircle),
+                  title: Text(
+                    "Precisa de ajuda?",
+                  ),
+                  onTap: () {},
+                ),
+
+                SizedBox(
+                  height: 16,
+                ),
+
+                // Mostra ainformação do aplicativo
+                ListTile(
+                  leading: Icon(MdiIcons.information),
+                  title: Text(
+                    "Versão do aplicativo",
+                  ),
+                  subtitle: Text("v1.0201"),
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   /// Button settings and logout creation.
-  _buttonSettingsLogout(BuildContext context ,String buttonName, {Icon iconButton, bool logout = false}){
-
+  _buttonSettingsLogout(BuildContext context, String buttonName,
+      {Icon iconButton, bool logout = false}) {
     // Inicia a variavel responsável pela autenticação.
     final BaseAuth auth = Auth();
 
@@ -186,54 +190,53 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.black54,
         ),
       ),
-      // Verifica se o botão construido é o de "Logout". 
-      onTap: logout ? 
-        // Se sim, aplica a função de deslogar. 
-        () async {
-          await auth.signedOut();
-          push(context, RootPage(), replace: true);
-        } : 
-        // Se não, navega até a tela de configurações.
-        () => _onButtonPressedSettings(context),
+      // Verifica se o botão construido é o de "Logout".
+      onTap: logout
+          ?
+          // Se sim, aplica a função de deslogar.
+          () async {
+              await auth.signedOut();
+              push(context, LoginPage(), replace: true);
+            }
+          :
+          // Se não, navega até a tela de configurações.
+          () => _onButtonPressedSettings(context),
     );
   }
 }
 
-_pictureProfileCenter(String url){
+_pictureProfileCenter(String url) {
   return Container(
     // Define o tamanho da imagem.
     width: 120,
     height: 120,
     // Deixa a imagem redonda.
     decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      image: DecorationImage(
-        fit: BoxFit.fill,
-        image: NetworkImage(url),
-      )
-    ),
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          fit: BoxFit.fill,
+          image: NetworkImage(url),
+        )),
   );
 }
 
 // Função responsável para mostra o nome do usuário
-_nameProfile(String name){
+_nameProfile(String name) {
   return Padding(
     padding: const EdgeInsets.only(top: 16, bottom: 32),
     child: Text(
       name,
       style: TextStyle(
-        color: Colors.white,
-        fontSize: 24,
-        fontWeight: FontWeight.bold
-      ),
+          color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
     ),
   );
 }
 
 // Função responsável por apresentar as informações do perfil do usuário.
-_infoProfile(String left ,String right){
+_infoProfile(String left, String right) {
   return Padding(
-    padding: const EdgeInsets.only(left: 25.0, bottom: 12.0, right: 25.0, top: 12.0),
+    padding:
+        const EdgeInsets.only(left: 25.0, bottom: 12.0, right: 25.0, top: 12.0),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -262,9 +265,9 @@ _infoProfile(String left ,String right){
   );
 }
 
-// Função responsável por definir o card azul superior que irá mostrar a foto 
+// Função responsável por definir o card azul superior que irá mostrar a foto
 // e as informações do usuário.
-_boxDecorationCardBlue(){
+_boxDecorationCardBlue() {
   return BoxDecoration(
     color: hexToColor("#4163CD"),
     borderRadius: BorderRadius.only(

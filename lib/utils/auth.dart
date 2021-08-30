@@ -7,8 +7,9 @@ import 'dart:async';
 abstract class BaseAuth {
   Future<String> signInWithEmailAndPassword(String email, String password);
   Future<String> createUserWithEmailAndPassword(String email, String password);
-  Future<String> currentUser();
-  Future<void> signedOut();
+  currentUser();
+  signedOut();
+  //currentUserUid();
 }
 
 // Generic autorization component
@@ -19,7 +20,7 @@ class Auth implements BaseAuth {
   @override
   Future<String> signInWithEmailAndPassword(
       String email, String password) async {
-    FirebaseUser user = (await _firebaseAuth.signInWithEmailAndPassword(
+    User user = (await _firebaseAuth.signInWithEmailAndPassword(
             email: email, password: password))
         .user;
     return user != null ? user.uid : null;
@@ -28,23 +29,36 @@ class Auth implements BaseAuth {
   @override
   Future<String> createUserWithEmailAndPassword(
       String email, String password) async {
-    FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
+    User user = (await _firebaseAuth.createUserWithEmailAndPassword(
             email: email, password: password))
         .user;
     return user != null ? user.uid : null;
   }
 
-  Future<String> currentUser() async {
-    FirebaseUser user = await _firebaseAuth.currentUser();
-    return user != null ? user.uid : null;
+  @override
+  currentUser() async {
+    return FirebaseAuth.instance.currentUser;
   }
 
-  Future<void> signedOut() async {
-    try {
-      return await _firebaseAuth.signOut();
-    } catch (e) {
-      print('Another error $e');
-      return null;
-    }
+  /*@override
+  currentUserUid() async {
+    String uid = (await FirebaseAuth.instance.currentUser).uid;
+    return uid != null ? uid : null;
+  }*/
+
+  @override
+  signedOut() {
+    return FirebaseAuth.instance.signOut();
   }
 }
+
+/*
+Future<void> signedOut() async {
+  try {
+    return await _firebaseAuth.signOut();
+  } catch (e) {
+    print('Another error $e');
+    return null;
+  }
+}
+*/

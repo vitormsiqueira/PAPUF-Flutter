@@ -26,9 +26,9 @@ class DashboardPage extends StatelessWidget {
 _body(BuildContext context) {
   String currentSala = currentClassRoom.toString();
   return StreamBuilder<DocumentSnapshot>(
-    stream: Firestore.instance
+    stream: FirebaseFirestore.instance
         .collection('bd-2')
-        .document('sala-$currentSala')
+        .doc('sala-$currentSala')
         .snapshots(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) return LinearProgressIndicator();
@@ -42,7 +42,6 @@ _body(BuildContext context) {
         ],
       );
       */
-
 
       return SingleChildScrollView(
         child: Container(

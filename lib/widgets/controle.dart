@@ -54,7 +54,7 @@ class _ControleState extends State<Controle> {
   }
 
   _modulo(String selected, String topic, int i, BuildContext context) {
-    final _controller = StreamController<int>();
+    //final _controller = StreamController<int>();
 
     return Container(
       padding: EdgeInsets.all(15),

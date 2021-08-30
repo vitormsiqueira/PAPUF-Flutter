@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_date_picker_timeline/flutter_date_picker_timeline.dart';
+//import 'package:flutter_date_picker_timeline/flutter_date_picker_timeline.dart';
 import 'package:papuf/widgets/details_table.dart';
 import 'package:papuf/widgets/grafico_salas.dart';
 import 'package:papuf/widgets/text_appbar.dart';
@@ -147,9 +147,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
               ////---------------------------------------
               //// Calendário Dinâmico
               Container(
-                  alignment: Alignment.topCenter,
-                  padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
-                  child: FlutterDatePickerTimeline(
+                alignment: Alignment.topCenter,
+                padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
+                /*child: FlutterDatePickerTimeline(
                     startDate: DateTime(2021, 05, 01),
                     endDate: DateTime.now(),
                     initialFocusedDate: DateTime.now(),
@@ -163,7 +163,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                     onSelectedDateChange: (DateTime dateTime) {
                       print(dateTime);
                     },
-                  )),
+                  )*/
+              ),
               ////---------------------------------------
               //// Texto Consumo
               Container(
@@ -459,9 +460,9 @@ class _DashboardPage2State extends State<DashboardPage2> {
               ////---------------------------------------
               //// Calendário Dinâmico
               Container(
-                  alignment: Alignment.topCenter,
-                  padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
-                  child: FlutterDatePickerTimeline(
+                alignment: Alignment.topCenter,
+                padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
+                /*child: FlutterDatePickerTimeline(
                     startDate: DateTime(2021, 05, 01),
                     endDate: DateTime.now(),
                     initialFocusedDate: DateTime.now(),
@@ -475,7 +476,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
                     onSelectedDateChange: (DateTime dateTime) {
                       print(dateTime);
                     },
-                  )),
+                  )*/
+              ),
               ////---------------------------------------
               //// Texto Consumo
               Container(
