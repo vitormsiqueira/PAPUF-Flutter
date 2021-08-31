@@ -143,14 +143,24 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     // Aqui passamos as informações de controle: Temperatura, tópico e o  numero da sala
 
-                    _modulo(1, snapshot.data['ar-l']['state'], um,
-                        snapshot.data['ar-l']['temperature']),
+                    _modulo(
+                        1,
+                        um,
+                        snapshot.data['ar-l']['temperature'],
+                        snapshot.data['ar-l']['state'],
+                        "bd-2",
+                        'sala-$currentSala'),
                     SizedBox(
                       width: 40,
                     ),
                     // Aqui passamos as informações de controle: Temperatura, tópico e o  numero da sala
-                    _modulo(2, snapshot.data['ar-r']['state'], um,
-                        snapshot.data['ar-r']['temperature']),
+                    _modulo(
+                        2,
+                        um,
+                        snapshot.data['ar-r']['temperature'],
+                        snapshot.data['ar-r']['state'],
+                        "bd-2",
+                        'sala-$currentSala'),
                   ],
                 ),
                 SizedBox(
@@ -298,8 +308,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   /////////////////////////////////
-  _modulo(int controle, bool selected, bool i, int temp) {
+  _modulo(int controle, bool i, int temp, bool selected, String collection,
+      String document) {
     //final _controller = StreamController<int>();
+
+    // Define qual ar sera atualizado o estado
+    String changeAr = controle == 1 ? "ar-l" : "ar-r";
+
+    // Define o valor da variável responvel por alterar o estado atual
+    bool changeState = selected ? false : true;
 
     return Container(
       padding: EdgeInsets.all(15),
@@ -359,18 +376,31 @@ class _HomePageState extends State<HomePage> {
             width: 60,
             height: 60,
             child: RawMaterialButton(
-              onPressed: () {
+              onPressed: () async {
                 //RequestState(topic);
                 //print('selected'+selected);
                 // aqui o selected não estava alterando o estado global, apenas qdo especificando se seelcted1 ou selected2
                 // mas ta aí uma solução porca
-                setState(() {});
-                // publishM(createJsonTempState("0" ,selected), topic);
-                FirebaseFirestore.instance
-                    .collection('bd-2')
-                    .doc('sala-1')
-                    .update({
-                  'ar-l': {'state': true}
+                setState(() {
+                  // publishM(createJsonTempState("0" ,selected), topic);
+                  /*
+                  FirebaseFirestore.instance
+                      .collection('bd-2')
+                      .doc('sala-1')
+                      .update({
+                    "ar-r": {"state": false}
+                  });
+                  */
+                  var db = FirebaseFirestore.instance;
+                  db
+                      .collection(collection)
+                      .doc(document)
+                      .update({"$changeAr.state": changeState});
+
+                  /*resultado.docs.forEach((d) {
+                    print(d.id);
+                    print(d.metadata);
+                  });*/
                 });
               },
               child: _textOnOff(selected),

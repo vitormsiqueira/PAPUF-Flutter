@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:papuf/widgets/grafico_salas.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -18,6 +18,15 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(App());
   //setDataEstrutura();
+  /*
+  var db = FirebaseFirestore.instance;
+  QuerySnapshot resultado = await db.collection('bd-2').get();
+
+  resultado.docs.forEach((d) {
+    print(d.id);
+    print(d.metadata);
+  });
+  */
 }
 
 //void main() async{ await Firebase.initializeApp(); runApp(MyApp());}
