@@ -29,8 +29,6 @@ void main() async {
   */
 }
 
-//void main() async{ await Firebase.initializeApp(); runApp(MyApp());}
-
 /*
 void setDataEstrutura() {
   for (int i = 1; i <= 15; i++) {

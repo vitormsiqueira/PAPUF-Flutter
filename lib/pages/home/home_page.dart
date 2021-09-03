@@ -318,6 +318,8 @@ class _HomePageState extends State<HomePage> {
     // Define o valor da variável responvel por alterar o estado atual
     bool changeState = selected ? false : true;
 
+    var db = FirebaseFirestore.instance;
+
     return Container(
       padding: EdgeInsets.all(15),
       width: 150,
@@ -329,25 +331,31 @@ class _HomePageState extends State<HomePage> {
           Container(
             child: selected
                 ? _img("assets/images/icon_ar_branco.png")
-                : _img("assets/images/icon_ar_azul.png"),
+                : _img("assets/images/icon_ar_cinza.png"),
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
           RawMaterialButton(
-            onPressed: () {
-              setState(() {
-                temp++;
-                //print(temp);
-                //print('++++++++'+temp.toString());
-              });
-              //envia um json {"temp": temp, "state": "on"} com temperatura e estado
-              //publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
-            },
+            onPressed: selected
+                ? () {
+                    setState(() {
+                      temp++;
+                      db
+                          .collection(collection)
+                          .doc(document)
+                          .update({"$changeAr.temperature": temp});
+                    });
+                    //envia um json {"temp": temp, "state": "on"} com temperatura e estado
+                    //publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
+                  }
+                : null,
             child: _textOthers(selected, '+', 45, FontWeight.w400, context),
             shape: CircleBorder(),
           ),
-
+          SizedBox(
+            height: 5,
+          ),
           // Temperatura
           Container(
             child: _textOthers(
@@ -356,12 +364,18 @@ class _HomePageState extends State<HomePage> {
 
           // Botão ' - '
           RawMaterialButton(
-            onPressed: () {
-              setState(() {
-                temp--;
-              });
-              //publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
-            },
+            onPressed: selected
+                ? () async {
+                    setState(() {
+                      temp--;
+                      db
+                          .collection(collection)
+                          .doc(document)
+                          .update({"$changeAr.temperature": temp});
+                    });
+                    //publishM(createJsonTempState(temp.toString(), _setStateOn(i)), topic);
+                  }
+                : null,
             child: _textOthers(selected, '-', 50, FontWeight.w400, context),
             shape: CircleBorder(),
           ),
@@ -369,7 +383,6 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 10,
           ),
-          //ControlTemperature(ar2, "temp-2"),
 
           // Container que mostra o botão On/Off
           Container(
@@ -377,30 +390,12 @@ class _HomePageState extends State<HomePage> {
             height: 60,
             child: RawMaterialButton(
               onPressed: () async {
-                //RequestState(topic);
-                //print('selected'+selected);
-                // aqui o selected não estava alterando o estado global, apenas qdo especificando se seelcted1 ou selected2
-                // mas ta aí uma solução porca
                 setState(() {
                   // publishM(createJsonTempState("0" ,selected), topic);
-                  /*
-                  FirebaseFirestore.instance
-                      .collection('bd-2')
-                      .doc('sala-1')
-                      .update({
-                    "ar-r": {"state": false}
-                  });
-                  */
-                  var db = FirebaseFirestore.instance;
                   db
                       .collection(collection)
                       .doc(document)
                       .update({"$changeAr.state": changeState});
-
-                  /*resultado.docs.forEach((d) {
-                    print(d.id);
-                    print(d.metadata);
-                  });*/
                 });
               },
               child: _textOnOff(selected),
@@ -410,19 +405,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-  }
-
-  // essa função faz o "switch" do estado do controle
-  _currentState(bool selected) {
-    if (selected1 == false && selected == true) {
-      selected1 = true;
-    } else if (selected1 == true && selected == true) {
-      selected1 = false;
-    } else if (selected2 == false && selected == false) {
-      selected2 = true;
-    } else if (selected2 == true && selected == false) {
-      selected2 = false;
-    }
   }
 
   _controleBoxDecoration(bool selected) {
@@ -443,15 +425,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   _textOnOff(bool selected) {
-    return Center(
-      child: Text(
-        selected ? "On" : "Off",
-        style: TextStyle(
-          fontSize: 25,
-          letterSpacing: .6,
-          color: selected ? Colors.white : hexToColor("#4163CD"),
-          fontWeight: FontWeight.w600,
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(7.0),
+      child: Center(
+        child: selected
+            ? _img("assets/images/icon_shutdown_branco.png")
+            : _img("assets/images/icon_shutdown_cinza.png"),
       ),
     );
   }
@@ -464,7 +443,7 @@ class _HomePageState extends State<HomePage> {
         texto,
         style: TextStyle(
           fontSize: size.toDouble(),
-          color: selected ? Colors.white : hexToColor("#4163CD"),
+          color: selected ? Colors.white : hexToColor("#cccccc"),
           fontWeight: myFontWeight,
         ),
       ),
