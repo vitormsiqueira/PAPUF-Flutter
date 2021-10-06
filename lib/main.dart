@@ -175,11 +175,11 @@ Widget _introScreen() {
         navigateAfterSeconds: RootPage(),
         loaderColor: Colors.transparent,
       ),
-      Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
+      Center(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image(
             image: AssetImage("assets/images/logo-faeng.png"),
-            fit: BoxFit.none,
           ),
         ),
       ),

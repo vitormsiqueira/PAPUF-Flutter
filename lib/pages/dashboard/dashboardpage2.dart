@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,27 @@ class _DashboardPage2State extends State<DashboardPage2> {
   // Variáveis responsável por fazer a "paginação" de informações da list Salas de Aulas
   bool pressed = false;
   SalaItem selectedUser;
+
+  Future getAir() async {
+    await FirebaseFirestore.instance
+        .collection('bd-2')
+        .where('state', isEqualTo: true)
+        .get()
+        .then((value) {
+      if (value.docs != null && value.docs.length > 0) {
+        value.docs.forEach(
+          (element) {
+            print(element['state']);
+          },
+        );
+      } else {
+        print('No documents found');
+      }
+    });
+    //print('zdassfafef $data');
+  }
+
+  var air;
 
   List<SalaItem> salas = [
     SalaItem('Sala 01', false, false, 158.2),
@@ -121,6 +143,8 @@ class _DashboardPage2State extends State<DashboardPage2> {
         ));
   }
 
+  //
+
   _tabDia(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height,
@@ -150,20 +174,20 @@ class _DashboardPage2State extends State<DashboardPage2> {
                 alignment: Alignment.topCenter,
                 padding: const EdgeInsets.only(top: 15, bottom: 20, left: 10),
                 /*child: FlutterDatePickerTimeline(
-                    startDate: DateTime(2021, 05, 01),
-                    endDate: DateTime.now(),
-                    initialFocusedDate: DateTime.now(),
-                    initialSelectedDate: DateTime.now(),
-                    selectedItemBackgroundColor: hexToColor("#3B53C9"),
-                    unselectedItemBackgroundColor: Colors.transparent,
-                    selectedItemTextStyle: TextStyle(color: Colors.white),
-                    unselectedItemTextStyle: TextStyle(color: Colors.white70),
-                    itemRadius: 14,
-                    selectedItemWidth: 150,
-                    onSelectedDateChange: (DateTime dateTime) {
-                      print(dateTime);
-                    },
-                  )*/
+                      startDate: DateTime(2021, 05, 01),
+                      endDate: DateTime.now(),
+                      initialFocusedDate: DateTime.now(),
+                      initialSelectedDate: DateTime.now(),
+                      selectedItemBackgroundColor: hexToColor("#3B53C9"),
+                      unselectedItemBackgroundColor: Colors.transparent,
+                      selectedItemTextStyle: TextStyle(color: Colors.white),
+                      unselectedItemTextStyle: TextStyle(color: Colors.white70),
+                      itemRadius: 14,
+                      selectedItemWidth: 150,
+                      onSelectedDateChange: (DateTime dateTime) {
+                        print(dateTime);
+                      },
+                    )*/
               ),
               ////---------------------------------------
               //// Texto Consumo
@@ -281,10 +305,10 @@ class _DashboardPage2State extends State<DashboardPage2> {
                               percent: 18 / 30,
                               center: Center(
                                 child: Text(
-                                  "18",
+                                  getAir().toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 24),
+                                      fontSize: 11),
                                 ),
                               ),
                               circularStrokeCap: CircularStrokeCap.round,

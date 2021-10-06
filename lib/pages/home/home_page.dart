@@ -145,7 +145,6 @@ class _HomePageState extends State<HomePage> {
 
                     _modulo(
                         1,
-                        um,
                         snapshot.data['ar-l']['temperature'],
                         snapshot.data['ar-l']['state'],
                         "bd-2",
@@ -156,7 +155,6 @@ class _HomePageState extends State<HomePage> {
                     // Aqui passamos as informações de controle: Temperatura, tópico e o  numero da sala
                     _modulo(
                         2,
-                        um,
                         snapshot.data['ar-r']['temperature'],
                         snapshot.data['ar-r']['state'],
                         "bd-2",
@@ -308,7 +306,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   /////////////////////////////////
-  _modulo(int controle, bool i, int temp, bool selected, String collection,
+  _modulo(int controle, int temp, bool selected, String collection,
       String document) {
     //final _controller = StreamController<int>();
 

@@ -21,7 +21,7 @@ dependencies:
   firebase_auth: ^3.1.0
   cloud_firestore: ^2.5.1
   flutter:
-    sdk: flutter
+    sdk: flutter 
   splashscreen: ^1.2.0
   mqtt_client: ^5.5.3
   material_design_icons_flutter: ^4.0.5145
