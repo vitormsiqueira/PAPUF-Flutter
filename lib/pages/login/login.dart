@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:papuf/color_hex.dart';
 import 'package:papuf/pages/forget_pass/forget_page.dart';
 import 'package:papuf/pages/register/register_page.dart';
@@ -94,33 +96,30 @@ class _LoginPageState extends State<LoginPage> {
                     topRight: Radius.circular(25.0),
                   ),
                 ),
-                padding: EdgeInsets.only(
-                  left: 50,
-                  right: 50,
-                ),
+                padding: EdgeInsets.only(left: 50, right: 50, top: 15),
                 child: ListView(
                   primary: false, //desabilita o scroll padrão do ListView
                   children: <Widget>[
-                    AppText(
-                      "Login",
-                      hint: "Digite seu login",
-                      controller: _controllerLogin,
-                      validator: _validateLogin,
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                      nextFocus:
-                          _focusPassword, //define o proximo foco ao clicar
-                    ),
+                    AppText("Login",
+                        hint: "Digite seu usuário",
+                        controller: _controllerLogin,
+                        validator: _validateLogin,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        nextFocus:
+                            _focusPassword, //define o proximo foco ao clicar
+                        isBackGround: false,
+                        iconForm: FontAwesomeIcons.solidEnvelope),
                     SizedBox(height: 25),
-                    AppText(
-                      "Senha",
-                      hint: "Digite sua senha",
-                      keyboardType: TextInputType.text,
-                      password: true,
-                      controller: _controllerPass,
-                      validator: _validatePass,
-                      focusNode: _focusPassword,
-                    ),
+                    AppText("Senha",
+                        hint: "Digite sua senha",
+                        keyboardType: TextInputType.text,
+                        password: true,
+                        controller: _controllerPass,
+                        validator: _validatePass,
+                        focusNode: _focusPassword,
+                        isBackGround: false,
+                        iconForm: FontAwesomeIcons.lock),
                     SizedBox(height: 10),
                     Container(
                       alignment: Alignment.centerRight,

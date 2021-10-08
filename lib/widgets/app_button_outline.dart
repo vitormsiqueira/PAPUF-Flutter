@@ -17,7 +17,7 @@ class AppButtonOutline extends StatelessWidget {
     return Container(
       height: 45,
       child: OutlineButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         color: hexToColor(backGroundColor),
         child: showProgress //if que mostra a o progresso circular
             ? Center(

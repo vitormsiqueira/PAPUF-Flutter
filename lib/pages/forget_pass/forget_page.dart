@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:papuf/widgets/app_button.dart';
 import 'package:papuf/widgets/app_text.dart';
-import 'package:papuf/widgets/text_appbar.dart';
 
 class ForgetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.light, // status bar brightness
-        // title: textAppBar("Esqueci a Senha"),
+        systemOverlayStyle: SystemUiOverlayStyle.dark, // status bar brightness
         elevation: 0,
         backgroundColor: Colors.white,
       ),
@@ -29,7 +28,8 @@ _body(BuildContext context) {
               Container(
                 padding: EdgeInsets.all(16),
                 child: _img("assets/images/forgot.png"),
-                constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height),
               ),
               SizedBox(
                 height: 36,
@@ -39,10 +39,9 @@ _body(BuildContext context) {
                 child: Text(
                   "Esqueceu sua senha?",
                   style: TextStyle(
-                    fontSize: 32.0,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.bold
-                  ),
+                      fontSize: 32.0,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -64,7 +63,7 @@ _body(BuildContext context) {
               Container(
                 padding: EdgeInsets.all(16),
                 child: AppText(
-                  "Email", 
+                  "Email",
                   hint: "Digite um email válido",
                   keyboardType: TextInputType.emailAddress,
                   mainColor: "#1c1c1c",
@@ -76,7 +75,7 @@ _body(BuildContext context) {
                 padding: EdgeInsets.all(16),
                 child: AppButton(
                   "ENVIAR",
-                  onPressed: (){},
+                  onPressed: () {},
                 ),
               ),
             ],
@@ -86,6 +85,7 @@ _body(BuildContext context) {
     ),
   );
 }
+
 _img(String img) {
   return Container(
     height: 150,
