@@ -18,7 +18,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 45,
+      height: 50,
       width: MediaQuery.of(context).size.width, // ocupar toda a largura
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),

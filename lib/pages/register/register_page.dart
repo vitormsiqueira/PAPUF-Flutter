@@ -57,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.only(left: 50, right: 50, bottom: 50, top: 20),
+            padding: EdgeInsets.only(left: 50, right: 50, bottom: 50, top: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -65,9 +65,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Text(
                     "Criar Conta",
                     style: TextStyle(
-                        fontSize: 30.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 30.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -85,6 +86,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       mainColor: "#afbce4",
                       secondColor: "#ffffff",
                       iconForm: FontAwesomeIcons.userAlt,
+                      isBackGround: true,
+                      isBorderColor: true,
                     ),
                     SizedBox(height: 15.0),
                     AppText(
@@ -92,16 +95,24 @@ class _RegisterPageState extends State<RegisterPage> {
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                       iconForm: FontAwesomeIcons.solidEnvelope,
+                      isBackGround: true,
+                      isBorderColor: true,
                     ),
                     SizedBox(height: 15.0),
                     //////////////////////////////////////////////
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 55,
-                      padding: EdgeInsets.only(left: 15, right: 22, top: 4),
+                      //width: MediaQuery.of(context).size.width,
+                      height: 65,
+                      padding: EdgeInsets.only(left: 15, right: 0, top: 4),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(13),
                         color: hexToColor("#4b6bcf"),
+                        border: Border.all(
+                          width: 1.5,
+                          color: profileTagSelecionado == null
+                              ? Colors.white10
+                              : Colors.white10,
+                        ),
                       ),
                       child: Row(
                         children: [
@@ -113,77 +124,100 @@ class _RegisterPageState extends State<RegisterPage> {
                           SizedBox(
                             width: 15,
                           ),
-                          DropdownButton<int>(
-                            value: (profileTagSelecionado == null)
-                                ? profileTagSelecionado
-                                : profileTagSelecionado.id,
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.53,
+                            child: DropdownButton<int>(
+                              //isExpanded: true,
+                              value: (profileTagSelecionado == null)
+                                  ? profileTagSelecionado
+                                  : profileTagSelecionado.id,
 
-                            hint: Text(
-                              "Categoria de Acesso",
+                              hint: Text(
+                                "Categoria de Acesso",
+                                style: TextStyle(
+                                  color: hexToColor("#afbce4"),
+                                  fontSize: 16,
+                                ),
+                              ),
+
+                              iconSize: 0,
                               style: TextStyle(
-                                color: hexToColor("#afbce4"),
+                                color: profileTagSelecionado == null
+                                    ? Colors.white38
+                                    : Colors.white,
                                 fontSize: 16,
                               ),
+                              underline: Container(
+                                color: Colors.transparent,
+                              ),
+                              onChanged: (int idSelecionado) {
+                                setState(() {
+                                  profileTagSelecionado = profile.firstWhere(
+                                      (profile) => profile.id == idSelecionado);
+                                });
+                                widget.callback(profileTagSelecionado);
+                              },
+                              items: profile.map<DropdownMenuItem<int>>(
+                                  (ProfileTag profile) {
+                                return DropdownMenuItem<int>(
+                                  value: profile.id,
+                                  child: Text(profile.tag),
+                                );
+                              }).toList(),
+
+                              // cor de fundo da lista
+                              dropdownColor: hexToColor("#4b6bcf"),
+                              // borda
+                              borderRadius: BorderRadius.circular(10),
+                              // tira a sombra
+                              elevation: 24,
                             ),
-                            icon: RotatedBox(
+                          ),
+                          Container(
+                            child: RotatedBox(
                               quarterTurns: 1,
                               child: Icon(
                                 Icons.chevron_right,
                                 color: Colors.white38,
                               ),
                             ),
-
-                            iconSize: 28,
-                            style: TextStyle(
-                                color: profileTagSelecionado == null
-                                    ? Colors.white38
-                                    : Colors.white),
-                            underline: Container(
-                              color: Colors.transparent,
-                            ),
-                            onChanged: (int idSelecionado) {
-                              setState(() {
-                                profileTagSelecionado = profile.firstWhere(
-                                    (profile) => profile.id == idSelecionado);
-                              });
-                              widget.callback(profileTagSelecionado);
-                            },
-                            items: profile.map<DropdownMenuItem<int>>(
-                                (ProfileTag profile) {
-                              return DropdownMenuItem<int>(
-                                value: profile.id,
-                                child: Text(profile.tag),
-                              );
-                            }).toList(),
-                            dropdownColor:
-                                hexToColor("#4b6bcf"), // cor de fundo da lista
-                            borderRadius: BorderRadius.circular(10), // borda
-                            elevation: 0, // tira a sombra
-                            iconDisabledColor: Colors.orange,
                           ),
                         ],
                       ),
                     ),
                     //////////////////////////////////////////////
                     SizedBox(height: 15.0),
-                    AppText("RGA / RA",
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.next,
-                        iconForm: FontAwesomeIcons.solidAddressCard),
+                    AppText(
+                      "RGA / RA",
+                      keyboardType: TextInputType.phone,
+                      textInputAction: TextInputAction.next,
+                      iconForm: FontAwesomeIcons.solidAddressCard,
+                      isBackGround: true,
+                      isBorderColor: true,
+                    ),
+
                     SizedBox(height: 15.0),
-                    AppText("Senha",
-                        keyboardType: TextInputType.text,
-                        password: true,
-                        controller: null,
-                        validator: null,
-                        focusNode: null,
-                        iconForm: FontAwesomeIcons.lock),
+                    AppText(
+                      "Senha",
+                      keyboardType: TextInputType.text,
+                      password: true,
+                      controller: null,
+                      validator: null,
+                      focusNode: null,
+                      iconForm: FontAwesomeIcons.lock,
+                      isBackGround: true,
+                      isBorderColor: true,
+                    ),
                     SizedBox(height: 15.0),
-                    AppText("Confirme sua senha",
-                        keyboardType: TextInputType.text,
-                        password: true,
-                        textInputAction: TextInputAction.next,
-                        iconForm: FontAwesomeIcons.lock),
+                    AppText(
+                      "Confirme sua senha",
+                      keyboardType: TextInputType.text,
+                      password: true,
+                      textInputAction: TextInputAction.next,
+                      iconForm: FontAwesomeIcons.lock,
+                      isBackGround: true,
+                      isBorderColor: true,
+                    ),
                     SizedBox(height: 30.0),
                     AppButton(
                       "CADASTRAR",

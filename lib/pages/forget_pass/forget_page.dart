@@ -26,7 +26,6 @@ _body(BuildContext context) {
           child: ListView(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.all(16),
                 child: _img("assets/images/forgot.png"),
                 constraints: BoxConstraints(
                     maxHeight: MediaQuery.of(context).size.height),
@@ -35,13 +34,13 @@ _body(BuildContext context) {
                 height: 36,
               ),
               Container(
-                padding: EdgeInsets.all(16),
                 child: Text(
                   "Esqueceu sua senha?",
                   style: TextStyle(
-                      fontSize: 32.0,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold),
+                    fontSize: 32.0,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -49,7 +48,6 @@ _body(BuildContext context) {
                 height: 16,
               ),
               Container(
-                padding: EdgeInsets.all(16),
                 child: Text(
                   "Por favor, informe o E-mail associado a sua conta que enviaremos um link com instruções para recuperação de senha",
                   style: TextStyle(
@@ -61,18 +59,17 @@ _body(BuildContext context) {
               ),
               SizedBox(height: 16),
               Container(
-                padding: EdgeInsets.all(16),
                 child: AppText(
                   "Email",
                   hint: "Digite um email válido",
                   keyboardType: TextInputType.emailAddress,
                   mainColor: "#1c1c1c",
                   secondColor: "#000000",
+                  isUnderLine: true,
                 ),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 30),
               Container(
-                padding: EdgeInsets.all(16),
                 child: AppButton(
                   "ENVIAR",
                   onPressed: () {},

@@ -100,26 +100,32 @@ class _LoginPageState extends State<LoginPage> {
                 child: ListView(
                   primary: false, //desabilita o scroll padrão do ListView
                   children: <Widget>[
-                    AppText("Login",
-                        hint: "Digite seu usuário",
-                        controller: _controllerLogin,
-                        validator: _validateLogin,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        nextFocus:
-                            _focusPassword, //define o proximo foco ao clicar
-                        isBackGround: false,
-                        iconForm: FontAwesomeIcons.solidEnvelope),
+                    AppText(
+                      "Login",
+                      hint: "Digite seu usuário",
+                      controller: _controllerLogin,
+                      validator: _validateLogin,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      //define o proximo foco ao clicar
+                      nextFocus: _focusPassword,
+                      isBackGround: false,
+                      iconForm: FontAwesomeIcons.solidEnvelope,
+                      isUnderLine: true,
+                    ),
                     SizedBox(height: 25),
-                    AppText("Senha",
-                        hint: "Digite sua senha",
-                        keyboardType: TextInputType.text,
-                        password: true,
-                        controller: _controllerPass,
-                        validator: _validatePass,
-                        focusNode: _focusPassword,
-                        isBackGround: false,
-                        iconForm: FontAwesomeIcons.lock),
+                    AppText(
+                      "Senha",
+                      hint: "Digite sua senha",
+                      keyboardType: TextInputType.text,
+                      password: true,
+                      controller: _controllerPass,
+                      validator: _validatePass,
+                      focusNode: _focusPassword,
+                      isBackGround: false,
+                      iconForm: FontAwesomeIcons.lock,
+                      isUnderLine: true,
+                    ),
                     SizedBox(height: 10),
                     Container(
                       alignment: Alignment.centerRight,

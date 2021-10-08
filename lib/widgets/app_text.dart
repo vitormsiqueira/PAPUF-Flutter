@@ -18,30 +18,39 @@ class AppText extends StatelessWidget {
   final double myFontSize;
   final bool isBackGround;
   final IconData iconForm;
+  final bool isBorderColor;
+  final bool isUnderLine;
 
-  AppText(this.label,
-      {this.myFontSize = 16,
-      this.hint,
-      this.password = false,
-      this.controller,
-      this.validator,
-      this.keyboardType,
-      this.textInputAction,
-      this.focusNode,
-      this.nextFocus,
-      this.mainColor = "#afbce4",
-      this.secondColor = '#ffffff',
-      this.underline = true,
-      this.isBackGround = true,
-      this.iconForm = FontAwesomeIcons.userAlt});
+  AppText(
+    this.label, {
+    this.myFontSize = 16,
+    this.hint,
+    this.password = false,
+    this.controller,
+    this.validator,
+    this.keyboardType,
+    this.textInputAction,
+    this.focusNode,
+    this.nextFocus,
+    this.mainColor = "#afbce4",
+    this.secondColor = '#ffffff',
+    this.underline = true,
+    this.isBackGround = false,
+    this.iconForm = FontAwesomeIcons.userAlt,
+    this.isBorderColor = false,
+    this.isUnderLine = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      //padding: EdgeInsets.only(left: 0, right: 20),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: isBackGround ? hexToColor("#4b6bcf") : hexToColor("#4163CD")),
+          borderRadius: BorderRadius.circular(13),
+          border: Border.all(
+            width: 1.5,
+            color: isBorderColor ? Colors.white10 : Colors.transparent,
+          ),
+          color: isBackGround ? hexToColor("#4b6bcf") : Colors.transparent),
       child: TextFormField(
         cursorColor: Colors.white,
         controller: controller,
@@ -73,16 +82,20 @@ class AppText extends StatelessWidget {
             fontSize: myFontSize,
             color: hexToColor(mainColor),
           ),
-          enabledBorder: InputBorder.none,
+          enabledBorder: isUnderLine
+              ? UnderlineInputBorder(
+                  borderSide: BorderSide(color: hexToColor(mainColor)),
+                  borderRadius:
+                      BorderRadius.only(bottomLeft: Radius.circular(10)))
+              : InputBorder.none,
+
           focusColor: Colors.black,
           hoverColor: Colors.white,
-          focusedBorder: InputBorder.none,
-          /*enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: hexToColor(mainColor)),
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10))), 
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: hexToColor(secondColor)),
-          ), */
+          focusedBorder: isUnderLine
+              ? UnderlineInputBorder(
+                  borderSide: BorderSide(color: hexToColor(secondColor)))
+              : InputBorder.none,
+
           hintText: hint,
           hintStyle: TextStyle(
             color: hexToColor(secondColor),
