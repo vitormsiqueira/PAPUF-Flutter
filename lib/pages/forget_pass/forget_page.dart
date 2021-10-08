@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:papuf/widgets/app_button.dart';
 import 'package:papuf/widgets/app_text.dart';
 
@@ -18,65 +19,67 @@ class ForgetPage extends StatelessWidget {
 }
 
 _body(BuildContext context) {
-  return Center(
-    child: Container(
-      color: Colors.white,
-      child: Form(
-        child: Container(
-          child: ListView(
-            children: <Widget>[
-              Container(
-                child: _img("assets/images/forgot.png"),
-                constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height),
-              ),
-              SizedBox(
-                height: 36,
-              ),
-              Container(
-                child: Text(
-                  "Esqueceu sua senha?",
-                  style: TextStyle(
-                    fontSize: 32.0,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
+  return Container(
+    color: Colors.white,
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    child: SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.only(left: 50, right: 50, bottom: 50, top: 10),
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: _img("assets/images/forgot.png"),
+              constraints:
+                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+            ),
+            SizedBox(
+              height: 36,
+            ),
+            Container(
+              child: Text(
+                "Esqueceu sua senha?",
+                style: TextStyle(
+                  fontSize: 30.0,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
-              SizedBox(
-                height: 16,
-              ),
-              Container(
-                child: Text(
-                  "Por favor, informe o E-mail associado a sua conta que enviaremos um link com instruções para recuperação de senha",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.black54,
-                  ),
-                  textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Container(
+              child: Text(
+                "Por favor, informe o E-mail associado a sua conta que enviaremos um link com instruções para recuperação de senha",
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.black54,
                 ),
+                textAlign: TextAlign.center,
               ),
-              SizedBox(height: 16),
-              Container(
-                child: AppText(
-                  "Email",
-                  hint: "Digite um email válido",
-                  keyboardType: TextInputType.emailAddress,
-                  mainColor: "#1c1c1c",
-                  secondColor: "#000000",
-                  isUnderLine: true,
-                ),
+            ),
+            SizedBox(height: 80),
+            Container(
+              child: AppText(
+                "Email",
+                hint: "Digite um email válido",
+                keyboardType: TextInputType.emailAddress,
+                mainColor: Colors.black54,
+                secondColor: "#000000",
+                isUnderLine: true,
+                iconForm: FontAwesomeIcons.solidEnvelope,
               ),
-              SizedBox(height: 30),
-              Container(
-                child: AppButton(
-                  "ENVIAR",
-                  onPressed: () {},
-                ),
+            ),
+            SizedBox(height: 30),
+            Container(
+              child: AppButton(
+                "ENVIAR",
+                onPressed: () {},
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     ),

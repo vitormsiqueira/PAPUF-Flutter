@@ -13,7 +13,7 @@ class AppText extends StatelessWidget {
   final TextInputAction textInputAction;
   final FocusNode focusNode;
   final FocusNode nextFocus;
-  final String mainColor;
+  final Color mainColor;
   final String secondColor;
   final double myFontSize;
   final bool isBackGround;
@@ -23,7 +23,7 @@ class AppText extends StatelessWidget {
 
   AppText(
     this.label, {
-    this.myFontSize = 16,
+    this.myFontSize = 15,
     this.hint,
     this.password = false,
     this.controller,
@@ -32,7 +32,7 @@ class AppText extends StatelessWidget {
     this.textInputAction,
     this.focusNode,
     this.nextFocus,
-    this.mainColor = "#afbce4",
+    this.mainColor = Colors.white38,
     this.secondColor = '#ffffff',
     this.underline = true,
     this.isBackGround = false,
@@ -52,7 +52,7 @@ class AppText extends StatelessWidget {
           ),
           color: isBackGround ? hexToColor("#4b6bcf") : Colors.transparent),
       child: TextFormField(
-        cursorColor: Colors.white,
+        cursorColor: mainColor,
         controller: controller,
         obscureText: password,
         validator: validator,
@@ -75,16 +75,15 @@ class AppText extends StatelessWidget {
         ),
 
         decoration: InputDecoration(
-          fillColor: Colors.white,
           //estilo do texto principal
           labelText: label,
           labelStyle: TextStyle(
             fontSize: myFontSize,
-            color: hexToColor(mainColor),
+            color: mainColor,
           ),
           enabledBorder: isUnderLine
               ? UnderlineInputBorder(
-                  borderSide: BorderSide(color: hexToColor(mainColor)),
+                  borderSide: BorderSide(color: mainColor),
                   borderRadius:
                       BorderRadius.only(bottomLeft: Radius.circular(10)))
               : InputBorder.none,
@@ -107,7 +106,7 @@ class AppText extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: FaIcon(
                 iconForm,
-                color: Colors.white30,
+                color: mainColor,
                 size: 18,
               ),
             ),

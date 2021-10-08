@@ -32,6 +32,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: _body(),
     );
   }
@@ -39,15 +44,14 @@ class _LoginPageState extends State<LoginPage> {
   _body() {
     return Stack(
       children: <Widget>[
-        Container(
-          height: 1000,
+        /*Container(
+          //height: 100,
           color: hexToColor("#4163CD"),
-        ),
+        ), */
         Container(
           color: Colors.white,
-          height: 450,
           child: Padding(
-            padding: EdgeInsets.only(top: 45),
+            padding: EdgeInsets.only(top: 0),
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -64,7 +68,8 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     child: _img("assets/images/logo_bloco.jpg"),
                     constraints: BoxConstraints(
-                        maxHeight: MediaQuery.of(context).size.height),
+                      maxHeight: MediaQuery.of(context).size.height,
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10),
@@ -84,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 400.0),
+            padding: const EdgeInsets.only(top: 310.0),
             child: Form(
               key: _formKey, //chave do formulário que controla o estado
               child: Container(
@@ -216,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _img(String img) {
     return Container(
-      height: 250,
+      height: 210,
       child: Image.asset(
         img,
         fit: BoxFit.cover,
