@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 //import 'package:flutter_date_picker_timeline/flutter_date_picker_timeline.dart';
 import 'package:papuf/widgets/details_table.dart';
 import 'package:papuf/widgets/grafico_salas.dart';
@@ -83,62 +84,64 @@ class _DashboardPage2State extends State<DashboardPage2> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-              //// status bar brightness
-              brightness: Brightness.dark,
-              title: textAppBar("Dashboard", isDark: true),
-              elevation: 0,
-              backgroundColor: hexToColor("#4163CD"),
-              bottom: PreferredSize(
-                //// altura é de 48+5 do padding bottom na linha abaixo
-                preferredSize: const Size.fromHeight(53.0),
-                child: Container(
-                  padding:
-                      EdgeInsets.only(left: 85, right: 85, bottom: 10, top: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
+            //// status bar brightness
+            systemOverlayStyle: SystemUiOverlayStyle.light,
+            title: textAppBar("Dashboard", isDark: true),
+            elevation: 0,
+            backgroundColor: hexToColor("#4163CD"),
+            bottom: PreferredSize(
+              //// altura é de 48+5 do padding bottom na linha abaixo
+              preferredSize: const Size.fromHeight(53.0),
+              child: Container(
+                padding:
+                    EdgeInsets.only(left: 85, right: 85, bottom: 10, top: 10),
+                height: 50,
+                child: TabBar(
+                  unselectedLabelColor: Colors.white,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: hexToColor("#4DE4B2"),
                   ),
-                  height: 50,
-                  child: TabBar(
-                    unselectedLabelColor: Colors.white,
-                    indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: hexToColor("#4DE4B2"),
+                  labelColor: Colors.white,
+                  tabs: [
+                    Tab(
+                      child: Align(
+                        child: Text(
+                          "Dia",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        alignment: Alignment.center,
+                      ),
                     ),
-                    labelColor: Colors.white,
-                    tabs: [
-                      Tab(
-                        child: Align(
-                          child: Text(
-                            "Dia",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          alignment: Alignment.center,
+                    Tab(
+                      child: Align(
+                        child: Text(
+                          "Mês",
+                          style: TextStyle(fontSize: 18),
                         ),
+                        alignment: Alignment.center,
                       ),
-                      Tab(
-                        child: Align(
-                          child: Text(
-                            "Mês",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          alignment: Alignment.center,
+                    ),
+                    Tab(
+                      child: Align(
+                        child: Text(
+                          "Ano",
+                          style: TextStyle(fontSize: 18),
                         ),
+                        alignment: Alignment.center,
                       ),
-                      Tab(
-                        child: Align(
-                          child: Text(
-                            "Ano",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          alignment: Alignment.center,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              )),
+              ),
+            ),
+          ),
           body: TabBarView(
-            children: [_tabDia(context), _tabMes(context), _tabAno()],
+            children: [
+              _tabDia(context),
+              _tabMes(context),
+              _tabAno(),
+            ],
           ),
         ));
   }

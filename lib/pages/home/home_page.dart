@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
     ),
   );
 
+  // Constroi a AppBar com a seleção das salas de aula
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -62,38 +63,46 @@ class _HomePageState extends State<HomePage> {
       length: myTabs.length,
       child: Scaffold(
         appBar: AppBar(
-          brightness: Brightness.light, // status bar brightness
+          // status bar brightness
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
           title: textAppBar("Salas de Aula", isDark: false),
-          elevation: 1,
+          elevation: 0,
           backgroundColor: Colors.white,
           /////
           bottom: PreferredSize(
             // altura é de 48+5 do padding bottom na linha abaixo
             preferredSize: const Size.fromHeight(53.0),
             child: Container(
-              padding: EdgeInsets.only(bottom: 5),
-              child: Theme(
-                data: Theme.of(context).copyWith(accentColor: Colors.white),
-                child: TabBar(
-                  // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
-                  indicatorSize: TabBarIndicatorSize.label,
-                  isScrollable: true,
-                  // cor da label da tab selecionada
-                  labelColor: Colors.white,
-                  // cor da label da tab não selecionada
-                  unselectedLabelColor: hexToColor("#4DE4B2"),
-                  indicator: BoxDecoration(
-                    color: hexToColor("#4DE4B2"),
-                    shape: BoxShape.circle,
+              // Adiciona borda na parte inferior
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.black26,
+                    width: .5,
                   ),
-                  tabs: myTabs,
-                  onTap: (index) {
-                    setState(() {
-                      currentClassRoom = index + 1;
-                      print("test print $currentClassRoom");
-                    });
-                  },
                 ),
+              ),
+              padding: EdgeInsets.only(bottom: 5),
+              child: TabBar(
+                // essa função deixa a tab selecionada do mesmo tamamanho das não-selecionadas
+                indicatorSize: TabBarIndicatorSize.label,
+                isScrollable: true,
+                // cor da label da tab selecionada
+                labelColor: Colors.white,
+                // cor da label da tab não selecionada
+                unselectedLabelColor: hexToColor("#4DE4B2"),
+                indicator: BoxDecoration(
+                  color: hexToColor("#4DE4B2"),
+                  shape: BoxShape.circle,
+                ),
+                tabs: myTabs,
+                onTap: (index) {
+                  setState(() {
+                    currentClassRoom = index + 1;
+                    print("test print $currentClassRoom");
+                  });
+                },
               ),
             ),
           ),
@@ -142,7 +151,6 @@ class _HomePageState extends State<HomePage> {
                       MainAxisAlignment.center, // centraliza os controles
                   children: <Widget>[
                     // Aqui passamos as informações de controle: Temperatura, tópico e o  numero da sala
-
                     _modulo(
                         1,
                         snapshot.data['ar-l']['temperature'],
@@ -152,6 +160,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       width: 40,
                     ),
+
                     // Aqui passamos as informações de controle: Temperatura, tópico e o  numero da sala
                     _modulo(
                         2,

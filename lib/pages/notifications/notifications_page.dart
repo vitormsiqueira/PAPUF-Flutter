@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:papuf/widgets/text_appbar.dart';
 
 class NotificationsPage extends StatelessWidget {
@@ -6,10 +7,24 @@ class NotificationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.light, // status bar brightness
+        systemOverlayStyle: SystemUiOverlayStyle.dark, // status bar brightness
         title: textAppBar("Notificações", isDark: false),
-        elevation: 1,
+        elevation: 0,
         backgroundColor: Colors.white,
+        bottom: PreferredSize(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.black26,
+                  width: .5,
+                ),
+              ),
+            ),
+          ),
+          preferredSize: const Size.fromHeight(0.0),
+        ),
       ),
       body: _body(),
     );
@@ -22,10 +37,7 @@ _body() {
     child: Center(
       child: Text(
         "Nenhuma notificação",
-        style: TextStyle(
-          fontSize: 20,
-          color: Colors.black54
-        ),
+        style: TextStyle(fontSize: 20, color: Colors.black54),
       ),
     ),
   );

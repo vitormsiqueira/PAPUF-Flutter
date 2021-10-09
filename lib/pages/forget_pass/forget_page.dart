@@ -25,7 +25,7 @@ _body(BuildContext context) {
     height: MediaQuery.of(context).size.height,
     child: SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.only(left: 50, right: 50, bottom: 50, top: 10),
+        padding: EdgeInsets.all(50),
         child: Column(
           children: <Widget>[
             Container(
@@ -52,7 +52,7 @@ _body(BuildContext context) {
             ),
             Container(
               child: Text(
-                "Por favor, informe o E-mail associado a sua conta que enviaremos um link com instruções para recuperação de senha",
+                "Por favor, informe o e-mail associado a sua conta que enviaremos um link com instruções para recuperação de senha",
                 style: TextStyle(
                   fontSize: 14.0,
                   color: Colors.black54,
@@ -60,7 +60,7 @@ _body(BuildContext context) {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 80),
+            SizedBox(height: 50),
             Container(
               child: AppText(
                 "Email",

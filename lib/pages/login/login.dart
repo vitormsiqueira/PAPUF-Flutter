@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Form(
               key: _formKey, //chave do formulário que controla o estado
               child: Container(
-                height: 410,
+                height: 400,
                 decoration: BoxDecoration(
                   color: hexToColor("#4163CD"),
                   borderRadius: BorderRadius.only(
@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     topRight: Radius.circular(25.0),
                   ),
                 ),
-                padding: EdgeInsets.only(left: 50, right: 50, top: 15),
+                padding: EdgeInsets.only(left: 50, right: 50, top: 35),
                 child: ListView(
                   primary: false, //desabilita o scroll padrão do ListView
                   children: <Widget>[

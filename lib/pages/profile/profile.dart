@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:papuf/pages/login/login.dart';
 import 'package:papuf/utils/auth.dart';
+import 'package:papuf/utils/auth_provider.dart';
 import 'package:papuf/utils/nav.dart';
 import 'package:papuf/utils/root_pages.dart';
 import 'package:papuf/widgets/text_appbar.dart';
@@ -25,17 +28,17 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final BaseAuth auth = Auth();
 
-  // //
-  // Future<void> _signedOut(BuildContext context) async{
-  //   try {
-  //     final BaseAuth auth = AuthProvider.of(context).auth;
-  //     await auth.signedOut(); // chamamos a função deslogar
-  //     widget.onSignedOut();
-  //     // print("função deslogar");
-  //   } catch (e) {
-  //     print('errooooo $e');
-  //   }
-  // }
+/*   Future<void> _signedOut(BuildContext context) async {
+    try {
+      final BaseAuth auth = AuthProvider.of(context).auth;
+      await auth.signedOut(); // chamamos a função deslogar
+      widget.onSignedOut();
+      // print("função deslogar");
+    } catch (e) {
+      print('errooooo $e');
+    }
+  }
+ */
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         // ativa barra de status claro
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         title: textAppBar("Perfil", isDark: true),
         elevation: 0,
         backgroundColor: hexToColor("#4163CD"),
@@ -92,17 +95,23 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
 
           // Constroi os botões de Configurações e Logout.
-          _buttonSettingsLogout(context, "Configurações",
-              iconButton: Icon(
-                Icons.settings_applications,
-                color: Colors.black54,
-              )),
-          _buttonSettingsLogout(context, "Sair",
-              iconButton: Icon(
-                Icons.exit_to_app,
-                color: Colors.black54,
-              ),
-              logout: true),
+          _buttonSettingsLogout(
+            context,
+            "Configurações",
+            iconButton: Icon(
+              FontAwesomeIcons.cog,
+              color: Colors.black54,
+            ),
+          ),
+          _buttonSettingsLogout(
+            context,
+            "Sair",
+            iconButton: Icon(
+              FontAwesomeIcons.signOutAlt,
+              color: Colors.black54,
+            ),
+            logout: true,
+          ),
         ],
       ),
     );
@@ -110,6 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // Show modal bottom sheet construction
   void _onButtonPressedSettings(BuildContext context) {
+    // Cria o menu suspenso
     showModalBottomSheet(
         // Adiciona bordas arredondadas nos cantos superiores.
         shape: RoundedRectangleBorder(
@@ -121,6 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
         context: context,
         builder: (context) {
           return Container(
+            height: 350,
             child: Column(
               children: <Widget>[
                 // Adiciona espaço vertical.
@@ -131,7 +142,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 // Cria uma switch list
                 SwitchListTile(
                   secondary: Icon(
-                      isSwitched ? MdiIcons.brightness7 : MdiIcons.brightness4),
+                    isSwitched
+                        ? FontAwesomeIcons.solidMoon
+                        : FontAwesomeIcons.solidSun,
+                  ),
                   title: Text("Dark mode"),
                   value: isSwitched,
                   onChanged: (value) {
@@ -150,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 // Cria um button
                 ListTile(
-                  leading: Icon(MdiIcons.helpCircle),
+                  leading: Icon(FontAwesomeIcons.solidQuestionCircle),
                   title: Text(
                     "Precisa de ajuda?",
                   ),
@@ -163,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 // Mostra ainformação do aplicativo
                 ListTile(
-                  leading: Icon(MdiIcons.information),
+                  leading: Icon(FontAwesomeIcons.infoCircle),
                   title: Text(
                     "Versão do aplicativo",
                   ),
@@ -196,6 +210,7 @@ class _ProfilePageState extends State<ProfilePage> {
           // Se sim, aplica a função de deslogar.
           () async {
               await auth.signedOut();
+
               push(context, LoginPage(), replace: true);
             }
           :
