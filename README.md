@@ -21,10 +21,6 @@ As tecnologias utilizadas nesse projeto:
  
 * Github
  
-
-## How to use
- 
-Here will be the images and descriptions. Principal content.
  
  
 ## Features
